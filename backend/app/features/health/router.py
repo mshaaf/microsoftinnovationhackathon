@@ -2,26 +2,18 @@ from uuid import uuid4
 
 from fastapi import APIRouter
 
-from app.core.config import APP_MODE
+from app.adapters import service_statuses
+from app.core.config import get_app_mode
 
 router = APIRouter()
 
 
 @router.get("/health")
 def health() -> dict:
-    status = "mock" if APP_MODE == "mock" else "not_configured"
+    mode = get_app_mode()
     return {
         "request_id": str(uuid4()),
-        "mode": APP_MODE,
+        "mode": mode,
         "version": "0.1.0",
-        "services": {
-            "openfema": status,
-            "geo": "ok",
-            "search": status,
-            "model": status,
-            "ocr": status,
-            "pii": status,
-            "translator": status,
-            "safety": status,
-        },
+        "services": service_statuses(mode),
     }

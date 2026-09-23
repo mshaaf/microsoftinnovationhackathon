@@ -5,6 +5,8 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 
+from app.core.logging import install_redaction_filter
+
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 
 
@@ -28,6 +30,7 @@ def register_feature_routers(
 
 
 def create_app() -> FastAPI:
+    install_redaction_filter()
     application = FastAPI(title="Survivor Journey Navigator", version="0.1.0")
     register_feature_routers(application)
 
