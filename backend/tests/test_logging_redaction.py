@@ -46,3 +46,19 @@ def test_redaction_preserves_uvicorn_access_log_arguments():
     ).format(record)
 
     assert formatted == '127.0.0.1 "GET /api/health HTTP/1.1" 200 OK'
+
+
+def test_redaction_covers_extra_fields_and_exception_text(monkeypatch, caplog):
+    monkeypatch.setattr(pii, "fixture_fake_pii", lambda: ("Jordan Samplewell",))
+    create_app()
+    logger = logging.getLogger("privacy-extra-redaction-test")
+
+    with caplog.at_level(logging.ERROR):
+        logger.error("request metadata", extra={"letter_text": "Jordan Samplewell"})
+        try:
+            raise ValueError("Jordan Samplewell")
+        except ValueError:
+            logger.exception("letter processing failed")
+
+    assert caplog.records[0].letter_text == "[REDACTED]"
+    assert "Jordan Samplewell" not in caplog.text

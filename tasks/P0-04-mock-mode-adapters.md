@@ -63,13 +63,13 @@ Plan:
 5. Run focused red/green tests, `make check`, and the two documented health checks; finish the task log and handoff.
 
 
-2026-09-23 — Added mock/live adapter modules for all eight services, mode-based health status, a PII-guarded model gateway, an injectable clock, and app-wide log redaction. Added health, gateway, clock, logging, and adapter-boundary tests. Focused tests went red for missing modules and the original health mismatches, then passed after implementation. Mock and live `make dev` checks returned the expected eight statuses; Uvicorn shutdown stayed clean after adding access-log argument coverage. `make check` passed; contract, fixture, and smoke targets remain their expected P0-03/P0-05/P0-08 stubs.
+2026-09-23 — Added mock/live adapter modules for all eight services, mode-based health status, a PII-guarded model gateway, an injectable clock, and app-wide log redaction. Added health, gateway, clock, logging, and adapter-boundary tests. Focused tests went red for missing modules and the original health mismatches, then passed after implementation. Mock and live `make dev` checks returned the expected eight statuses; Uvicorn shutdown stayed clean after adding access-log argument coverage. A read-only review found fixture PII discovery was not tested against a fixture file and custom log fields/exception text bypassed redaction. Added regression tests, exposed the fixture directory for tests, and sanitized extra fields and formatted exception text while preserving Uvicorn access arguments. Regressions passed; `make check` passed (14 backend tests, 1 frontend test). Service operation methods remain with their owning service tasks. Contract, fixture, and smoke targets remain their expected P0-03/P0-05/P0-08 stubs.
 
 `make check` output (last 10 lines):
 ```text
       Tests  1 passed (1)
-   Start at  18:52:14
-   Duration  1.28s (transform 178ms, setup 0ms, collect 313ms, tests 162ms, environment 391ms, prepare 68ms)
+   Start at  19:01:32
+   Duration  925ms (transform 70ms, setup 0ms, collect 183ms, tests 47ms, environment 384ms, prepare 74ms)
 
 uv run --project backend python scripts/validate_contracts.py
 not implemented yet (P0-03)
@@ -78,7 +78,7 @@ not implemented yet (P0-05)
 bash scripts/smoke.sh
 not implemented yet (P0-08)
 
-Learned: Redacting formatted log text and clearing arguments can break structured access formatters; sanitize string fields while preserving record shape.
+Learned: Fixture discovery can look covered while an empty fixture tree leaves the detector inert, and PII can bypass message redaction through log extras or exceptions.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

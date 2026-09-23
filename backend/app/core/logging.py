@@ -19,6 +19,14 @@ class RedactionFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
         record.msg = _redact_value(record.msg)
         record.args = _redact_value(record.args)
+        for key, value in record.__dict__.items():
+            if key not in {"msg", "args", "exc_info"}:
+                record.__dict__[key] = _redact_value(value)
+        if record.exc_info:
+            record.exc_text = redact_text(
+                logging.Formatter().formatException(record.exc_info)
+            )
+            record.exc_info = None
         return True
 
 
