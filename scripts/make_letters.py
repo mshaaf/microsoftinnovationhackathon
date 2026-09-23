@@ -2,7 +2,6 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-
 ROOT = Path(__file__).resolve().parents[1]
 LETTERS = ROOT / "fixtures" / "letters"
 WATERMARK = "SAMPLE — NOT A REAL FEMA LETTER"
@@ -21,7 +20,9 @@ def font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     return ImageFont.load_default()
 
 
-def wrap(draw: ImageDraw.ImageDraw, text: str, face: ImageFont.ImageFont, width: int) -> list[str]:
+def wrap(
+    draw: ImageDraw.ImageDraw, text: str, face: ImageFont.ImageFont, width: int
+) -> list[str]:
     words = text.split()
     lines: list[str] = []
     line = ""
@@ -57,22 +58,32 @@ def render(text_path: Path, angle: float) -> None:
     regular, bold = font(23), font(25)
     y = 60
     line_height = 31
-    for index, source_line in enumerate(text_path.read_text(encoding="utf-8").splitlines()):
+    for index, source_line in enumerate(
+        text_path.read_text(encoding="utf-8").splitlines()
+    ):
         if not source_line:
             y += 15
             continue
-        face = bold if index < 3 or (source_line.isupper() and len(source_line) < 60) else regular
+        face = (
+            bold
+            if index < 3 or (source_line.isupper() and len(source_line) < 60)
+            else regular
+        )
         color = (150, 20, 20, 255) if WATERMARK in source_line else (35, 37, 39, 255)
         for line in wrap(draw, source_line, face, width - 120):
             if y + line_height > height - 55:
-                raise ValueError(f"Letter text does not fit on one page: {text_path.name}")
+                raise ValueError(
+                    f"Letter text does not fit on one page: {text_path.name}"
+                )
             draw.text((60, y), line, font=face, fill=color)
             y += line_height
 
     page = page.convert("RGB")
     grain = Image.effect_noise(page.size, 5).convert("L").convert("RGB")
     page = Image.blend(page, grain, 0.018)
-    page = page.rotate(angle, resample=Image.Resampling.BICUBIC, expand=True, fillcolor=(223, 222, 218))
+    page = page.rotate(
+        angle, resample=Image.Resampling.BICUBIC, expand=True, fillcolor=(223, 222, 218)
+    )
 
     photo = Image.new("RGB", (1080, 1400))
     photo_draw = ImageDraw.Draw(photo)
