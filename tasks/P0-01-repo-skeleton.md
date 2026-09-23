@@ -3,7 +3,7 @@ id: P0-01
 title: "Repo skeleton, Makefile, task board"
 phase: 0
 lane: shared
-status: review
+status: done
 owner: "luna-s1"
 depends_on: []
 research: []
