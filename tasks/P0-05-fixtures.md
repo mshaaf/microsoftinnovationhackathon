@@ -3,11 +3,11 @@ id: P0-05
 title: "Synthetic letters, scenarios, OpenFEMA snapshot"
 phase: 0
 lane: A
-status: todo
-owner: ""
+status: in_progress
+owner: "luna-s2"
 depends_on: []   # runs in wave 0A alongside P0-01; only new folders
 research: [R10, R12, R20]
-branch: ""
+branch: "task/P0-05-fixtures"
 ---
 
 ## Execute in phases

@@ -3,11 +3,11 @@ id: P0-01
 title: "Repo skeleton, Makefile, task board"
 phase: 0
 lane: shared
-status: todo
-owner: ""
+status: in_progress
+owner: "luna-s1"
 depends_on: []
 research: []
-branch: ""
+branch: "task/P0-01-repo-skeleton"
 ---
 
 ## Execute in phases
