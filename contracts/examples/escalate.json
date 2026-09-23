@@ -1,0 +1,8 @@
+{
+  "request_id": "r8",
+  "card": {
+    "title": "Get help now",
+    "steps": ["If someone is in immediate danger, call 911."],
+    "phones": [{"label": "Emergency", "number": "911"}, {"label": "FEMA Helpline", "number": "1-800-621-3362"}]
+  }
+}

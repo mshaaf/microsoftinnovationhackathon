@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "card"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "card": {
+      "type": "object", "required": ["title", "steps", "phones"],
+      "properties": {
+        "title": {"type": "string"},
+        "steps": {"type": "array", "items": {"type": "string"}},
+        "phones": {
+          "type": "array", "items": {
+            "type": "object", "required": ["label", "number"],
+            "properties": {"label": {"type": "string"}, "number": {"type": "string"}},
+            "additionalProperties": false
+          }
+        }
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

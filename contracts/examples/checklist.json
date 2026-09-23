@@ -1,0 +1,10 @@
+{
+  "request_id": "r4",
+  "rules_regime": "2024-03-22",
+  "items": [{
+    "id": "proof_of_occupancy",
+    "text": "Something that shows you lived there, like a lease or a utility bill.",
+    "why": "FEMA needs to confirm the home was your main residence.",
+    "source_url": "https://www.fema.gov/assistance/individual/after-applying/verify-identity-occupancy-ownership"
+  }]
+}

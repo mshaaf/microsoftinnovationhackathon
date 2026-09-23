@@ -1,0 +1,6 @@
+{
+  "request_id": "r2",
+  "zip": "12345",
+  "counties": [{"state": "XX", "county_fips": "99001", "name": "Example County"}],
+  "needs_confirmation": false
+}

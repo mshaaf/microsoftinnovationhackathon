@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "county", "declarations", "checked_at"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "county": {"$ref": "#/$defs/county"},
+    "declarations": {"type": "array", "items": {"$ref": "#/$defs/declaration"}},
+    "checked_at": {"type": "string", "format": "date-time"}
+  },
+  "$defs": {
+    "county": {
+      "type": "object", "required": ["state", "county_fips", "name"],
+      "properties": {
+        "state": {"type": "string", "pattern": "^[A-Z]{2}$"},
+        "county_fips": {"type": "string", "pattern": "^[0-9]{5}$"},
+        "name": {"type": "string", "minLength": 1}
+      }, "additionalProperties": false
+    },
+    "declaration": {
+      "type": "object",
+      "required": ["disaster_number", "title", "incident_type", "declaration_date", "individual_assistance", "rules_regime", "registration_deadline", "registration_open", "serious_needs", "fema_url"],
+      "properties": {
+        "disaster_number": {"type": "integer", "minimum": 1},
+        "title": {"type": "string"},
+        "incident_type": {"type": "string"},
+        "declaration_date": {"type": "string", "format": "date"},
+        "individual_assistance": {"type": "boolean"},
+        "rules_regime": {"type": "string", "format": "date"},
+        "registration_deadline": {"type": "string", "format": "date"},
+        "registration_open": {"type": "boolean"},
+        "serious_needs": {
+          "type": "object",
+          "required": ["available"],
+          "properties": {
+            "available": {"type": "boolean"},
+            "amount_usd": {"type": "integer", "minimum": 0},
+            "apply_by": {"type": "string", "format": "date"},
+            "extension_possible": {"type": "boolean"},
+            "source_url": {"type": "string", "format": "uri"}
+          },
+          "additionalProperties": false
+        },
+        "fema_url": {"type": "string", "format": "uri"}
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

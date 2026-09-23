@@ -1,0 +1,23 @@
+{
+  "request_id": "r3",
+  "county": {"state": "XX", "county_fips": "99001", "name": "Example County"},
+  "declarations": [{
+    "disaster_number": 9999,
+    "title": "Example Severe Storms and Flooding",
+    "incident_type": "Flood",
+    "declaration_date": "2026-09-10",
+    "individual_assistance": true,
+    "rules_regime": "2024-03-22",
+    "registration_deadline": "2026-11-09",
+    "registration_open": true,
+    "serious_needs": {
+      "available": true,
+      "amount_usd": 770,
+      "apply_by": "2026-10-10",
+      "extension_possible": true,
+      "source_url": "https://www.fema.gov/fact-sheet/serious-needs-assistance-0"
+    },
+    "fema_url": "https://www.fema.gov/disaster/9999"
+  }],
+  "checked_at": "2026-09-23T18:00:00Z"
+}

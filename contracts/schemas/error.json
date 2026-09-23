@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "error"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "error": {
+      "type": "object", "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": {"enum": ["invalid_input", "zip_not_found", "file_too_large", "unsupported_file", "unreadable_letter", "dependency_unavailable"]},
+        "message": {"type": "string"},
+        "retryable": {"type": "boolean"}
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["confidence_threshold", "reasons"],
+  "properties": {
+    "confidence_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+    "reasons": {"type": "array", "items": {
+      "type": "object",
+      "required": ["id", "label", "plain_explanation", "what_to_send", "match_hints", "source_url"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"$ref": "#/$defs/language_text"},
+        "plain_explanation": {"$ref": "#/$defs/language_text"},
+        "what_to_send": {"type": "array", "items": {
+          "type": "object", "required": ["id", "text"],
+          "properties": {"id": {"type": "string"}, "text": {"$ref": "#/$defs/language_text"}},
+          "additionalProperties": false
+        }},
+        "match_hints": {"type": "array", "items": {"type": "string"}},
+        "source_url": {"type": "string", "format": "uri"}
+      }, "additionalProperties": false
+    }}
+  },
+  "$defs": {
+    "language_text": {
+      "type": "object", "required": ["en", "es"],
+      "properties": {"en": {"type": "string"}, "es": {"type": "string"}},
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

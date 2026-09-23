@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["last_verified", "programs"],
+  "properties": {
+    "last_verified": {"type": "string", "format": "date"},
+    "programs": {"type": "array", "items": {
+      "type": "object",
+      "required": ["id", "title", "trigger_conditions", "tier_logic", "deadline_anchor", "how_to_apply", "source_url", "last_verified"],
+      "properties": {
+        "id": {"enum": ["fema_ihp", "irs_relief", "dua", "dsnap", "sba_loan"]},
+        "title": {"type": "string", "minLength": 1},
+        "trigger_conditions": {"type": "object"},
+        "tier_logic": {"type": "object"},
+        "deadline_anchor": {"type": "string"},
+        "how_to_apply": {"type": "string"},
+        "source_url": {"type": "string", "format": "uri"},
+        "last_verified": {"type": "string", "format": "date"}
+      }, "additionalProperties": false
+    }}
+  },
+  "additionalProperties": false
+}

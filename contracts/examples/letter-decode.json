@@ -1,0 +1,13 @@
+{
+  "request_id": "r6",
+  "ocr": {"confidence": 0.97, "pages": 1},
+  "redaction": {"entities_removed": 7, "categories": ["Person", "Address", "PhoneNumber", "Other"]},
+  "decision": {"type": "not_approved", "assistance_types": ["rental"], "letter_date": "2026-09-01", "disaster_number": 9999, "disaster_number_verified": true},
+  "reasons": [{"taxonomy_id": "insurance_docs_missing", "confidence": 0.92}],
+  "explanation": "FEMA may need a final insurance decision before it can review your request.",
+  "checklist": [{"id": "insurance_decision_letter", "text": "Send the final decision from your insurer.", "source_url": "https://www.fema.gov/"}],
+  "deadline": {"appeal_due": "2026-10-31", "days_left": 38, "rule": "60 days from the date on your letter"},
+  "appeal_template_id": "insurance_docs_missing",
+  "redacted_preview": "Dear [PERSON], your home at [ADDRESS]...",
+  "handoff": null
+}

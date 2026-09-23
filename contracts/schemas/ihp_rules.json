@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["last_verified", "regimes", "sources"],
+  "properties": {
+    "last_verified": {"type": "string", "format": "date"},
+    "regimes": {"type": "array", "items": {"$ref": "#/$defs/regime"}, "minItems": 1},
+    "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}}
+  },
+  "$defs": {
+    "regime": {
+      "type": "object",
+      "required": ["id", "appeal_window_days", "sba_application_required_for_some_ona", "signed_appeal_letter_required", "serious_needs"],
+      "properties": {
+        "id": {"type": "string"},
+        "declared_before": {"type": "string", "format": "date"},
+        "declared_on_or_after": {"type": "string", "format": "date"},
+        "appeal_window_days": {"type": "integer", "minimum": 1},
+        "sba_application_required_for_some_ona": {"type": "boolean"},
+        "signed_appeal_letter_required": {"type": "boolean"},
+        "serious_needs": {
+          "type": "object", "required": ["available"],
+          "properties": {
+            "available": {"type": "boolean"},
+            "window_days": {"type": "integer", "minimum": 1},
+            "extension_max_days": {"type": "integer", "minimum": 0},
+            "amounts": {"type": "array", "items": {
+              "type": "object", "required": ["amount_usd", "effective"],
+              "properties": {"amount_usd": {"type": "integer", "minimum": 0}, "effective": {"type": "string", "format": "date"}},
+              "additionalProperties": false
+            }}
+          },
+          "if": {"properties": {"available": {"const": true}}, "required": ["available"]},
+          "then": {"required": ["window_days", "extension_max_days", "amounts"]},
+          "else": {"not": {"anyOf": [{"required": ["window_days"]}, {"required": ["extension_max_days"]}, {"required": ["amounts"]}]}},
+          "additionalProperties": false
+        }
+      },
+      "oneOf": [{"required": ["declared_before"]}, {"required": ["declared_on_or_after"]}],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object", "required": ["fact", "url"],
+      "properties": {"fact": {"type": "string"}, "url": {"type": "string", "format": "uri"}},
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

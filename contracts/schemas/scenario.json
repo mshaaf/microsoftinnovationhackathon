@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "persona", "lang", "zip", "answers", "letter", "expected"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^S[0-9]{2}$"},
+    "persona": {"type": "string", "minLength": 1},
+    "lang": {"enum": ["en", "es"]},
+    "zip": {"type": "string", "pattern": "^[0-9]{5}$"},
+    "answers": {"$ref": "#/$defs/answers"},
+    "letter": {"type": ["string", "null"], "pattern": "^L[0-9]{2}$"},
+    "questions": {"type": "array", "items": {"type": "string"}},
+    "expected": {"$ref": "#/$defs/expected"}
+  },
+  "$defs": {
+    "answers": {
+      "type": "object",
+      "required": ["housing", "insured", "lost_id", "displaced", "lost_work_or_self_employed", "on_snap", "household_size"],
+      "properties": {
+        "housing": {"enum": ["own", "rent"]},
+        "insured": {"enum": ["yes", "no", "not_sure"]},
+        "lost_id": {"type": "boolean"},
+        "displaced": {"type": "boolean"},
+        "lost_work_or_self_employed": {"type": "boolean"},
+        "on_snap": {"type": "boolean"},
+        "household_size": {"type": "integer", "minimum": 1}
+      }, "additionalProperties": false
+    },
+    "expected": {
+      "type": "object",
+      "required": ["individual_assistance", "checklist_includes", "handoff"],
+      "properties": {
+        "individual_assistance": {"type": "boolean"},
+        "checklist_includes": {"type": "array", "items": {"type": "string"}},
+        "programs": {
+          "type": "object",
+          "propertyNames": {"enum": ["fema_ihp", "irs_relief", "dua", "dsnap", "sba_loan"]},
+          "additionalProperties": {"enum": ["open", "likely", "check_now", "optional"]}
+        },
+        "handoff": {"type": ["string", "null"], "enum": ["emergency", "shelter", "sensitive", "low_confidence", null]},
+        "needs_confirmation": {"type": "boolean"},
+        "rules_regime": {"enum": ["pre-2024-03-22", "2024-03-22"]},
+        "serious_needs_available": {"type": "boolean"},
+        "chat_citations_required": {"type": "boolean"},
+        "promise_question_no_guarantee": {"type": "boolean"},
+        "prompt_injection_ignored": {"type": "boolean"}
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

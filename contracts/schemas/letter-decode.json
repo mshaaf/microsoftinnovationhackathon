@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "ocr", "redaction", "decision", "reasons", "explanation", "checklist", "deadline", "appeal_template_id", "redacted_preview", "handoff"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "ocr": {
+      "type": "object", "required": ["confidence", "pages"],
+      "properties": {"confidence": {"type": "number", "minimum": 0, "maximum": 1}, "pages": {"type": "integer", "minimum": 1}},
+      "additionalProperties": false
+    },
+    "redaction": {
+      "type": "object", "required": ["entities_removed", "categories"],
+      "properties": {"entities_removed": {"type": "integer", "minimum": 0}, "categories": {"type": "array", "items": {"type": "string"}}},
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object", "required": ["type", "assistance_types", "letter_date", "disaster_number", "disaster_number_verified"],
+      "properties": {
+        "type": {"enum": ["approved", "not_approved", "needs_information", "unclear"]},
+        "assistance_types": {"type": "array", "items": {"type": "string"}},
+        "letter_date": {"type": ["string", "null"], "format": "date"},
+        "disaster_number": {"type": ["integer", "null"], "minimum": 1},
+        "disaster_number_verified": {"type": "boolean"}
+      }, "additionalProperties": false
+    },
+    "reasons": {
+      "type": "array", "items": {
+        "type": "object", "required": ["taxonomy_id", "confidence"],
+        "properties": {"taxonomy_id": {"type": "string"}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}},
+        "additionalProperties": false
+      }
+    },
+    "explanation": {"type": "string"},
+    "checklist": {"type": "array", "items": {
+      "type": "object", "required": ["id", "text", "source_url"],
+      "properties": {"id": {"type": "string"}, "text": {"type": "string"}, "source_url": {"type": "string", "format": "uri"}},
+      "additionalProperties": false
+    }},
+    "deadline": {
+      "type": "object", "required": ["appeal_due", "days_left", "rule"],
+      "properties": {"appeal_due": {"type": "string", "format": "date"}, "days_left": {"type": "integer"}, "rule": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "appeal_template_id": {"type": "string"},
+    "redacted_preview": {"type": "string"},
+    "handoff": {"type": ["string", "null"], "enum": ["emergency", "shelter", "sensitive", "low_confidence", "user_request", null]}
+  },
+  "additionalProperties": false
+}

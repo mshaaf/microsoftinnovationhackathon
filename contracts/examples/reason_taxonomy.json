@@ -1,0 +1,11 @@
+{
+  "confidence_threshold": 0.6,
+  "reasons": [{
+    "id": "insurance_docs_missing",
+    "label": {"en": "Insurance documents needed", "es": "Se necesitan documentos del seguro"},
+    "plain_explanation": {"en": "FEMA may need the final decision from your insurer.", "es": "FEMA puede necesitar la decisión final de su aseguradora."},
+    "what_to_send": [{"id": "insurance_decision_letter", "text": {"en": "Your insurer's final decision letter.", "es": "La carta con la decisión final de su aseguradora."}}],
+    "match_hints": ["insurance", "settlement", "denial letter"],
+    "source_url": "https://www.fema.gov/assistance/individual/after-applying/appeals"
+  }]
+}
