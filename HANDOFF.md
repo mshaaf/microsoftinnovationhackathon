@@ -23,7 +23,7 @@ Last updated 2026-09-23 by Claude Code (setup session). Whoever picks this up (C
 - Hackathon requirement (R18): a **video with demo + presentation** (goals, components/architecture, approach, key learnings). Every task Log needs a `Learned:` line.
 
 ## Not done yet: next steps, in order
-1. **Initial commit** (if `git log` is empty): `git add -A && git commit -m "Project docs, research, and phased plan"`.
+1. ~~Initial commit~~ done.
 2. **GitHub repo** (M decides the name and visibility): `gh repo create mshackathon --private --source . --push`.
 3. **Wave 0A** (docs/WORKFLOW.md → Bootstrap): launch **P0-01** and **P0-05** in two worktrees at the same time.
 4. When P0-01 merges, use `scripts/start_task.sh` for everything after.
