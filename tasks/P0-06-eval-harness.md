@@ -3,11 +3,11 @@ id: P0-06
 title: "Eval harness and scorecard"
 phase: 0
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-03, P0-05]
 research: []
-branch: ""
+branch: "task/P0-06-eval-harness"
 ---
 
 ## Execute in phases
