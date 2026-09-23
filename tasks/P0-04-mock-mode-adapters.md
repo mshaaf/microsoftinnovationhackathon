@@ -3,11 +3,11 @@ id: P0-04
 title: "Mock mode, adapters, model gateway, /api/health"
 phase: 0
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-01]
 research: [R01, R02]
-branch: ""
+branch: "task/P0-04-mock-mode-adapters"
 ---
 
 ## Execute in phases
