@@ -7,6 +7,24 @@ from jsonschema import Draft202012Validator, FormatChecker, SchemaError, Validat
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = ROOT / "contracts" / "schemas"
 EXAMPLES = ROOT / "contracts" / "examples"
+REQUIRED_CONTRACTS = frozenset(
+    {
+        "chat",
+        "checklist",
+        "declarations",
+        "error",
+        "escalate",
+        "health",
+        "ihp_rules",
+        "letter-decode",
+        "letter-expected",
+        "location",
+        "programs",
+        "programs_data",
+        "reason_taxonomy",
+        "scenario",
+    }
+)
 
 
 def load_json(path: Path) -> dict:
@@ -28,13 +46,47 @@ def test_rejects_mismatched_declaration_example() -> None:
     raise AssertionError("validator accepted a string for registration_open")
 
 
+def require_complete_contract_set(
+    schema_names: set[str], example_names: set[str]
+) -> None:
+    if schema_names != example_names:
+        raise ValueError("schema and example names do not match")
+    missing = sorted(REQUIRED_CONTRACTS - schema_names)
+    unknown = sorted(schema_names - REQUIRED_CONTRACTS)
+    if missing or unknown:
+        raise ValueError(
+            f"missing required contracts: {missing}; unknown contracts: {unknown}"
+        )
+
+
+def test_rejects_missing_contract_pair() -> None:
+    incomplete = set(REQUIRED_CONTRACTS - {"programs_data"})
+    try:
+        require_complete_contract_set(incomplete, incomplete)
+    except ValueError:
+        return
+    raise AssertionError("validator accepted a missing schema/example pair")
+
+
+def test_rejects_unknown_rule_regime() -> None:
+    for name in ("declarations", "checklist"):
+        schema = load_json(SCHEMAS / f"{name}.json")
+        payload = load_json(EXAMPLES / f"{name}.json")
+        if name == "declarations":
+            payload["declarations"][0]["rules_regime"] = "2024-03-23"
+        else:
+            payload["rules_regime"] = "2024-03-23"
+        try:
+            validate_payload(schema, payload)
+        except ValidationError:
+            continue
+        raise AssertionError(f"validator accepted an unknown {name} rules_regime")
+
+
 def validate_examples() -> int:
     schemas = {path.stem: path for path in SCHEMAS.glob("*.json")}
     examples = {path.stem: path for path in EXAMPLES.glob("*.json")}
-    if schemas.keys() != examples.keys():
-        missing = sorted(schemas.keys() - examples.keys())
-        unknown = sorted(examples.keys() - schemas.keys())
-        raise ValueError(f"missing examples: {missing}; missing schemas: {unknown}")
+    require_complete_contract_set(set(schemas), set(examples))
 
     for name, schema_path in sorted(schemas.items()):
         schema = load_json(schema_path)
@@ -53,11 +105,14 @@ def validate_examples() -> int:
 def main() -> int:
     try:
         test_rejects_mismatched_declaration_example()
+        test_rejects_missing_contract_pair()
+        test_rejects_unknown_rule_regime()
         count = validate_examples()
     except (OSError, ValueError, SchemaError, ValidationError) as error:
         print(f"Contract validation failed: {error}", file=sys.stderr)
         return 1
     print("Validator mismatch check passed.")
+    print("Validator required-contract check passed.")
     print(f"Validated {count} contract examples against their schemas.")
     return 0
 

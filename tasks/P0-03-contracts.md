@@ -81,6 +81,32 @@ not implemented yet (P0-08)
 
 Learned: the scenario fixtures are the contract for the eval inputs, so validating all committed scenario fields up front caught several fields missing from the original abbreviated example in `docs/CONTRACTS.md`.
 
+Review-fix plan:
+- Restrict declaration and checklist rule regimes to the two researched IDs.
+- Add and test typed query parameters for live API requests.
+- Require the complete contract name set and exercise rejection of a deleted pair.
+- Record the Vite mode wiring follow-up, verify, and commit before rebasing on main.
+
+Review fixes: rule regime fields now use the two supported IDs. The frontend client accepts typed `URLSearchParams` and passes them in live fetch URLs; a focused test covers this. The contract validator now requires all 14 schema/example names and exercises a missing-pair negative case.
+
+Review verification: focused frontend test (2 passed), typecheck, `make contracts`, Ruff, and `make check` passed. `make check` exited 0; fixture validation and smoke still report the P0-05/P0-08 stubs.
+
+Last 10 lines of the review `make check`:
+
+```text
+   Duration  871ms (transform 87ms, setup 0ms, collect 208ms, tests 48ms, environment 722ms, prepare 140ms)
+
+uv run --project backend python scripts/validate_contracts.py
+Validator mismatch check passed.
+Validator required-contract check passed.
+Validated 14 contract examples against their schemas.
+uv run --project backend python scripts/validate_fixtures.py
+not implemented yet (P0-05)
+bash scripts/smoke.sh
+not implemented yet (P0-08)
+```
+
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
 - Pin nested `trigger_conditions` and `tier_logic` shapes in the programs data schema when P1-03/P2-05 define their data format.
+- `scripts/dev.sh` forwards `APP_MODE` to the backend only. For `APP_MODE=live make dev`, Vite must also receive `VITE_APP_MODE=live`; update the launcher to forward that value in the owning task, since it is outside P0-03 scope.

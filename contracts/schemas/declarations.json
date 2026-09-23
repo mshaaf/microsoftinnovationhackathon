@@ -26,7 +26,7 @@
         "incident_type": {"type": "string"},
         "declaration_date": {"type": "string", "format": "date"},
         "individual_assistance": {"type": "boolean"},
-        "rules_regime": {"type": "string", "format": "date"},
+        "rules_regime": {"type": "string", "enum": ["pre-2024-03-22", "2024-03-22"]},
         "registration_deadline": {"type": "string", "format": "date"},
         "registration_open": {"type": "boolean"},
         "serious_needs": {

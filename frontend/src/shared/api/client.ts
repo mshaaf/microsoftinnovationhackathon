@@ -22,18 +22,19 @@ const examples = {
 export type ApiPath = keyof typeof examples;
 export type ApiResponse<Path extends ApiPath> = (typeof examples)[Path];
 export type ApiError = typeof errorExample;
-type ApiOptions = RequestInit & { mock?: boolean };
+type ApiOptions = RequestInit & { mock?: boolean; params?: URLSearchParams };
 
 export async function apiRequest<Path extends ApiPath>(
   path: Path,
   options: ApiOptions = {},
 ): Promise<ApiResponse<Path>> {
-  const { mock, ...requestOptions } = options;
+  const { mock, params, ...requestOptions } = options;
   if (mock ?? import.meta.env.VITE_APP_MODE !== "live") {
     return structuredClone(examples[path]) as ApiResponse<Path>;
   }
 
-  const response = await fetch(path, requestOptions);
+  const query = params?.toString();
+  const response = await fetch(query ? `${path}?${query}` : path, requestOptions);
   if (!response.ok) {
     const error = (await response.json()) as ApiError;
     throw new Error(error.error.message);

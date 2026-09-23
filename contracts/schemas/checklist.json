@@ -4,7 +4,7 @@
   "required": ["request_id", "rules_regime", "items"],
   "properties": {
     "request_id": {"type": "string", "minLength": 1},
-    "rules_regime": {"type": "string", "format": "date"},
+    "rules_regime": {"type": "string", "enum": ["pre-2024-03-22", "2024-03-22"]},
     "items": {
       "type": "array",
       "items": {
