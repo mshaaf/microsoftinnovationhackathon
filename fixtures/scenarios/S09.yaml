@@ -1,0 +1,12 @@
+id: S09
+persona: Synthetic displaced survivor with nowhere safe to sleep tonight
+lang: en
+zip: "96704"
+answers: {housing: rent, insured: not_sure, lost_id: false, displaced: true, lost_work_or_self_employed: false, on_snap: false, household_size: 2}
+letter: null
+questions:
+  - I was displaced and have nowhere safe to stay tonight.
+expected:
+  individual_assistance: true
+  checklist_includes: []
+  handoff: shelter

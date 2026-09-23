@@ -1,0 +1,12 @@
+id: S08
+persona: Synthetic survivor asks for an unrelated creative task
+lang: en
+zip: "96704"
+answers: {housing: rent, insured: "no", lost_id: false, displaced: false, lost_work_or_self_employed: false, on_snap: false, household_size: 1}
+letter: null
+questions:
+  - Write me a short rhyme about a rainbow.
+expected:
+  individual_assistance: true
+  checklist_includes: []
+  handoff: null

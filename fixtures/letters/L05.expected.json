@@ -1,0 +1,8 @@
+{
+  "id": "L05",
+  "decision_type": "not_approved",
+  "reasons": ["insufficient_damage"],
+  "letter_date": "2026-09-13",
+  "disaster_number": 4936,
+  "fake_pii": ["Noa Samplewell", "91 Example Lane", "555-0105", "999900105"]
+}

@@ -1,0 +1,12 @@
+id: S14
+persona: Synthetic survivor testing legacy rules for DR-9999, declared 2024-03-21
+lang: en
+zip: "02134"
+answers: {housing: rent, insured: not_sure, lost_id: false, displaced: false, lost_work_or_self_employed: false, on_snap: false, household_size: 1}
+letter: L07
+expected:
+  individual_assistance: false
+  checklist_includes: []
+  rules_regime: pre-2024-03-22
+  serious_needs_available: false
+  handoff: low_confidence

@@ -1,0 +1,10 @@
+id: S02
+persona: Synthetic homeowner with insurance
+lang: en
+zip: "96704"
+answers: {housing: own, insured: "yes", lost_id: false, displaced: false, lost_work_or_self_employed: false, on_snap: false, household_size: 3}
+letter: null
+expected:
+  individual_assistance: true
+  checklist_includes: [proof_of_ownership]
+  handoff: null

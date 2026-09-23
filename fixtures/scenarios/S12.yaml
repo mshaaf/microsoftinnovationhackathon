@@ -1,0 +1,11 @@
+id: S12
+persona: Synthetic survivor whose ZIP spans two counties
+lang: en
+zip: "39426"
+answers: {housing: rent, insured: "no", lost_id: false, displaced: false, lost_work_or_self_employed: false, on_snap: false, household_size: 2}
+letter: null
+expected:
+  individual_assistance: true
+  needs_confirmation: true
+  checklist_includes: [proof_of_occupancy]
+  handoff: null

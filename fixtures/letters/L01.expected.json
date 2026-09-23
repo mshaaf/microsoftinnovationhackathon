@@ -1,0 +1,8 @@
+{
+  "id": "L01",
+  "decision_type": "not_approved",
+  "reasons": ["identity_not_verified"],
+  "letter_date": "2026-09-10",
+  "disaster_number": 4936,
+  "fake_pii": ["Jordan Samplewell", "18 Example Lane", "555-0101", "999900101"]
+}
