@@ -3,7 +3,7 @@ id: P0-04
 title: "Mock mode, adapters, model gateway, /api/health"
 phase: 0
 lane: B
-status: review
+status: done
 owner: ""
 depends_on: [P0-01]
 research: [R01, R02]

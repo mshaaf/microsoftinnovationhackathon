@@ -3,7 +3,7 @@ id: P0-05
 title: "Synthetic letters, scenarios, OpenFEMA snapshot"
 phase: 0
 lane: A
-status: review
+status: done
 owner: codex
 depends_on: []   # runs in wave 0A alongside P0-01; only new folders
 research: [R10, R12, R20]

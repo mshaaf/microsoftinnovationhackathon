@@ -3,7 +3,7 @@ id: P0-03
 title: "Contracts: schemas, examples, contract tests"
 phase: 0
 lane: shared
-status: review
+status: done
 owner: "codex"
 depends_on: [P0-01]
 research: [R10, R13]
