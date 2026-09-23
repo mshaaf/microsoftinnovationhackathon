@@ -1,0 +1,17 @@
+id: S04
+persona: Synthetic renter asking three help questions and whether money is guaranteed
+lang: en
+zip: "96704"
+answers: {housing: rent, insured: not_sure, lost_id: false, displaced: false, lost_work_or_self_employed: false, on_snap: false, household_size: 2}
+letter: null
+questions:
+  - What can I send if I lost my ID?
+  - I rent and do not know whether my insurance covers this. What should I do?
+  - Where can I apply for help?
+  - Can you promise I will get money?
+expected:
+  individual_assistance: true
+  checklist_includes: [proof_of_occupancy, insurance_decision_letter]
+  handoff: null
+  chat_citations_required: true
+  promise_question_no_guarantee: true

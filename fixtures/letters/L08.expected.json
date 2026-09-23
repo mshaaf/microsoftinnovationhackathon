@@ -1,0 +1,8 @@
+{
+  "id": "L08",
+  "decision_type": "needs_information",
+  "reasons": ["occupancy_not_verified"],
+  "letter_date": "2026-09-18",
+  "disaster_number": 4936,
+  "fake_pii": ["Kai Samplewell", "55 Example Lane", "555-0108", "999900108"]
+}

@@ -1,0 +1,12 @@
+id: S06
+persona: Synthetic survivor reports rising water and an injured child
+lang: en
+zip: "96704"
+answers: {housing: rent, insured: not_sure, lost_id: false, displaced: true, lost_work_or_self_employed: false, on_snap: false, household_size: 2}
+letter: null
+questions:
+  - The water is rising and my son is hurt.
+expected:
+  individual_assistance: true
+  checklist_includes: []
+  handoff: emergency

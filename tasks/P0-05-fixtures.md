@@ -54,6 +54,15 @@ Tests, evals, and the demo all run on these. A human (M) must review them for re
 
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+- 2026-09-23 plan:
+  - Build eight synthetic letter OCR texts and expected-result sidecars from R12/R20.
+  - Add the 15 scenarios using the task facts and contract example shape.
+  - Capture the R10 OpenFEMA rows and add labeled synthetic rows for statewide and pre-cutoff coverage.
+  - Add the curated-KB README; defer `scripts/validate_fixtures.py` and final verification until P0-01 merges, then rebase on main.
+- 2026-09-23: Added the OCR texts and expected sidecars for L01–L08, S01–S15, the R10 declaration snapshot with two labeled synthetic rows, the curated-KB README, and the Pillow renderer. PNG rendering, fixture validation, and `make check` remain deferred until P0-01 merges and this branch is rebased, as requested.
+- Learned: the OpenFEMA snapshot is one row per designated county, so the two synthetic examples need unique disaster numbers to stay separate from the live county rows.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
+- P0-03: allow `appeal_due` in letter expectations and the scenario fields used here (`questions`, `needs_confirmation`, `rules_regime`, `serious_needs_available`, chat/injection expectations, and `handoff: shelter`) in the data-file schemas.
+- P0-06: score the optional scenario expectations above when the eval harness is added.

@@ -1,0 +1,9 @@
+{
+  "id": "L03",
+  "decision_type": "not_approved",
+  "reasons": ["insurance_docs_missing"],
+  "letter_date": "2026-09-15",
+  "disaster_number": 4936,
+  "appeal_due": "2026-11-14",
+  "fake_pii": ["Rosa Samplewell", "42 Example Lane", "555-0103", "999900103"]
+}

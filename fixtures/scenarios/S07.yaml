@@ -1,0 +1,11 @@
+id: S07
+persona: Synthetic gig worker, renter, car flooded, Spanish speaker
+lang: es
+zip: "96704"
+answers: {housing: rent, insured: "no", lost_id: false, displaced: false, lost_work_or_self_employed: true, on_snap: false, household_size: 1}
+letter: null
+expected:
+  individual_assistance: true
+  checklist_includes: [proof_of_occupancy]
+  programs: {fema_ihp: open, irs_relief: likely, dua: check_now, dsnap: check_now, sba_loan: optional}
+  handoff: null

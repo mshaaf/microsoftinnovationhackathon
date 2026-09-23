@@ -1,0 +1,8 @@
+{
+  "id": "L02",
+  "decision_type": "not_approved",
+  "reasons": ["ownership_not_verified"],
+  "letter_date": "2026-09-11",
+  "disaster_number": 4936,
+  "fake_pii": ["Mateo Samplewell", "27 Example Lane", "555-0102", "999900102"]
+}
