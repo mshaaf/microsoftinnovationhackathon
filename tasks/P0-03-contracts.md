@@ -3,7 +3,7 @@ id: P0-03
 title: "Contracts: schemas, examples, contract tests"
 phase: 0
 lane: shared
-status: in_progress
+status: review
 owner: "codex"
 depends_on: [P0-01]
 research: [R10, R13]
@@ -62,7 +62,7 @@ Plan:
 
 Implemented: added 14 schema/example pairs, including the P0-05 scenario fields (`questions`, `needs_confirmation`, `rules_regime`, `serious_needs_available`, chat/injection expectations, and `shelter` handoff). The examples use disaster 9999 and synthetic ZIP 12345. The validator's CLI exercises a deliberately mistyped declaration, then validates every matching schema/example pair. The backend helper was checked against `/api/health`; the frontend client test, typecheck, and production build passed. A read-only validation also accepted all 15 P0-05 scenarios and 8 expected letters.
 
-`make check` exited 0. `validate-fixtures` and smoke still print their P0-05/P0-08 stubs in this draft worktree. P0-01 remains at review, so this task stays `in_progress`; do not push/open a PR until P0-01 merges and this branch is rebased on main.
+`make check` exited 0. `validate-fixtures` and smoke still print their P0-05/P0-08 stubs in this draft worktree. At this point P0-01 had not yet merged, so publication was deferred.
 
 Last 10 lines of `make check`:
 
@@ -85,17 +85,19 @@ Review-fix plan:
 - Restrict declaration and checklist rule regimes to the two researched IDs.
 - Add and test typed query parameters for live API requests.
 - Require the complete contract name set and exercise rejection of a deleted pair.
-- Record the Vite mode wiring follow-up, verify, and commit before rebasing on main.
+- Record the Vite mode wiring follow-up, verify, and rebase on main.
 
 Review fixes: rule regime fields now use the two supported IDs. The frontend client accepts typed `URLSearchParams` and passes them in live fetch URLs; a focused test covers this. The contract validator now requires all 14 schema/example names and exercises a missing-pair negative case.
 
 Review verification: focused frontend test (2 passed), typecheck, `make contracts`, Ruff, and `make check` passed. `make check` exited 0; fixture validation and smoke still report the P0-05/P0-08 stubs.
 
-Last 10 lines of the review `make check`:
+Rebased onto `origin/main` at `f10fd59` after P0-01 merged. Code review approved the fixes with no remaining Critical or Important findings. Post-rebase `make check` exited 0.
+
+Last 10 lines of the post-rebase `make check`:
 
 ```text
-   Duration  871ms (transform 87ms, setup 0ms, collect 208ms, tests 48ms, environment 722ms, prepare 140ms)
-
+   Start at  18:36:35
+   Duration  1.08s (transform 129ms, setup 0ms, collect 260ms, tests 51ms, environment 1.08s, prepare 137ms)
 uv run --project backend python scripts/validate_contracts.py
 Validator mismatch check passed.
 Validator required-contract check passed.
