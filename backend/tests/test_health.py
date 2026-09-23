@@ -21,3 +21,7 @@ def test_health_returns_mock_service_statuses():
         "translator": "mock",
         "safety": "mock",
     }
+
+
+def test_p0_02_ci_failure_proof():
+    assert False, "intentional failure to verify CI blocks a PR"
