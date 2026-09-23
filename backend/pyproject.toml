@@ -1,0 +1,39 @@
+[project]
+name = "survivor-journey-navigator"
+version = "0.1.0"
+description = "Mock-first disaster assistance navigator API"
+requires-python = ">=3.12"
+dependencies = [
+  "agent-framework>=1.0,<2",
+  "azure-ai-documentintelligence>=1.0,<2",
+  "azure-identity>=1.19,<2",
+  "azure-monitor-opentelemetry>=1.6,<2",
+  "azure-search-documents>=12,<13",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "jsonschema>=4.23,<5",
+  "pydantic>=2.10,<3",
+  "python-multipart>=0.0.20,<1",
+  "pyyaml>=6,<7",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[dependency-groups]
+dev = [
+  "pillow>=11,<13",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "ruff>=0.9,<1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.uv]
+package = false
+prerelease = "allow"
