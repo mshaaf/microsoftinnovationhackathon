@@ -1,0 +1,9 @@
+{
+  "request_id": "r1",
+  "mode": "mock",
+  "version": "0.1.0",
+  "services": {
+    "openfema": "mock", "geo": "ok", "search": "mock", "model": "mock",
+    "ocr": "mock", "pii": "mock", "translator": "mock", "safety": "mock"
+  }
+}

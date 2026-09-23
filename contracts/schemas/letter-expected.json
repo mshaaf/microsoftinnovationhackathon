@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "decision_type", "reasons", "letter_date", "disaster_number", "fake_pii"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^L[0-9]{2}$"},
+    "decision_type": {"enum": ["approved", "not_approved", "needs_information", "unclear"]},
+    "reasons": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "letter_date": {"type": "string", "format": "date"},
+    "disaster_number": {"type": "integer", "minimum": 1},
+    "appeal_due": {"type": "string", "format": "date"},
+    "fake_pii": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1}
+  },
+  "additionalProperties": false
+}

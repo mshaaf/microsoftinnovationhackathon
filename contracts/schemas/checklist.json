@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "rules_regime", "items"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "rules_regime": {"type": "string", "enum": ["pre-2024-03-22", "2024-03-22"]},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["id", "text", "why", "source_url"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "text": {"type": "string", "minLength": 1},
+          "why": {"type": "string", "minLength": 1},
+          "source_url": {"type": "string", "format": "uri"}
+        }, "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

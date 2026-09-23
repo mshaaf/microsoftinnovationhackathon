@@ -1,0 +1,13 @@
+{
+  "request_id": "r7",
+  "cards": [{
+    "program_id": "fema_ihp",
+    "tier": "open",
+    "title": "FEMA help for individuals and households",
+    "why": "Individual Assistance is open for your county.",
+    "deadline": {"date": "2026-11-09", "label": "Apply by"},
+    "how_to_apply": "DisasterAssistance.gov or 1-800-621-3362",
+    "source_url": "https://www.disasterassistance.gov/",
+    "last_verified": "2026-09-23"
+  }]
+}

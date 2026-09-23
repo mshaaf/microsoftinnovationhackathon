@@ -1,0 +1,9 @@
+{
+  "id": "L99",
+  "decision_type": "not_approved",
+  "reasons": ["insurance_docs_missing"],
+  "letter_date": "2026-09-15",
+  "disaster_number": 9999,
+  "appeal_due": "2026-11-14",
+  "fake_pii": ["Jordan Samplewell", "18 Example Lane", "555-0101", "999900101"]
+}

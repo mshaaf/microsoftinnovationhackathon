@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "mode", "version", "services"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "mode": {"enum": ["mock", "live"]},
+    "version": {"type": "string"},
+    "services": {
+      "type": "object",
+      "required": ["openfema", "geo", "search", "model", "ocr", "pii", "translator", "safety"],
+      "properties": {
+        "openfema": {"$ref": "#/$defs/status"}, "geo": {"$ref": "#/$defs/status"},
+        "search": {"$ref": "#/$defs/status"}, "model": {"$ref": "#/$defs/status"},
+        "ocr": {"$ref": "#/$defs/status"}, "pii": {"$ref": "#/$defs/status"},
+        "translator": {"$ref": "#/$defs/status"}, "safety": {"$ref": "#/$defs/status"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {"status": {"enum": ["ok", "mock", "down", "not_configured"]}},
+  "additionalProperties": false
+}

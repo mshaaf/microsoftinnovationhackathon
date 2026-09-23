@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "cards"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "cards": {"type": "array", "items": {"$ref": "#/$defs/card"}}
+  },
+  "$defs": {
+    "card": {
+      "type": "object",
+      "required": ["program_id", "tier", "title", "why", "deadline", "how_to_apply", "source_url", "last_verified"],
+      "properties": {
+        "program_id": {"enum": ["fema_ihp", "irs_relief", "dua", "dsnap", "sba_loan"]},
+        "tier": {"enum": ["open", "likely", "check_now", "optional"]},
+        "title": {"type": "string"},
+        "why": {"type": "string"},
+        "deadline": {
+          "type": ["object", "null"],
+          "required": ["date", "label"],
+          "properties": {"date": {"type": "string", "format": "date"}, "label": {"type": "string"}},
+          "additionalProperties": false
+        },
+        "how_to_apply": {"type": "string"},
+        "source_url": {"type": "string", "format": "uri"},
+        "last_verified": {"type": "string", "format": "date"}
+      }, "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

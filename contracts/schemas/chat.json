@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["request_id", "reply", "citations", "handoff"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "reply": {"type": "string"},
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["title", "url"],
+        "properties": {"title": {"type": "string"}, "url": {"type": "string", "format": "uri"}},
+        "additionalProperties": false
+      }
+    },
+    "handoff": {"type": ["string", "null"], "enum": ["emergency", "shelter", "sensitive", "low_confidence", "user_request", null]}
+  },
+  "additionalProperties": false
+}
