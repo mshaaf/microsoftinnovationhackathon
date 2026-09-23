@@ -13,7 +13,7 @@ def test_health_returns_mock_service_statuses():
     assert payload["request_id"]
     assert payload["services"] == {
         "openfema": "mock",
-        "geo": "ok",
+        "geo": "mock",
         "search": "mock",
         "model": "mock",
         "ocr": "mock",
