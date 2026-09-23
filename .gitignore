@@ -1,0 +1,23 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.worktree.env
+.claude/settings.local.json
+*.zip
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+frontend/dist/
+frontend/playwright-report/
+frontend/test-results/
+
+# evals (latest report is committed on purpose; scratch runs aren't)
+evals/reports/tmp/
