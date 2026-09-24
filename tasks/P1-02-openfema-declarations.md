@@ -3,7 +3,7 @@ id: P1-02
 title: "OpenFEMA declarations lookup"
 phase: 1
 lane: A
-status: "review"
+status: done
 owner: ""
 depends_on: [P0-04]
 research: [R10]
