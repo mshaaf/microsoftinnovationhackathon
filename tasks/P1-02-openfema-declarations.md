@@ -3,11 +3,11 @@ id: P1-02
 title: "OpenFEMA declarations lookup"
 phase: 1
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-04]
 research: [R10]
-branch: ""
+branch: "task/P1-02-openfema-declarations"
 ---
 
 ## Execute in phases
