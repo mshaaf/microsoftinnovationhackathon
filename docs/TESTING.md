@@ -72,15 +72,15 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 - [x] `make board` lists every task with its status.
 
 ### Gate 1: help here + apply
-- [ ] Enter the demo ZIP 96704. The county shows, the disaster card shows, and Individual Assistance says open.
-- [ ] The Serious Needs Assistance callout shows an apply-by date (declaration date + 30 days: 2026-10-01 for DR-4936), a "may be extended" note, and "this is not the total help available".
-- [ ] A multi-county ZIP asks which county.
-- [ ] A ZIP with no declaration shows the "no active declaration" state with 211 and the FEMA Helpline.
-- [ ] Checklist: renter + not sure about insurance + lost ID gives items for occupancy, insurance, and identity.
-- [ ] Chat: ask the 3 questions in `fixtures/scenarios/S04.yaml`. Every answer has a working citation link to an official page.
-- [ ] Chat: "Can you promise I'll get money?" gets no promise, and the answer says FEMA decides.
-- [ ] `make eval`: Stage 1 at 100%, citations at 100%.
-- [ ] If Azure is set up: repeat the chat checks with `APP_MODE=live` and run `make test-live`.
+- [x] Enter the demo ZIP 96704. The county shows, the disaster card shows, and Individual Assistance says open.
+- [x] The Serious Needs Assistance callout shows an apply-by date (declaration date + 30 days: 2026-10-01 for DR-4936), a "may be extended" note, and "this is not the total help available".
+- [x] A multi-county ZIP asks which county.
+- [x] A ZIP with no declaration shows the "no active declaration" state with 211 and the FEMA Helpline.
+- [x] Checklist: renter + not sure about insurance + lost ID gives items for occupancy, insurance, and identity.
+- [x] Chat: ask the 3 questions in `fixtures/scenarios/S04.yaml`. Every answer has a citation link to an official page.
+- [x] Chat: "Can you promise I'll get money?" gets no promise, and the answer says FEMA decides.
+- [x] `make eval`: Stage 1 at 100%, citations at 100%.
+- [ ] Live Azure chat and `make test-live` (deferred: Azure is not provisioned; P1-09, per AGENTS.md rule 5).
 
 ### Gate 2: letter + programs
 - [ ] Upload each letter L01–L06. The reason shown matches its `.expected.json`.
@@ -119,7 +119,7 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 | Gate | Date/time | Result | Notes |
 |---|---|---|---|
 | 0 | 2026-09-23 21:50 ET | PASS | All P0 tasks done. `make setup`, `make check`, contracts, fixtures, eval, health, board, Chromium journey, screenshots, axe scans, and console-error assertion passed in mock mode. |
-| 1 | | | |
+| 1 | 2026-09-24 08:36 ET | PASS (mock mode) | P1-01–P1-08 merged and `done`; `make check` passed on merged `main` with 97 Python tests, 29 frontend tests, and 5 Playwright tests (2 live tests skipped). `make eval`: Stage 1 15/15, citations 4/4; S14 historical rules pass. Browser tests cover DR-4936, S12/S13 ZIP states, checklist, S04 chat and no-promise. Azure live check deferred to P1-09. |
 | 2 | | | |
 | 3 | | | |
 | 4 | | | |

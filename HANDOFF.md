@@ -1,90 +1,61 @@
-# HANDOFF: Phase 0 complete, Phase 1 ready
+# HANDOFF: Gate 1 passed; Phase 2 ready
 
-Last updated **2026-09-23 21:50 ET** after the Phase 0 gate. Start here, then read `AGENTS.md`, `docs/PLAN.md`, and the task file for the work you claim.
+Updated 2026-09-24 ET. Start here, then read `AGENTS.md`, `docs/PLAN.md`, and the task file for the work you claim.
 
 ## Current state
 
-- **Phase 0 is complete. Gate 0 is logged `PASS` in `docs/TESTING.md`.**
-- P0-01 through P0-08 are merged to `main` and marked `done`.
-- GitHub PRs #1, #2, and #4–#9 contain the Phase 0 implementation. CI is green.
-- Mock mode is the default and requires no Azure credentials or internet access.
-- Azure is not provisioned yet. P1-09 is the human-led setup task and can run alongside Phase 1.
-- The next legal implementation tasks are **P1-01**, **P1-05**, and **P1-04**, one per worktree/session.
+- Gates 0 and 1 are logged `PASS` in `docs/TESTING.md`. Phase 2 may start; Phase 3 must wait for Gate 2.
+- P0-01–P0-08 and P1-01–P1-08 are merged to `main` and marked `done`. `make board` is the status source.
+- Mock mode needs no Azure keys or internet. `make dev` runs the mock backend and connects the browser to that API. Component tests still use frozen contract examples by default.
+- P1-09 Azure setup remains `todo`. Live chat and `make test-live` are deferred under AGENTS.md rule 5; they are not part of the mock Gate 1 pass.
+- No Phase 2 task has been claimed yet.
+- On this machine, use `mshackathon-main` for new task claims. The original `mshackathon` folder remains the older P1-06 task worktree.
 
-## What Phase 0 delivered
+## What is complete
 
-| Task | Delivered |
+| Phase | Delivered |
 |---|---|
-| P0-01 | Python/React repository skeleton, Make targets, task board, worktree scripts, mock-first local workflow, and router discovery. |
-| P0-02 | GitHub Actions CI running `make check` on pull requests and `main`. |
-| P0-03 | Frozen JSON Schemas, example payloads, validators, backend contract helpers, and typed frontend API client. |
-| P0-04 | Mock/live adapter boundary, model gateway, PII-safe logging, deterministic clock, configuration, and `/api/health`. |
-| P0-05 | 15 synthetic scenarios, 8 watermarked FEMA-style letters, 12 OpenFEMA snapshot rows, and fixture validation. |
-| P0-06 | Fixture-driven evaluation harness, eight metrics, per-case results, and Markdown/JSON scorecards. Unimplemented Phase 1/2 endpoints remain visibly `not implemented`. |
-| P0-07 | Mobile-first shell, eight routes, four-stage stepper, in-memory journey state, English/Spanish toggle, disclaimer, and service-status page. |
-| P0-08 | Isolated Chromium journey smoke test, seven 360px screenshots, per-screen axe scans, HTML report, request-capture privacy helpers, and browser-console error detection. |
+| 0 | Repo, CI, frozen contracts, mock/live adapter boundary, 15 synthetic scenarios, 8 watermarked letters, 12 OpenFEMA rows, evaluation harness, frontend shell, and browser smoke test. |
+| 1 · data/rules | ZIP-to-county lookup; OpenFEMA declarations and active-IA checks; declaration-date rule regimes and Serious Needs dates; deterministic bilingual, sourced checklist. |
+| 1 · knowledge/chat | Curated official-page knowledge base and search; cited chat through the model gateway, with no eligibility promises and a low-confidence handoff when no source is found. |
+| 1 · interface | ZIP result, county picker, no-declaration guidance, Serious Needs callout, four apply questions, checklist, and chat panel in English and Spanish. |
 
-The setup session also completed the product/architecture/testing workflow and research set `docs/research/R01–R20` (R17 is intentionally deferred with Voice Live).
+Gate 1 recovery PRs: [#18](https://github.com/mshaaf/microsoftinnovationhackathon/pull/18) brought P1-06 onto `main`; [#19](https://github.com/mshaaf/microsoftinnovationhackathon/pull/19) added P1-07; [#20](https://github.com/mshaaf/microsoftinnovationhackathon/pull/20) fixed evaluation route detection and historical S14 scoring; [#21](https://github.com/mshaaf/microsoftinnovationhackathon/pull/21) connected local browser flows to the mock API; [#22](https://github.com/mshaaf/microsoftinnovationhackathon/pull/22) added feature and eval tests to `make check`.
 
-## Gate 0 evidence
+## Gate 1 evidence
 
-Verified from merged `main` on 2026-09-23:
+From the merged mock-mode app:
 
-- `make setup`: passed.
-- `make check`: passed.
-- Backend: **14 tests passed**.
-- Frontend: **13 component tests passed**.
-- Playwright: **1 full-journey Chromium test passed** across Help here, Apply, Letter, Deadline, Programs, About, and Status.
-- Contracts: **14 examples validated**, including the validator's negative mismatch check.
-- Fixtures: **15 scenarios, 8 letters, and 12 OpenFEMA rows validated**.
-- Eval: generated `evals/reports/latest.md` and `.json` with **15 scenarios and 8 letters**.
-- Health: `/api/health` returned `mode: mock`; all eight runtime services reported `mock`.
-- Visual check: L01 and L02 were readable and carried the `SAMPLE — NOT A REAL FEMA LETTER` watermark.
-- Accessibility is warn-only through Phase 2. Phase 3 changes critical/serious axe findings to failures.
+- `make check`: 97 Python tests passed, 2 live tests skipped; 29 frontend tests and 5 Playwright tests passed. Contracts validated 14 examples; fixtures validated 15 scenarios, 8 letters, and 12 declaration rows.
+- `make eval`: Stage 1 **15/15 (100%)**; cited chat **4/4 (100%)**. The S14 pre-2024 rules and Serious Needs checks pass. See `evals/reports/latest.md`.
+- Browser tests use the running backend: ZIP 96704 shows DR-4936, Hawaiʻi County, IA open, and the October 1 Serious Needs date; 39426 asks for a county; 02134 shows 211/FEMA guidance; renter + insurance not sure + lost ID shows the correct checklist; all S04 questions return official citations, and the promise question says FEMA decides.
+- The full scorecard is not yet all green: letter and program checks belong to Phase 2; emergency, shelter, and sensitive handoffs belong to P3-01. The live Azure checks await P1-09.
 
-## Next work: Phase 1
+To recheck: `git pull --ff-only && make check && make eval && make board` from clean `main`.
 
-Run these claim commands **sequentially from the clean `main` worktree**; after creation, run the three agents in parallel:
+## Next work: Phase 2
+
+Claim the first three tasks sequentially from a clean `main` worktree, then run the resulting worktrees in parallel (one task per session, maximum three active agent sessions):
 
 ```bash
-scripts/start_task.sh P1-01 zip-to-county
-scripts/start_task.sh P1-05 knowledge-base
-scripts/start_task.sh P1-04 stage1-ui
+cd ../mshackathon-main  # from the original mshackathon folder
+scripts/start_task.sh P2-04 deadline-math
+scripts/start_task.sh P2-01 ocr-adapter
+scripts/start_task.sh P2-06 letter-decoder-ui
 ```
 
-### Session lanes
+| Lane | First task | Continue after merge |
+|---|---|---|
+| A · rules (Codex) | P2-04 deadline math | P2-05 program rules/cards API. P2-04 unblocks P2-03. |
+| B · letter pipeline (Claude) | P2-01 OCR | P2-02 PII gate, then P2-03 classifier after P2-04 is `done`. |
+| C · interface (Claude or Codex) | P2-06 Letter Decoder UI | P2-07 program cards UI. |
 
-1. **Lane A — deterministic data and rules**
-   - P1-01 ZIP to county
-   - P1-02 OpenFEMA declarations
-   - P1-03 rules regimes and Serious Needs
-   - P1-07 checklist endpoint
+P1-09 Azure setup can proceed in the human lane. After P2 tasks merge, run the Gate 2 checklist and its letter/PII eval thresholds before starting Phase 3.
 
-2. **Lane B — knowledge and cited chat**
-   - P1-05 curated knowledge base and search
-   - P1-06 Agent Framework chat with citations
+## Follow-ups and boundaries
 
-3. **Lane C — survivor interface**
-   - P1-04 Stage 1 UI
-   - P1-08 Stage 2 checklist/chat UI
-
-4. **Human lane, in parallel**
-   - P1-09 Azure resources and local `.env` setup
-   - Review/merge PRs and change merged task statuses from `review` to `done`
-
-After all Phase 1 tasks are merged and marked `done`, run and log Gate 1 before starting Phase 2.
-
-## Known follow-ups
-
-- `scripts/dev.sh` forwards `APP_MODE` to the backend but not `VITE_APP_MODE` to Vite. Fix this before relying on `APP_MODE=live make dev` for the browser.
-- `scripts/finish_task.sh` still uses a P0-01-specific sentence in every generated PR body. Generalize it when workflow polish is scheduled.
-- The exact submission time/time zone is still unknown. The plan assumes Friday 2026-09-25 at 5:00 pm local and targets submission by 2:00 pm.
-
-## Non-negotiable rules for the next agent
-
-- Do not start Phase 2 until Gate 1 is logged `PASS`.
-- One task, branch, and worktree per session; stay inside the task's allowed files.
-- Test first, run `make check`, record its final output, add a `Learned:` line, set `status: review`, and open the PR.
-- After merging, mark the task `done` on `main`; dependencies do not unlock on `review`.
-- Personal data never reaches a model. All model calls go through `backend/app/core/model_gateway.py`.
-- Mock mode must remain green and runnable even if Azure is unavailable.
+- For deployment, build the frontend with `VITE_APP_MODE=live` so it calls the deployed API; local `make dev` already sets this while keeping backend `APP_MODE=mock` by default.
+- A direct visit to `/apply` without completing Stage 1 still uses the synthetic disaster 9999 fallback. Use the ZIP-first journey in the demo; replace that fallback before feature freeze.
+- The checklist's live declaration-number lookup currently lives in its feature service. Move it behind the shared OpenFEMA adapter when live integration is exercised; mock behavior is covered now.
+- P1-06 retrieves official sources before the model call. Its declaration/checklist agent tools and live Azure behavior remain to verify after P1-09.
+- Keep personal data out of models and logs; do not start a later phase until its prior gate is logged. Stay within each task's file list, test first, run `make check`, and use a task PR before marking `done`.
