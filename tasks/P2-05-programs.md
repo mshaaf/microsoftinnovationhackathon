@@ -3,11 +3,11 @@ id: P2-05
 title: "Programs rules and endpoint"
 phase: 2
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P1-03]
 research: [R14]
-branch: ""
+branch: "task/P2-05-programs"
 ---
 
 ## Execute in phases
