@@ -3,11 +3,11 @@ id: P2-04
 title: "Deadline math"
 phase: 2
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-04]
 research: [R12, R13]
-branch: ""
+branch: "task/P2-04-deadline-math"
 ---
 
 ## Execute in phases
