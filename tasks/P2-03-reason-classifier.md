@@ -3,7 +3,7 @@ id: P2-03
 title: "Reason taxonomy and classifier"
 phase: 2
 lane: B
-status: "review"
+status: done
 owner: ""
 depends_on: [P2-02, P2-04, P2-08]
 research: [R01, R12, R10]
@@ -89,6 +89,8 @@ Running 5 tests using 1 worker
 2026-09-24 independent review: No blockers. Defer missing model-output behavior refinement because the letter response contract is frozen; defer live SDK initialization error handling verification until Azure is available (P1-09).
 
 Learned: The OpenFEMA snapshot contains synthetic rows used by other evaluations; existence in the mock snapshot is not enough to claim a disaster number is verified.
+
+2026-09-24: PR #29 merged to main after independent review and green CI. Status set to done.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
