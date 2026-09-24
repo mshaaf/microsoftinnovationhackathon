@@ -3,7 +3,7 @@ id: P2-04
 title: "Deadline math"
 phase: 2
 lane: A
-status: review
+status: done
 owner: ""
 depends_on: [P0-04]
 research: [R12, R13]
