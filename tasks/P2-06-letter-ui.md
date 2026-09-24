@@ -3,7 +3,7 @@ id: P2-06
 title: "Letter Decoder UI and appeal draft"
 phase: 2
 lane: C
-status: "review"
+status: done
 owner: ""
 depends_on: [P0-07, P2-03]
 research: []
@@ -86,6 +86,8 @@ Running 6 tests using 1 worker
 ```
 
 2026-09-24 independent review: No Critical or Important findings. Review confirmed `/deadline` continuation and the local-only draft privacy path. Reviewer did not run tests.
+
+2026-09-24: PR #30 merged to main after green CI. Status set to done.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
