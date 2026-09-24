@@ -22,4 +22,5 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 
 cd "$ROOT/frontend"
-APP_MODE="$APP_MODE" API_PORT="$API_PORT" WEB_PORT="$WEB_PORT" pnpm dev --host 0.0.0.0
+# Use the running API even when its adapters are in mock mode.
+VITE_APP_MODE=live API_PORT="$API_PORT" WEB_PORT="$WEB_PORT" pnpm dev --host 0.0.0.0
