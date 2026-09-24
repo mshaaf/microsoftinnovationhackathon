@@ -3,11 +3,11 @@ id: P1-01
 title: "ZIP to county"
 phase: 1
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-04]
 research: [R11]
-branch: ""
+branch: "task/P1-01-zip-to-county"
 ---
 
 ## Execute in phases
