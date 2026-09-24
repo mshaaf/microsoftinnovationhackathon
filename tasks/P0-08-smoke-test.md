@@ -3,7 +3,7 @@ id: P0-08
 title: "Playwright smoke and accessibility check"
 phase: 0
 lane: C
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P0-07]
 research: [R16]
