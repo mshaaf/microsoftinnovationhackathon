@@ -3,7 +3,7 @@ id: P2-02
 title: "PII redaction gate and leak tests"
 phase: 2
 lane: B
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P2-01]
 research: [R05]
@@ -87,6 +87,8 @@ The core Responsible AI promise: personal data never reaches a model.
     5 passed (7.7s)
   ```
 - Learned: Keeping the HTTP route staged until all contract fields exist avoids publishing incomplete results or inventing classification facts; P2-02 supplies reusable response fields for P2-03.
+- 2026-09-24 merged: PR #27 passed CI and merged to main. The full endpoint-response acceptance remains Gate 2 work owned by P2-03, as documented above.
+- 2026-09-24 post-merge verification: `make check` passed on main: backend 145 passed/3 skipped, frontend 29 passed, 14 contract examples, 15 scenarios/8 letters/12 OpenFEMA rows validated, and all 5 smoke tests passed.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
