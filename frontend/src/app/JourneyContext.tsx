@@ -1,10 +1,12 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import type { PropsWithChildren } from "react";
 
+export type JourneyAnswer = string | number | boolean | null;
+
 export type JourneyState = {
   zipCode: string;
   county: string;
-  answers: Record<string, string>;
+  answers: Record<string, JourneyAnswer>;
   disasterNumber: string;
 };
 

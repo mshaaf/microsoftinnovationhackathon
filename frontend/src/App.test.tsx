@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import App from "./App";
@@ -7,6 +7,7 @@ import App from "./App";
 afterEach(() => {
   cleanup();
   window.history.replaceState({}, "", "/");
+  document.documentElement.lang = "en";
 });
 
 describe("app shell", () => {
@@ -61,6 +62,10 @@ describe("app shell", () => {
     expect(
       screen.getByRole("navigation", { name: "Pasos para recuperarse" }),
     ).toBeInTheDocument();
+    await waitFor(() => expect(document.documentElement.lang).toBe("es"));
+
+    await user.click(screen.getByRole("button", { name: "English" }));
+    await waitFor(() => expect(document.documentElement.lang).toBe("en"));
   });
 
   it("shows every service from the health contract on /status", async () => {

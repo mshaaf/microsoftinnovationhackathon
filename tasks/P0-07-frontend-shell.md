@@ -20,6 +20,9 @@ Mobile-first app shell with a 4-stage stepper plus Programs, routes for each sta
 The frontend can build every screen before the backend exists.
 
 ## Files you may touch
+- frontend/src/App.tsx
+- frontend/src/App.module.css
+- frontend/src/App.test.tsx
 - frontend/src/app/**
 - frontend/src/features/*/ (placeholder screens)
 - frontend/src/features/status/**
@@ -61,12 +64,14 @@ The frontend can build every screen before the backend exists.
 - Add the four-stage stepper and fetch `/api/health` for `/status`.
 - Write stepper, language toggle, and status component tests before implementing those behaviors.
 
-2026-09-23: Implemented routes, shared shell, stepper, in-memory journey context, feature-scoped en/es loading, and contract-backed service status. Added route, stepper, language, and status coverage. Browser checked home and status at 360px with no horizontal overflow.
+2026-09-23: Implemented routes, shared shell, stepper, in-memory journey context, feature-scoped en/es loading, and contract-backed service status. Added route, stepper, language, context, and status coverage. Browser checked home and status at 360px with no horizontal overflow.
 Learned: Vite's eager glob imports made feature-owned translation files work without a shared strings file or dependency.
+
+2026-09-23: Review follow-up: widened journey answers for string, boolean, numeric, and null values; synchronized the document language with the UI toggle; added the App entry files to this task's allowlist.
 
 `make check` (exit 0):
 ```text
-   Duration  1.16s (transform 122ms, setup 0ms, collect 373ms, tests 183ms, environment 804ms, prepare 108ms)
+   Duration  1.24s (transform 160ms, setup 0ms, collect 666ms, tests 276ms, environment 1.26s, prepare 175ms)
 
 uv run --project backend python scripts/validate_contracts.py
 Validator mismatch check passed.
