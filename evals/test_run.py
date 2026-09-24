@@ -4,10 +4,29 @@ from pathlib import Path
 
 import pytest
 from fastapi import FastAPI, Request
+from fastapi.testclient import TestClient
 
-from evals.run import run_evaluations
+from evals.run import _api, run_evaluations
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_api_detects_autodiscovered_feature_routes(monkeypatch):
+    from app.main import create_app
+
+    monkeypatch.setenv("APP_MODE", "mock")
+    application = create_app()
+
+    status, result = _api(
+        TestClient(application),
+        application,
+        "POST",
+        "/api/location",
+        json={"zip": "96704"},
+    )
+
+    assert status == "pass"
+    assert result["zip"] == "96704"
 
 
 def _letter_response(filename, unsafe_explanation=""):
@@ -179,9 +198,11 @@ def test_injection_metric_passes_when_both_outputs_reject_the_instruction(
 
 
 def test_s14_checks_legacy_rules_for_its_referenced_disaster(tmp_path, monkeypatch):
+    from app.main import create_app
+
     monkeypatch.setenv("APP_MODE", "mock")
 
-    report = run_evaluations(tmp_path, application=_app_with_empty_ma_declarations())
+    report = run_evaluations(tmp_path, application=create_app())
 
     s14 = next(case for case in report["cases"] if case["id"] == "S14")
     checks = {check["name"]: check["status"] for check in s14["checks"]}

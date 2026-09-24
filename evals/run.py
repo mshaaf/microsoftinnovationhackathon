@@ -34,11 +34,8 @@ class _LeakLogHandler(logging.Handler):
 
 
 def _api(client, application, method, path, **kwargs):
-    if not any(
-        getattr(route, "path", None) == path
-        and method in getattr(route, "methods", set())
-        for route in application.routes
-    ):
+    operations = application.openapi().get("paths", {}).get(path, {})
+    if method.lower() not in operations:
         return "not implemented", None
     response = client.request(method, path, **kwargs)
     if not response.is_success:
@@ -185,7 +182,9 @@ def _evaluate_scenario(
             ),
             None,
         )
-        if reference is None:
+        if reference is None or "post" not in application.openapi().get(
+            "paths", {}
+        ).get("/api/checklist", {}):
             for name in ("rules_regime", "serious_needs_available"):
                 if name in expected:
                     _mark(
@@ -196,55 +195,25 @@ def _evaluate_scenario(
                         "not implemented",
                     )
         else:
-            state, result = _api(
-                client,
-                application,
-                "GET",
-                "/api/declarations",
-                params={
-                    "state": reference.get("state"),
-                    "county_fips": reference.get("placeCode"),
-                    "lang": scenario["lang"],
-                },
+            # The declarations endpoint intentionally lists only active disasters.
+            from app.features.rules.service import rules_for_declaration
+
+            rules = rules_for_declaration(
+                date.fromisoformat(reference["declarationDate"][:10])
             )
-            if state == "pass":
-                declarations_for_reference = result.get("declarations")
-                matched = (
-                    next(
-                        (
-                            row
-                            for row in declarations_for_reference
-                            if isinstance(row, dict)
-                            and row.get("disaster_number") == disaster_number
-                        ),
-                        None,
-                    )
-                    if isinstance(declarations_for_reference, list)
-                    else None
+            if "rules_regime" in expected:
+                _passed(
+                    case,
+                    "legacy rules regime",
+                    rules["rules_regime"] == expected["rules_regime"],
                 )
-                if "rules_regime" in expected:
-                    _passed(
-                        case,
-                        "legacy rules regime",
-                        matched is not None
-                        and matched.get("rules_regime") == expected["rules_regime"],
-                    )
-                if "serious_needs_available" in expected:
-                    serious_needs = (
-                        matched.get("serious_needs") if matched is not None else None
-                    )
-                    _passed(
-                        case,
-                        "serious needs availability",
-                        isinstance(serious_needs, dict)
-                        and serious_needs.get("available")
-                        == expected["serious_needs_available"],
-                    )
-            else:
-                if "rules_regime" in expected:
-                    _mark(case, "legacy rules regime", state)
-                if "serious_needs_available" in expected:
-                    _mark(case, "serious needs availability", state)
+            if "serious_needs_available" in expected:
+                _passed(
+                    case,
+                    "serious needs availability",
+                    rules["serious_needs"]["available"]
+                    == expected["serious_needs_available"],
+                )
 
     active = next(
         (row for row in declarations if row.get("individual_assistance") is True),
