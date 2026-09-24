@@ -9,7 +9,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<HelpHerePage />} />
       <Route path="/help-here" element={<HelpHerePage />} />
-      <Route path="/apply" element={<ApplyPage feature="apply" next="/letter" />} />
+      <Route path="/apply" element={<ApplyPage />} />
       <Route path="/letter" element={<FeaturePage feature="letter" next="/deadline" />} />
       <Route path="/deadline" element={<FeaturePage feature="deadline" next="/programs" />} />
       <Route path="/programs" element={<FeaturePage feature="programs" />} />
