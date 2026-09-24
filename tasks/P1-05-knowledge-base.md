@@ -3,7 +3,7 @@ id: P1-05
 title: "Knowledge base index"
 phase: 1
 lane: B
-status: review
+status: done
 owner: ""
 depends_on: [P0-04]
 research: [R03, R15]

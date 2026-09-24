@@ -3,7 +3,7 @@ id: P1-03
 title: "Rules regimes and Serious Needs window"
 phase: 1
 lane: A
-status: review
+status: done
 owner: ""
 depends_on: [P1-02]
 research: [R13]

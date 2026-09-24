@@ -3,7 +3,7 @@ id: P1-08
 title: "Stage 2 UI and chat panel"
 phase: 1
 lane: C
-status: "review"
+status: done
 owner: ""
 depends_on: [P0-07]
 research: []

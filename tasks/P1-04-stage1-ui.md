@@ -3,7 +3,7 @@ id: P1-04
 title: "Stage 1 UI: is help available here?"
 phase: 1
 lane: C
-status: "review"
+status: done
 owner: ""
 depends_on: [P0-07]
 research: []
