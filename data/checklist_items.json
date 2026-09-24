@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "id": "proof_of_occupancy",
+      "text": {
+        "en": "Something that shows you lived there, like a lease or a utility bill.",
+        "es": "Algo que demuestre que vivía allí, como un contrato de alquiler o una factura de servicios."
+      },
+      "why": {
+        "en": "FEMA needs to confirm the home was your main residence.",
+        "es": "FEMA necesita confirmar que la vivienda era su residencia principal."
+      },
+      "source_url": "https://www.fema.gov/assistance/individual/after-applying/verifying-home-ownership-occupancy"
+    },
+    {
+      "id": "proof_of_ownership",
+      "text": {
+        "en": "Something that shows you owned the home, like a deed, mortgage statement, or property tax bill.",
+        "es": "Algo que demuestre que era dueño de la vivienda, como una escritura, un estado de cuenta hipotecario o una factura de impuestos."
+      },
+      "why": {
+        "en": "FEMA may need to confirm ownership before giving home repair or replacement help.",
+        "es": "FEMA puede necesitar confirmar la propiedad antes de dar ayuda para reparar o reemplazar la vivienda."
+      },
+      "source_url": "https://www.fema.gov/assistance/individual/after-applying/verifying-home-ownership-occupancy"
+    },
+    {
+      "id": "insurance_decision_letter",
+      "text": {
+        "en": "Your insurance settlement or denial letter, if you have one.",
+        "es": "La carta de pago o denegación de su seguro, si la tiene."
+      },
+      "why": {
+        "en": "FEMA cannot pay for needs already covered by insurance.",
+        "es": "FEMA no puede pagar necesidades que ya cubre el seguro."
+      },
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "identity_document",
+      "text": {
+        "en": "An identity document, such as a government ID, U.S. passport, or Social Security document.",
+        "es": "Un documento de identidad, como una identificación del gobierno, pasaporte de EE. UU. o documento del Seguro Social."
+      },
+      "why": {
+        "en": "FEMA must confirm who is applying.",
+        "es": "FEMA debe confirmar quién presenta la solicitud."
+      },
+      "source_url": "https://www.fema.gov/assistance/individual/after-applying"
+    },
+    {
+      "id": "temporary_housing_information",
+      "text": {
+        "en": "Your current contact information and details about where you are staying now.",
+        "es": "Su información de contacto actual y detalles sobre dónde se está alojando ahora."
+      },
+      "why": {
+        "en": "FEMA may offer displacement help for temporary housing.",
+        "es": "FEMA puede ofrecer ayuda de desplazamiento para vivienda provisional."
+      },
+      "source_url": "https://www.fema.gov/assistance/individual/2024-reform"
+    },
+    {
+      "id": "sba_application",
+      "text": {
+        "en": "If FEMA refers you to SBA, complete the SBA disaster loan application.",
+        "es": "Si FEMA le refiere a la SBA, complete la solicitud de préstamo por desastre de la SBA."
+      },
+      "why": {
+        "en": "For disasters declared before March 22, 2024, this may be required before FEMA considers some Other Needs Assistance.",
+        "es": "Para desastres declarados antes del 22 de marzo de 2024, esto puede ser necesario antes de que FEMA considere cierta Asistencia para Otras Necesidades."
+      },
+      "source_url": "https://www.federalregister.gov/documents/2024/01/22/2024-00677/individual-assistance-program-equity"
+    }
+  ]
+}
