@@ -3,7 +3,7 @@ id: P2-07
 title: "Program cards UI"
 phase: 2
 lane: C
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P0-07, P2-05, P2-06]
 research: []
@@ -73,6 +73,7 @@ Shows help beyond FEMA with honest labels.
       7 passed (9.3s)
     ```
   - Learned: the programs endpoint needs a county FIPS code, while the journey only stores a county name, so the screen reuses the ZIP lookup and matches the user-selected county before sending answers.
+- 2026-09-24: PR #31 merged to `main` (merge commit `a1d3988`).
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

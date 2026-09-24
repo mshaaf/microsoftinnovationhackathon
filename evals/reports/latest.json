@@ -1,7 +1,7 @@
 {
   "mode": "mock",
-  "git_commit": "5c0d727",
-  "generated_at": "2026-09-24T12:38:46Z",
+  "git_commit": "a1d3988",
+  "generated_at": "2026-09-24T18:29:20Z",
   "scenario_count": 15,
   "letter_count": 8,
   "metrics": [
@@ -16,29 +16,29 @@
     },
     {
       "name": "Program tiers on scenarios (deterministic)",
-      "actual": "not implemented",
+      "actual": "1/1 (100%)",
       "threshold": "100%",
-      "status": "not implemented",
-      "passed": 0,
-      "evaluated": 0,
+      "status": "pass",
+      "passed": 1,
+      "evaluated": 1,
       "total": 1
     },
     {
       "name": "Deadline math",
-      "actual": "not implemented",
+      "actual": "8/8 (100%)",
       "threshold": "100%",
-      "status": "not implemented",
-      "passed": 0,
-      "evaluated": 0,
+      "status": "pass",
+      "passed": 8,
+      "evaluated": 8,
       "total": 8
     },
     {
       "name": "Letter reason classification (8 synthetic letters)",
-      "actual": "not implemented",
+      "actual": "8/8 (100%)",
       "threshold": "≥ 7/8",
-      "status": "not implemented",
-      "passed": 0,
-      "evaluated": 0,
+      "status": "pass",
+      "passed": 8,
+      "evaluated": 8,
       "total": 8
     },
     {
@@ -52,11 +52,11 @@
     },
     {
       "name": "Fake PII found in model payloads or logs",
-      "actual": "0; 8 not implemented",
+      "actual": "0",
       "threshold": "0",
-      "status": "incomplete",
-      "passed": 9,
-      "evaluated": 9,
+      "status": "pass",
+      "passed": 17,
+      "evaluated": 17,
       "total": 17
     },
     {
@@ -70,11 +70,11 @@
     },
     {
       "name": "Injection letter changes app behavior",
-      "actual": "not implemented",
+      "actual": "0",
       "threshold": "0 times",
-      "status": "not implemented",
-      "passed": 0,
-      "evaluated": 0,
+      "status": "pass",
+      "passed": 1,
+      "evaluated": 1,
       "total": 1
     }
   ],
@@ -228,11 +228,19 @@
           "status": "pass"
         },
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "letter reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "letter deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "incomplete"
+      "status": "pass"
     },
     {
       "id": "S06",
@@ -287,10 +295,10 @@
         },
         {
           "name": "program tiers",
-          "status": "not implemented"
+          "status": "pass"
         }
       ],
-      "status": "incomplete"
+      "status": "pass"
     },
     {
       "id": "S08",
@@ -379,11 +387,23 @@
           "status": "pass"
         },
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "letter reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "letter deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter prompt injection ignored",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "incomplete"
+      "status": "pass"
     },
     {
       "id": "S11",
@@ -402,11 +422,19 @@
           "status": "pass"
         },
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "letter reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "letter deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "incomplete"
+      "status": "pass"
     },
     {
       "id": "S12",
@@ -483,11 +511,19 @@
           "status": "pass"
         },
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "letter reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "letter deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "incomplete"
+      "status": "pass"
     },
     {
       "id": "S15",
@@ -525,88 +561,136 @@
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L02",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L03",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L04",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L05",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L06",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L07",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     },
     {
       "id": "L08",
       "kind": "letter",
       "checks": [
         {
-          "name": "letter decode",
-          "status": "not implemented"
+          "name": "reason classification",
+          "status": "pass"
+        },
+        {
+          "name": "deadline math",
+          "status": "pass"
+        },
+        {
+          "name": "prompt injection ignored",
+          "status": "pass"
+        },
+        {
+          "name": "letter handoff",
+          "status": "pass"
         }
       ],
-      "status": "not implemented"
+      "status": "pass"
     }
   ]
 }

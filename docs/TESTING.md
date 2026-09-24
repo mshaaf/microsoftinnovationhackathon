@@ -83,13 +83,15 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 - [ ] Live Azure chat and `make test-live` (deferred: Azure is not provisioned; P1-09, per AGENTS.md rule 5).
 
 ### Gate 2: letter + programs
-- [ ] Upload each letter L01–L06. The reason shown matches its `.expected.json`.
-- [ ] The "What we removed" panel shows counts and categories only. The redacted preview contains none of that letter's `fake_pii` strings.
-- [ ] Open browser DevTools → Network, type a name in the appeal draft, and search all requests for that name. **Zero results.**
-- [ ] The countdown equals letter date + 60 days (check one letter by hand).
-- [ ] Unclear letter (L07) leads to the handoff card, not a guess.
-- [ ] Gig-worker scenario S07 program cards: IHP open, IRS likely, DUA check now, D-SNAP check now, SBA optional.
-- [ ] `make test` leak tests are green. `make eval`: letters ≥ 7/8, deadlines 100%, PII leaks 0.
+- [x] Upload each letter L01–L06. The reason shown matches its `.expected.json` (`make eval`: L01–L06 all pass; letter suite 8/8).
+- [x] The "What we removed" panel shows counts and categories only. The redacted preview contains none of that letter's `fake_pii` strings (component checks plus L03 browser preview; backend leak tests cover all letters).
+- [x] Appeal draft name and FEMA number are absent from all captured requests (Playwright request assertions).
+- [x] The countdown equals letter date + 60 days (eval verifies 8/8; UI component test verifies the displayed countdown).
+- [x] Unclear letter (L07) leads to the handoff card, not a guess (letter eval and UI handoff test).
+- [x] Gig-worker scenario S07 program cards: IHP open, IRS likely, DUA check now, D-SNAP check now, SBA optional (Playwright flow in Español).
+- [x] `make test` leak tests are green. `make eval`: letters 8/8, deadlines 8/8, PII leaks 0.
+
+Gate 2 note: the eval's emergency-handoff metric remains 0/1 and is tracked by P3-01 for Gate 3; it is outside this gate's listed criteria.
 
 ### Gate 3: feature freeze
 - [ ] The public Azure URL works on your phone over cellular data.
@@ -120,6 +122,6 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 |---|---|---|---|
 | 0 | 2026-09-23 21:50 ET | PASS | All P0 tasks done. `make setup`, `make check`, contracts, fixtures, eval, health, board, Chromium journey, screenshots, axe scans, and console-error assertion passed in mock mode. |
 | 1 | 2026-09-24 08:36 ET | PASS (mock mode) | P1-01–P1-08 merged and `done`; `make check` passed on merged `main` with 97 Python tests, 29 frontend tests, and 5 Playwright tests (2 live tests skipped). `make eval`: Stage 1 15/15, citations 4/4; S14 historical rules pass. Browser tests cover DR-4936, S12/S13 ZIP states, checklist, S04 chat and no-promise. Azure live check deferred to P1-09. |
-| 2 | | | |
+| 2 | 2026-09-24 14:30 ET | PASS (mock mode) | P2-01–P2-08 merged and `done`. On merged `main`, `make check` passed: 161 backend tests (3 live skipped), 42 frontend tests, contracts/fixtures, and 7 Playwright tests. `make eval`: L01–L08 reasons 8/8, deadline math 8/8, fake PII 0, S07 tiers pass. P2-07 received an independent review with no Critical/Important findings. Emergency handoff 0/1 is assigned to P3-01, not a Gate 2 criterion. |
 | 3 | | | |
 | 4 | | | |
