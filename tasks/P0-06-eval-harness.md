@@ -3,7 +3,7 @@ id: P0-06
 title: "Eval harness and scorecard"
 phase: 0
 lane: B
-status: "in_progress"
+status: "review"
 owner: ""
 depends_on: [P0-03, P0-05]
 research: []
@@ -35,7 +35,7 @@ Turns 'it seems to work' into a scorecard we can track and show judges.
 - Unit tests for each scorer
 
 ## How to verify (human, under 5 minutes)
-1. Run `PYTHONPATH=. uv run --project backend pytest -c backend/pyproject.toml evals/test_scoring.py evals/test_run.py -q`. Expect all 11 tests to pass.
+1. Run `PYTHONPATH=. uv run --project backend pytest -c backend/pyproject.toml evals/test_scoring.py evals/test_run.py -q`. Expect all 18 tests to pass.
 2. Run `make eval`, then open `evals/reports/latest.md`. Expect 15 scenario rows, 8 letter rows, all 8 metrics and thresholds, plus mode, commit, and UTC timestamp. Currently unavailable API routes show `not implemented`.
 3. Run `make check`. Expect exit code 0; the P0-08 smoke target may still print its scaffold message.
 
@@ -54,9 +54,18 @@ Turns 'it seems to work' into a scorecard we can track and show judges.
 
 2026-09-23 — Implemented the fixture-driven evaluator with FastAPI's in-process test client, metric scorers, report generation, and fake-PII monitoring for model payloads and logs. Added scorer and report tests; all 11 focused tests passed. `make eval` completed in under one second and wrote scorecard files for all 15 scenarios and 8 letters; all API-dependent results show `not implemented` because those endpoints are not registered yet. The metrics table includes all eight documented thresholds.
 
+2026-09-23 review fixes:
+1. Add runner regression tests for unsafe explanations/chat replies, split denial-plus-unsafe instructions, legacy DR-9999 results, and referenced letter decode/handoff failures.
+2. Score injection against both L08's explanation and S10's reply; constrain the sensitive-action matcher to one sentence.
+3. Evaluate S14's rules and Serious Needs values using its referenced DR-9999 snapshot county while keeping ZIP 02134 Stage 1 independent.
+4. Include each referenced letter's checks in its scenario status.
+5. Rerun focused tests, `make check`, and `make eval`; confirm absent API routes remain `not implemented`.
+
+Verification: 18 focused tests passed; `make check` passed; `make eval` completed in under one second with 15 scenarios, 8 letters, all 8 metrics, and API-dependent results marked `not implemented`.
+
 `make check` output (last 10 lines):
 ```text
-   Duration  921ms (transform 96ms, setup 0ms, collect 209ms, tests 50ms, environment 808ms, prepare 129ms)
+   Duration  868ms (transform 93ms, setup 0ms, collect 190ms, tests 49ms, environment 754ms, prepare 149ms)
 
 uv run --project backend python scripts/validate_contracts.py
 Validator mismatch check passed.
