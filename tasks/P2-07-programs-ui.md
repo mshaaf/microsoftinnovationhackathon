@@ -3,11 +3,11 @@ id: P2-07
 title: "Program cards UI"
 phase: 2
 lane: C
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-07]
 research: []
-branch: ""
+branch: "task/P2-07-programs-ui"
 ---
 
 ## Execute in phases
