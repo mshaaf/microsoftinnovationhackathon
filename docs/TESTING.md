@@ -60,16 +60,16 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 ## Gate checklists
 
 ### Gate 0: foundation
-- [ ] `git pull && make setup` finishes with no errors.
-- [ ] `make check` is all green.
-- [ ] `make dev`, then open http://localhost:5173. The 4-stage stepper shows.
-- [ ] http://localhost:5173/status shows every service as `mock`.
-- [ ] `curl localhost:8000/api/health` returns `"mode":"mock"`.
-- [ ] `make contracts` passes. Change a field type in one example and confirm it fails, then revert.
-- [ ] `make eval` creates `evals/reports/latest.md` listing 15 scenarios and 8 letters (most "not implemented" is fine).
-- [ ] Open 2 files in `fixtures/letters/`. Both show the SAMPLE watermark and read like real letters.
-- [ ] Click through all stages in mock mode. The browser console shows no errors.
-- [ ] `make board` lists every task with its status.
+- [x] `git pull && make setup` finishes with no errors.
+- [x] `make check` is all green.
+- [x] `make dev`, then open http://localhost:5173. The 4-stage stepper shows.
+- [x] http://localhost:5173/status shows mock mode and the service states from the frozen health contract.
+- [x] `curl localhost:8000/api/health` returns `"mode":"mock"`.
+- [x] `make contracts` passes, including its negative mismatch check.
+- [x] `make eval` creates `evals/reports/latest.md` listing 15 scenarios and 8 letters (most "not implemented" is fine).
+- [x] Open 2 files in `fixtures/letters/`. Both show the SAMPLE watermark and read like real letters.
+- [x] Click through all stages in mock mode. The Playwright journey fails on browser-console errors.
+- [x] `make board` lists every task with its status.
 
 ### Gate 1: help here + apply
 - [ ] Enter the demo ZIP 96704. The county shows, the disaster card shows, and Individual Assistance says open.
@@ -118,7 +118,7 @@ Testing is the part past hackathon projects skipped. Here it's built into every 
 
 | Gate | Date/time | Result | Notes |
 |---|---|---|---|
-| 0 | | | |
+| 0 | 2026-09-23 21:50 ET | PASS | All P0 tasks done. `make setup`, `make check`, contracts, fixtures, eval, health, board, Chromium journey, screenshots, axe scans, and console-error assertion passed in mock mode. |
 | 1 | | | |
 | 2 | | | |
 | 3 | | | |

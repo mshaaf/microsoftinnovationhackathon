@@ -17,6 +17,11 @@ async function checkScreen(
 
 test("a survivor can walk through every placeholder stage", async ({ page }, testInfo) => {
   const requests = captureRequests(page);
+  const browserErrors: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") browserErrors.push(message.text());
+  });
+  page.on("pageerror", (error) => browserErrors.push(error.message));
 
   await page.goto("/");
   await checkScreen(page, testInfo, "Start with your ZIP code", "help-here");
@@ -44,4 +49,5 @@ test("a survivor can walk through every placeholder stage", async ({ page }, tes
   await checkScreen(page, testInfo, "Service status", "status");
 
   expectNoRequestContains(requests, "Jordan Samplewell");
+  expect(browserErrors).toEqual([]);
 });
