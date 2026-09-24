@@ -3,11 +3,11 @@ id: P2-06
 title: "Letter Decoder UI and appeal draft"
 phase: 2
 lane: C
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-07]
 research: []
-branch: ""
+branch: "task/P2-06-letter-ui"
 ---
 
 ## Execute in phases
