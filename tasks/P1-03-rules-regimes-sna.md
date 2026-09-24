@@ -41,7 +41,7 @@ The most time-sensitive benefit in the journey. It must be exactly right.
 - Schema validation of the rules file
 
 ## How to verify (human, under 5 minutes)
-1. Run `PYTHONPATH=backend:. uv run --project backend pytest backend/app/features/rules backend/app/features/declarations -q`; expect 32 passed and 1 live test skipped.
+1. Run `PYTHONPATH=backend:. uv run --project backend pytest backend/app/features/rules backend/app/features/declarations -q`; expect 24 passed and 1 live test skipped.
 2. Run `API_PORT=8080 WEB_PORT=5253 make dev` in one terminal.
 3. Run `curl -sS 'http://localhost:8080/api/declarations?state=HI&county_fips=15001'`; DR-4936 should show regime `2024-03-22`, amount `770`, and `apply_by: 2026-10-01`.
 
@@ -60,7 +60,7 @@ The most time-sensitive benefit in the journey. It must be exactly right.
 
 2026-09-24:
 - Added `data/ihp_rules.json` with the R13 regimes, amount schedule, and source records; added declaration-date selection, 30-calendar-day apply-by math, and Serious Needs response fields.
-- Focused verification: `PYTHONPATH=backend:. uv run --project backend pytest backend/app/features/rules backend/app/features/declarations -q` → 32 passed, 1 live test skipped. The rules data validates against the existing IHP rules schema.
+- Focused verification: `PYTHONPATH=backend:. uv run --project backend pytest backend/app/features/rules backend/app/features/declarations -q` → 24 passed, 1 live test skipped. The rules data validates against the existing IHP rules schema.
 - The first `make check` smoke run hit a transient Playwright artifact-cleanup `ENOENT`; the isolated rerun passed all checks: 19 backend passed, 1 live skipped, 29 frontend passed, contracts and fixtures passed, and 3 smoke tests passed.
 - `make check` last 10 lines:
   ```text
