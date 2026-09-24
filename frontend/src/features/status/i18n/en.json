@@ -1,0 +1,14 @@
+{
+  "title": "Service status",
+  "loading": "Loading service status…",
+  "error": "Service status did not load. Try again.",
+  "retry": "Try again",
+  "empty": "No service details are available right now.",
+  "mode": "App mode",
+  "mock": "Mock",
+  "live": "Live",
+  "service.mock": "Mock",
+  "service.ok": "Available",
+  "service.down": "Unavailable",
+  "service.not_configured": "Not configured"
+}

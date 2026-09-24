@@ -1,0 +1,16 @@
+{
+  "app.title": "Survivor Journey Navigator",
+  "app.banner": "Not a government website. Not FEMA. FEMA makes all decisions.",
+  "app.languageButton": "Español",
+  "app.stepsLabel": "Recovery steps",
+  "app.step.helpHere": "Help here",
+  "app.step.apply": "Apply",
+  "app.step.letter": "Letter",
+  "app.step.deadline": "Deadline",
+  "app.continue": "Continue",
+  "app.programs": "Other programs",
+  "app.about": "About",
+  "app.status": "Service status",
+  "app.moreLinks": "More information",
+  "app.footerLinks": "More information"
+}

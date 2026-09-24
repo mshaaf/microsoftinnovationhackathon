@@ -1,0 +1,16 @@
+{
+  "app.title": "Navegador de recuperación",
+  "app.banner": "Este no es un sitio web del gobierno. No es FEMA. FEMA toma todas las decisiones.",
+  "app.languageButton": "English",
+  "app.stepsLabel": "Pasos para recuperarse",
+  "app.step.helpHere": "Busca ayuda",
+  "app.step.apply": "Solicita ayuda",
+  "app.step.letter": "Carta",
+  "app.step.deadline": "Fecha límite",
+  "app.continue": "Continuar",
+  "app.programs": "Otros programas",
+  "app.about": "Acerca de",
+  "app.status": "Estado de servicios",
+  "app.moreLinks": "Más información",
+  "app.footerLinks": "Más información"
+}
