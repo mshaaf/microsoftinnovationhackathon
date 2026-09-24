@@ -62,7 +62,8 @@ class Adapter(SearchAdapter):
             title_words = set(_words(chunk["title"]))
             body_words = _words(chunk["content"])
             score = sum(2 * (t in title_words) + (t in body_words) for t in terms)
-            if score:
+            matched = sum(t in title_words or t in body_words for t in terms)
+            if matched >= min(2, len(terms)):  # one stray word isn't a match
                 scored.append((score, {k: chunk[k] for k in RESULT_KEYS}))
         scored.sort(key=lambda s: -s[0])
         return [{**r, "score": float(s)} for s, r in scored[:top]]
