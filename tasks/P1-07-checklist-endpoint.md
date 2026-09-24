@@ -3,11 +3,11 @@ id: P1-07
 title: "Checklist endpoint"
 phase: 1
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P1-03]
 research: [R12, R13]
-branch: ""
+branch: "task/P1-07-checklist-endpoint"
 ---
 
 ## Execute in phases
