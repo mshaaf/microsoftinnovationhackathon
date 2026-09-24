@@ -3,7 +3,7 @@ id: P1-06
 title: "Agent and cited chat"
 phase: 1
 lane: B
-status: review
+status: done
 owner: ""
 depends_on: [P1-05]
 research: [R01, R02]
