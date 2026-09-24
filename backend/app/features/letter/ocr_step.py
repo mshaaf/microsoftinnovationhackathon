@@ -14,7 +14,7 @@ class UploadError(ValueError):
         self.status, self.code, self.message = status, code, message
 
 
-async def read_upload(request: Request) -> tuple[bytes, str]:
+async def read_upload(request: Request) -> tuple[bytes, str, str]:
     kind, options = parse_options_header(request.headers.get("content-type", ""))
     boundary = options.get(b"boundary")
     if kind != b"multipart/form-data" or not boundary:
@@ -105,4 +105,8 @@ async def read_upload(request: Request) -> tuple[bytes, str]:
     file_type = fields["content_type"].decode()
     if not VALID_TYPES[file_type](data):
         raise UploadError(415, "unsupported_file", "Use a JPEG, PNG, or PDF file.")
-    return data, fields["filename"].decode(errors="replace")
+    return (
+        data,
+        fields["filename"].decode(errors="replace"),
+        fields["lang"].decode(),
+    )

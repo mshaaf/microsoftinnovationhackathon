@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 
 from app.adapters.base import NotConfigured
 from app.adapters.ocr.base import OCRUnavailable, UnreadableLetter
+from app.adapters.openfema.base import OpenFEMAUnavailable
 
 from .ocr_step import UploadError, read_upload
 from .service import decode_ocr
@@ -16,8 +17,8 @@ router = APIRouter()
 async def decode(request: Request):
     request_id = str(uuid4())
     try:
-        await read_upload(request)
-        return await decode_ocr()
+        data, filename, lang = await read_upload(request)
+        return await decode_ocr(data, filename, lang, request_id)
     except UploadError as error:
         status, code, message, retryable = (
             error.status,
@@ -32,7 +33,7 @@ async def decode(request: Request):
             "We could not read this letter. Try a clearer photo.",
             False,
         )
-    except (OCRUnavailable, NotConfigured):
+    except (OCRUnavailable, OpenFEMAUnavailable, NotConfigured):
         status, code, message, retryable = (
             503,
             "dependency_unavailable",

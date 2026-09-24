@@ -1,0 +1,96 @@
+{
+  "confidence_threshold": 0.6,
+  "reasons": [
+    {
+      "id": "insurance_docs_missing",
+      "label": {"en": "Insurance documents needed", "es": "Se necesitan documentos del seguro"},
+      "plain_explanation": {
+        "en": "FEMA may need the final decision from your insurer. FEMA may not pay for needs that insurance already covers.",
+        "es": "FEMA puede necesitar la decisión final de su aseguradora. FEMA quizá no pague por necesidades que el seguro ya cubre."
+      },
+      "what_to_send": [
+        {"id": "insurance_decision_letter", "text": {"en": "Your insurer's settlement or denial letter. If it did not cover your loss, include proof of the costs that remain.", "es": "La carta de pago o rechazo de su aseguradora. Si no cubrió su pérdida, incluya prueba de los gastos pendientes."}}
+      ],
+      "match_hints": ["insurance", "settlement", "denial letter", "insurer"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "identity_not_verified",
+      "label": {"en": "Identity not verified", "es": "No se pudo verificar su identidad"},
+      "plain_explanation": {
+        "en": "FEMA could not verify your identity with the information on your application. Call FEMA or send a copy of a government ID, such as a driver's license or passport.",
+        "es": "FEMA no pudo verificar su identidad con la información de su solicitud. Llame a FEMA o envíe una copia de una identificación oficial, como una licencia de conducir o un pasaporte."
+      },
+      "what_to_send": [
+        {"id": "identity_document", "text": {"en": "A clear copy of a government identity document, such as a driver's license or passport. Do not send an original.", "es": "Una copia clara de una identificación oficial, como una licencia de conducir o un pasaporte. No envíe el documento original."}}
+      ],
+      "match_hints": ["identity", "verify your identity", "government ID"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "ownership_not_verified",
+      "label": {"en": "Home ownership not verified", "es": "No se pudo verificar que sea propietario de la vivienda"},
+      "plain_explanation": {
+        "en": "FEMA could not confirm that you owned the damaged home. Send a record that shows you owned it on the date of the disaster.",
+        "es": "FEMA no pudo confirmar que usted era propietario de la vivienda dañada. Envíe un documento que muestre que era suya el día del desastre."
+      },
+      "what_to_send": [
+        {"id": "proof_of_ownership", "text": {"en": "A deed or title, mortgage document, property tax bill, homeowner's insurance statement, or another record showing ownership.", "es": "Una escritura o título, documento hipotecario, factura de impuestos sobre la propiedad, estado del seguro de vivienda u otro documento que muestre la propiedad."}}
+      ],
+      "match_hints": ["ownership", "owned the damaged home", "deed", "title"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "occupancy_not_verified",
+      "label": {"en": "Main home not verified", "es": "No se pudo verificar que fuera su residencia principal"},
+      "plain_explanation": {
+        "en": "FEMA could not confirm the damaged home was your main home. A main home is where you live for more than six months a year.",
+        "es": "FEMA no pudo confirmar que la vivienda dañada fuera su residencia principal. Es el lugar donde vive más de seis meses al año."
+      },
+      "what_to_send": [
+        {"id": "proof_of_occupancy", "text": {"en": "A lease, utility bill, bank or credit card statement, or other mail showing the home was your main address.", "es": "Un contrato de alquiler, factura de servicios, estado bancario o de tarjeta de crédito, u otra carta que muestre que esa era su dirección principal."}}
+      ],
+      "match_hints": ["main residence", "main home", "lease", "utility bill"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "insufficient_damage",
+      "label": {"en": "Damage information needed", "es": "Se necesita más información sobre los daños"},
+      "plain_explanation": {
+        "en": "FEMA's records did not show enough damage to essential living areas. Damage to landscaping, spoiled food, or areas not needed for basic living may not qualify for this help.",
+        "es": "Los registros de FEMA no mostraron suficientes daños en las áreas esenciales de la vivienda. Los daños al jardín, los alimentos echados a perder o las áreas no esenciales quizá no califiquen para esta ayuda."
+      },
+      "what_to_send": [
+        {"id": "proof_of_damage", "text": {"en": "Repair estimates, photos, or a contractor's statement about damage to essential living areas.", "es": "Presupuestos de reparación, fotos o una declaración de un contratista sobre los daños en las áreas esenciales de la vivienda."}}
+      ],
+      "match_hints": ["not enough damage", "essential living areas", "repair estimates"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "missed_inspection_or_contact",
+      "label": {"en": "FEMA needs to reach you", "es": "FEMA necesita comunicarse con usted"},
+      "plain_explanation": {
+        "en": "FEMA could not reach you or complete an inspection. Call the FEMA Helpline to update your contact information or reschedule.",
+        "es": "FEMA no pudo comunicarse con usted o completar una inspección. Llame a la línea de ayuda de FEMA para actualizar sus datos o reprogramar la inspección."
+      },
+      "what_to_send": [
+        {"id": "contact_fema", "text": {"en": "Call the FEMA Helpline at 1-800-621-3362 to update your contact information or reschedule an inspection. Return FEMA's calls when you can.", "es": "Llame a la línea de ayuda de FEMA al 1-800-621-3362 para actualizar sus datos o reprogramar una inspección. Devuelva las llamadas de FEMA cuando pueda."}}
+      ],
+      "match_hints": ["inspection", "could not reach you", "reschedule", "contact information"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    },
+    {
+      "id": "other_or_unclear",
+      "label": {"en": "Ask someone to review this letter", "es": "Pida ayuda para revisar esta carta"},
+      "plain_explanation": {
+        "en": "This letter is unclear or gives a reason that needs careful review. Call the FEMA Helpline or visit a Disaster Recovery Center.",
+        "es": "Esta carta no está clara o menciona un motivo que requiere una revisión cuidadosa. Llame a la línea de ayuda de FEMA o visite un Centro de Recuperación por Desastre."
+      },
+      "what_to_send": [
+        {"id": "contact_fema", "text": {"en": "Ask the FEMA Helpline or a Disaster Recovery Center to review the complete letter with you.", "es": "Pida a la línea de ayuda de FEMA o a un Centro de Recuperación por Desastre que revise la carta completa con usted."}}
+      ],
+      "match_hints": ["unclear", "duplicate application", "text missing", "unreadable"],
+      "source_url": "https://www.fema.gov/fact-sheet/understanding-fema-decision-letter"
+    }
+  ]
+}
