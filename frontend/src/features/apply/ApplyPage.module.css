@@ -1,0 +1,62 @@
+.page { max-width: 47rem; padding: 0 0 1rem; }
+.page h1 {
+  max-width: 17ch;
+  margin: 0;
+  font-size: clamp(2.2rem, 8vw, 4rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+.description { margin: 1.15rem 0 1.5rem; color: var(--color-muted); font-size: 1.15rem; line-height: 1.6; }
+.panel {
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.4rem;
+  background: var(--color-surface);
+}
+.panel h2 { margin: 0 0 0.75rem; font-size: 1.4rem; }
+.step, .hint { margin: 0 0 0.5rem; color: var(--color-muted); }
+.options { display: flex; flex-direction: column; gap: 0.75rem; }
+.big {
+  min-height: 3.25rem;
+  padding: 0.7rem 1.15rem;
+  border: 0;
+  border-radius: 0.3rem;
+  background: var(--color-sea);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.big:hover { background: var(--color-sea-dark); }
+.big:disabled { opacity: 0.6; }
+.link {
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0;
+  border: 0;
+  background: none;
+  color: var(--color-sea-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.items { margin: 0; padding: 0; list-style: none; }
+.items li { padding: 0.75rem 0; border-top: 1px solid var(--color-line); }
+.items p { margin: 0.25rem 0; }
+.items a, .reply a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
+.input { display: block; width: 100%; margin: 0.25rem 0 0.75rem; padding: 0.6rem; box-sizing: border-box; font: inherit; }
+.reply { margin-top: 1rem; }
+.continue {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  padding: 0.7rem 1.15rem;
+  border-radius: 0.3rem;
+  background: var(--color-sea);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
