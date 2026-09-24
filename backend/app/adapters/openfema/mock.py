@@ -25,3 +25,8 @@ class Adapter(MockAdapter, OpenFEMAAdapter):
             if row["fipsStateCode"] == state_fips
             and row["fipsCountyCode"] in {county_code, "000"}
         ]
+
+    def declaration_by_number(self, disaster_number: int) -> dict | None:
+        return next(
+            (row for row in _rows() if row["disasterNumber"] == disaster_number), None
+        )

@@ -3,10 +3,8 @@ from datetime import date
 from functools import lru_cache
 from pathlib import Path
 
-import httpx
-
+from app.adapters import get_adapter
 from app.adapters.openfema.base import OpenFEMAUnavailable
-from app.core.config import get_app_mode
 from app.features.rules.service import rules_for_declaration
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -19,33 +17,8 @@ def _items() -> dict[str, dict]:
     return {row["id"]: row for row in rows}
 
 
-@lru_cache(maxsize=64)
 def _declaration_date(disaster_number: int) -> date:
-    if get_app_mode() == "mock":
-        from app.adapters.openfema.mock import _rows
-
-        rows = _rows()
-    else:
-        from app.adapters.openfema.live import ENDPOINT
-
-        try:
-            response = httpx.get(
-                ENDPOINT,
-                params={
-                    "$filter": f"disasterNumber eq {disaster_number}",
-                    "$select": "disasterNumber,declarationDate",
-                    "$top": "1",
-                },
-                timeout=10.0,
-            )
-            response.raise_for_status()
-            rows = response.json().get("DisasterDeclarationsSummaries", [])
-        except (httpx.HTTPError, ValueError, AttributeError) as error:
-            raise OpenFEMAUnavailable("OpenFEMA request failed") from error
-
-    row = next(
-        (row for row in rows if row.get("disasterNumber") == disaster_number), None
-    )
+    row = get_adapter("openfema").declaration_by_number(disaster_number)
     if row is None:
         raise LookupError(f"disaster {disaster_number} was not found")
     try:

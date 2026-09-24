@@ -11,6 +11,9 @@ class OpenFEMAAdapter(BaseAdapter):
     def declarations_for_county(self, state_fips: str, county_code: str) -> list[dict]:
         raise NotImplementedError
 
+    def declaration_by_number(self, disaster_number: int) -> dict | None:
+        raise NotImplementedError
+
 
 __all__ = [
     "SERVICE_NAME",

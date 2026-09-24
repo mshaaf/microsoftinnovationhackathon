@@ -102,6 +102,46 @@ def test_sba_item_only_appears_for_pre_reform_declarations():
     assert "sba_application" not in {item["id"] for item in after["items"]}
 
 
+def test_checklist_uses_openfema_adapter_declaration_date(monkeypatch):
+    from app.features.checklist import service
+
+    calls = []
+
+    class Adapter:
+        def declaration_by_number(self, disaster_number):
+            calls.append(disaster_number)
+            return {"disasterNumber": disaster_number, "declarationDate": "2024-03-21"}
+
+    monkeypatch.setattr(service, "get_adapter", lambda name: Adapter())
+    result = service.build_checklist(
+        12345,
+        "en",
+        {"housing": "rent", "insured": "no", "lost_id": False, "displaced": False},
+    )
+
+    assert calls == [12345]
+    assert result["rules_regime"] == "pre-2024-03-22"
+
+
+def test_unknown_disaster_number_is_rejected():
+    response = TestClient(create_app()).post(
+        "/api/checklist",
+        json={
+            "disaster_number": 987654,
+            "lang": "en",
+            "answers": {
+                "housing": "rent",
+                "insured": "no",
+                "lost_id": False,
+                "displaced": False,
+            },
+        },
+    )
+
+    assert response.status_code == 400
+    assert response.json()["error"]["code"] == "invalid_input"
+
+
 @pytest.mark.parametrize(
     "change",
     [
