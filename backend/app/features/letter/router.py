@@ -16,8 +16,8 @@ router = APIRouter()
 async def decode(request: Request):
     request_id = str(uuid4())
     try:
-        data, filename = await read_upload(request)
-        return await decode_ocr(data, filename)
+        await read_upload(request)
+        return await decode_ocr()
     except UploadError as error:
         status, code, message, retryable = (
             error.status,
@@ -36,7 +36,7 @@ async def decode(request: Request):
         status, code, message, retryable = (
             503,
             "dependency_unavailable",
-            "Letter reading is temporarily unavailable. Try again.",
+            "Letter review cannot be completed right now. Try again later.",
             True,
         )
     return JSONResponse(

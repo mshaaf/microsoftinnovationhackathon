@@ -31,11 +31,20 @@ async def test_mock_matches_name_and_hash():
     assert by_name.pages == 1 and by_name.confidence == 0.97
 
 
-def test_valid_upload_waits_for_the_complete_decode_pipeline(caplog):
+def test_incomplete_pipeline_does_not_send_upload_to_ocr(monkeypatch, caplog):
+    from app.adapters.ocr import mock
+
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError("OCR must wait until the decode pipeline is complete")
+
+    monkeypatch.setattr(mock.Adapter, "read", fail_if_called)
     response = upload()
     assert response.status_code == 503
     assert_matches_schema(response, "error")
     assert response.json()["error"]["code"] == "dependency_unavailable"
+    assert response.json()["error"]["message"] == (
+        "Letter review cannot be completed right now. Try again later."
+    )
     assert "Jordan Samplewell" not in response.text + caplog.text
 
 
