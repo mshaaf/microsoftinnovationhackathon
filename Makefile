@@ -19,12 +19,12 @@ dev:
 	bash scripts/dev.sh
 
 test:
-	APP_MODE=mock $(UV_RUN) pytest backend/tests scripts/tests
+	APP_MODE=mock $(UV_RUN) pytest backend/tests backend/app/features scripts/tests evals
 	cd frontend && pnpm test
 
 lint:
-	$(UV_RUN) ruff check backend scripts
-	$(UV_RUN) ruff format --check backend scripts
+	$(UV_RUN) ruff check backend scripts evals
+	$(UV_RUN) ruff format --check backend scripts evals
 
 typecheck:
 	cd frontend && pnpm typecheck
