@@ -198,9 +198,11 @@ def test_injection_metric_passes_when_both_outputs_reject_the_instruction(
 
 
 def test_s14_checks_legacy_rules_for_its_referenced_disaster(tmp_path, monkeypatch):
+    from app.main import create_app
+
     monkeypatch.setenv("APP_MODE", "mock")
 
-    report = run_evaluations(tmp_path, application=_app_with_empty_ma_declarations())
+    report = run_evaluations(tmp_path, application=create_app())
 
     s14 = next(case for case in report["cases"] if case["id"] == "S14")
     checks = {check["name"]: check["status"] for check in s14["checks"]}
