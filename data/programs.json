@@ -1,0 +1,66 @@
+{
+  "last_verified": "2026-09-23",
+  "programs": [
+    {
+      "id": "fema_ihp",
+      "title": "FEMA help for individuals and households",
+      "trigger_conditions": {"individual_assistance": true},
+      "tier_logic": {
+        "open_if_registration_open": "open",
+        "otherwise": "check_now"
+      },
+      "deadline_anchor": "registration_deadline",
+      "how_to_apply": "Apply at DisasterAssistance.gov or call FEMA at 1-800-621-3362.",
+      "source_url": "https://www.disasterassistance.gov/",
+      "last_verified": "2026-09-23"
+    },
+    {
+      "id": "irs_relief",
+      "title": "IRS tax relief",
+      "trigger_conditions": {
+        "individual_assistance": true,
+        "deadline_dates_by_disaster": {"4936": "2027-02-01"}
+      },
+      "tier_logic": {"tier": "likely"},
+      "deadline_anchor": "deadline_dates_by_disaster",
+      "how_to_apply": "Review current disaster notices at IRS.gov. If you moved into or live outside the covered area, call 866-562-5227.",
+      "source_url": "https://www.irs.gov/newsroom/tax-relief-in-disaster-situations",
+      "last_verified": "2026-09-23"
+    },
+    {
+      "id": "dua",
+      "title": "Disaster Unemployment Assistance",
+      "trigger_conditions": {"lost_work_or_self_employed": true},
+      "tier_logic": {"tier": "check_now"},
+      "deadline_anchor": "not_announced",
+      "how_to_apply": "Contact your state unemployment office. File promptly; late filing may be allowed for good cause.",
+      "source_url": "https://oui.doleta.gov/unemploy/disaster.asp",
+      "last_verified": "2026-09-23"
+    },
+    {
+      "id": "dsnap",
+      "title": "Disaster Supplemental Nutrition Assistance Program",
+      "trigger_conditions": {"individual_assistance": true, "on_snap": false},
+      "tier_logic": {"tier": "check_now"},
+      "deadline_anchor": "not_announced",
+      "how_to_apply": "Contact your state SNAP agency to ask whether D-SNAP is open.",
+      "source_url": "https://www.fns.usda.gov/disaster/disaster-assistance",
+      "last_verified": "2026-09-23"
+    },
+    {
+      "id": "sba_loan",
+      "title": "SBA disaster loan",
+      "trigger_conditions": {"housing": ["own", "rent"]},
+      "tier_logic": {
+        "tiers_by_rules_regime": {
+          "2024-03-22": "optional",
+          "pre-2024-03-22": "check_now"
+        }
+      },
+      "deadline_anchor": "none",
+      "how_to_apply": "Learn about SBA disaster loans at SBA.gov or call 1-800-659-2955.",
+      "source_url": "https://www.sba.gov/funding-programs/disaster-assistance",
+      "last_verified": "2026-09-23"
+    }
+  ]
+}
