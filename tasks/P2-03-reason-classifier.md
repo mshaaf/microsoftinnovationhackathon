@@ -3,7 +3,7 @@ id: P2-03
 title: "Reason taxonomy and classifier"
 phase: 2
 lane: B
-status: "blocked"
+status: "in_progress"
 owner: ""
 depends_on: [P2-02, P2-04, P2-08]
 research: [R01, R12]
@@ -57,6 +57,15 @@ Turns a confusing letter into a specific next step.
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
 2026-09-24 scope correction: The acceptance path requires a global disaster-number lookup, but the existing OpenFEMA adapter only supports county queries. P2-08 now owns the adapter capability; this task depends on it so validation stays in the adapter boundary. The route currently discards upload bytes and language, so this task also owns passing the validated in-memory upload and language through OCR to response assembly. No implementation has started. Resume after P2-08 is merged.
+
+2026-09-24 resume plan after P2-08 merge:
+1. Add the sourced seven-reason taxonomy and structured letter output model.
+2. Add failing tests for mock/live structured output, date and disaster validation, L07 handoff, and response contract/privacy.
+3. Pass the validated upload bytes and language through OCR, redaction, classification, and frozen response assembly.
+4. Derive checklist and explanation from taxonomy data and calculate the deadline through the existing deadline service.
+5. Run focused tests, `make check`, and `make eval`; record the final evidence before handoff.
+
+2026-09-24 resumed: P2-08 PR #28 merged to main; P2-02, P2-04, and P2-08 are all done.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

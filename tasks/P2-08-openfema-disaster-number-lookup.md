@@ -3,7 +3,7 @@ id: P2-08
 title: "OpenFEMA disaster-number lookup"
 phase: 2
 lane: A
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P2-05]
 research: [R10]
@@ -75,6 +75,7 @@ The letter pipeline must verify that a disaster number exists without hard-codin
     5 passed (6.9s)
   ```
 - Learned: The checklist’s direct OpenFEMA call duplicated both mock/live selection and cache behavior; moving the number lookup into the adapter removed that split.
+- 2026-09-24 independent review and merge: No critical or important findings; CI passed. Review noted that negative lookup expiry is implemented but not separately tested. PR #28 merged to main.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
