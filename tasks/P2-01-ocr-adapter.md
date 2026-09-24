@@ -3,11 +3,11 @@ id: P2-01
 title: "OCR adapter"
 phase: 2
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-04]
 research: [R04]
-branch: ""
+branch: "task/P2-01-ocr-adapter"
 ---
 
 ## Execute in phases
