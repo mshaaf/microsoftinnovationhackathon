@@ -1,12 +1,22 @@
 :root {
-  color: #153349;
-  background: #f5f8fa;
+  color: var(--color-ink);
+  background: var(--color-canvas);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
   --color-ink: #153349;
   --color-muted: #466174;
+  --color-sea: #176b68;
+  --color-sea-dark: #105653;
+  --color-action: #b44c2f;
+  --color-canvas: #f2f6f4;
+  --color-paper: #fff;
+  --color-surface: #fff;
+  --color-line: #c9d7d1;
+  --color-banner: #fff1c9;
+  --color-banner-border: #dfbd5f;
+  --color-focus: #b44c2f;
 }
 
 * {
@@ -17,4 +27,14 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
 }

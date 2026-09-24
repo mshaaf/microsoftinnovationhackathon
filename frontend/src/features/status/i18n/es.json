@@ -1,0 +1,14 @@
+{
+  "title": "Estado de servicios",
+  "loading": "Cargando el estado de los servicios…",
+  "error": "No se pudo cargar el estado de los servicios. Inténtalo de nuevo.",
+  "retry": "Intentar de nuevo",
+  "empty": "No hay detalles de servicios disponibles ahora.",
+  "mode": "Modo de la aplicación",
+  "mock": "Simulado",
+  "live": "En vivo",
+  "service.mock": "Simulado",
+  "service.ok": "Disponible",
+  "service.down": "No disponible",
+  "service.not_configured": "Sin configurar"
+}

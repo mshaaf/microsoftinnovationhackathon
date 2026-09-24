@@ -1,0 +1,77 @@
+.navigation {
+  margin: 1.25rem 0 2.5rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  min-width: 0;
+}
+
+.step {
+  display: flex;
+  min-height: 3.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 0.45rem 0.25rem 0.5rem;
+  border-top: 3px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.step:hover .label {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.step[aria-current="step"] {
+  border-color: var(--color-action);
+  color: var(--color-ink);
+}
+
+.number {
+  display: grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.step[aria-current="step"] .number {
+  border-color: var(--color-action);
+  background: var(--color-action);
+  color: white;
+}
+
+.label {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 42rem) {
+  .navigation {
+    margin: 2rem 0 3.5rem;
+  }
+
+  .step {
+    min-height: 4.25rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+    padding-inline: 0.65rem;
+    font-size: 0.925rem;
+  }
+}
