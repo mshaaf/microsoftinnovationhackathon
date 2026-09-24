@@ -15,7 +15,32 @@ def _chunks() -> list[dict]:
 
 
 STOPWORDS = frozenset(
-    "a an the i me my we is are do does can what how to of for in on and or if it be".split()
+    [
+        "a",
+        "an",
+        "the",
+        "i",
+        "me",
+        "my",
+        "we",
+        "is",
+        "are",
+        "do",
+        "does",
+        "can",
+        "what",
+        "how",
+        "to",
+        "of",
+        "for",
+        "in",
+        "on",
+        "and",
+        "or",
+        "if",
+        "it",
+        "be",
+    ]
 )
 
 
