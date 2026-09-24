@@ -9,6 +9,7 @@ Updated 2026-09-24 ET. Start here, then read `AGENTS.md`, `docs/PLAN.md`, and th
 - Mock mode needs no Azure keys or internet. `make dev` runs the mock backend and connects the browser to that API. Component tests still use frozen contract examples by default.
 - P1-09 Azure setup remains `todo`. Live chat and `make test-live` are deferred under AGENTS.md rule 5; they are not part of the mock Gate 1 pass.
 - No Phase 2 task has been claimed yet.
+- On this machine, use `mshackathon-main` for new task claims. The original `mshackathon` folder remains the older P1-06 task worktree.
 
 ## What is complete
 
@@ -37,6 +38,7 @@ To recheck: `git pull --ff-only && make check && make eval && make board` from c
 Claim the first three tasks sequentially from a clean `main` worktree, then run the resulting worktrees in parallel (one task per session, maximum three active agent sessions):
 
 ```bash
+cd ../mshackathon-main  # from the original mshackathon folder
 scripts/start_task.sh P2-04 deadline-math
 scripts/start_task.sh P2-01 ocr-adapter
 scripts/start_task.sh P2-06 letter-decoder-ui
