@@ -3,7 +3,7 @@ id: P0-07
 title: "Frontend shell, stepper, status page"
 phase: 0
 lane: C
-status: review
+status: done
 owner: "Codex"
 depends_on: [P0-03]
 research: []

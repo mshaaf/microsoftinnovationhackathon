@@ -3,7 +3,7 @@ id: P0-06
 title: "Eval harness and scorecard"
 phase: 0
 lane: B
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P0-03, P0-05]
 research: []
