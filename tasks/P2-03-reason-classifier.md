@@ -3,9 +3,9 @@ id: P2-03
 title: "Reason taxonomy and classifier"
 phase: 2
 lane: B
-status: "in_progress"
+status: "blocked"
 owner: ""
-depends_on: [P2-02, P2-04]
+depends_on: [P2-02, P2-04, P2-08]
 research: [R01, R12]
 branch: "task/P2-03-reason-classifier"
 ---
@@ -22,7 +22,10 @@ Turns a confusing letter into a specific next step.
 ## Files you may touch
 - data/reason_taxonomy.json
 - backend/app/features/letter/classify_step.py
-- backend/app/features/letter/service.py (classify step + attach deadline by calling `features/deadline/service.py`)
+- backend/app/features/letter/service.py
+- backend/app/features/letter/router.py
+- backend/app/features/letter/ocr_step.py
+- backend/app/features/letter/test_decode.py
 
 ## Do not touch
 - Anything not listed above. Put needed changes under Follow-ups.
@@ -49,6 +52,7 @@ Turns a confusing letter into a specific next step.
 
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+2026-09-24 scope correction: The acceptance path requires a global disaster-number lookup, but the existing OpenFEMA adapter only supports county queries. P2-08 now owns the adapter capability; this task depends on it so validation stays in the adapter boundary. The route currently discards upload bytes and language, so this task also owns passing the validated in-memory upload and language through OCR to response assembly. No implementation has started. Resume after P2-08 is merged.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

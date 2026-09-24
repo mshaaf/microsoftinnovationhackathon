@@ -62,10 +62,12 @@ Cross-review: a PR written by Codex gets reviewed by Claude, and the reverse (do
 
 | Session | Order |
 |---|---|
-| S1 (A) | P2-04 Deadline math → P2-05 Programs rules and endpoint |
-| S2 (B) | P2-01 OCR adapter → P2-02 PII gate and leak tests → P2-03 Reason classifier (needs P2-04, which S1 does first) |
+| S1 (A) | P2-04 Deadline math → P2-05 Programs rules and endpoint → P2-08 OpenFEMA disaster-number lookup |
+| S2 (B) | P2-01 OCR adapter → P2-02 PII gate and leak tests → P2-03 Reason classifier (needs P2-04 and P2-08) |
 | S3 (C) | P2-06 Letter Decoder UI and appeal draft → P2-07 Program cards UI |
 | M | Draft P4-03 presentation outline from docs (an agent can do the first draft) |
+
+P2-08 was added after tracing P2-03's acceptance path: the existing OpenFEMA adapter only looks up declarations by county, but letter validation must verify arbitrary disaster numbers globally. The feature task depends on this adapter capability; no letter-specific network call belongs in the feature service.
 
 ## Phase 3: Safety, language, deploy (Friday morning, ends at feature freeze)
 
