@@ -3,7 +3,7 @@ id: P1-08
 title: "Stage 2 UI and chat panel"
 phase: 1
 lane: C
-status: "in_progress"
+status: "review"
 owner: ""
 depends_on: [P0-07]
 research: []
@@ -28,10 +28,10 @@ Turns the survivor's situation into a concrete list.
 - Anything not listed above. Put needed changes under Follow-ups.
 
 ## Acceptance criteria
-- [ ] Big-button questions, one per screen, with a back option
-- [ ] Checklist items show why and a source link
-- [ ] Chat replies show citations as links; handoff renders the handoff card
-- [ ] Works in Español
+- [x] Big-button questions, one per screen, with a back option
+- [x] Checklist items show why and a source link
+- [x] Chat replies show citations as links; handoff renders the handoff card
+- [x] Works in Español
 
 ## Tests to add
 - Component tests: questions, checklist, chat with citations, handoff
@@ -44,7 +44,11 @@ Turns the survivor's situation into a concrete list.
 - (none)
 
 ## Log
-<!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+2026-09-23 Plan: (1) tests for questions/checklist/chat/handoff; (2) HandoffCard in features/handoff; (3) ApplyPage (4 questions, back, POST /api/checklist, states) + ChatPanel (POST /api/chat, citations, handoff, escalate button); (4) en/es i18n; (5) e2e apply.spec.ts; (6) mount at /apply.
+HUMAN-APPROVED SCOPE EXCEPTION: edited frontend/src/app/routes.tsx only to mount ApplyPage at /apply (one route line + one import). FeaturePage.tsx untouched. ApplyPage keeps a Continue link to /letter so journey.spec.ts still passes.
+Disaster number falls back to 9999 when Stage 1 has not set one.
+Learned: mock mode returns fixed examples, so component tests spy on apiRequest to cover error/empty/handoff paths.
+`make check` passed (last lines): vitest 22 passed; contracts validated 14; fixtures validated; smoke 2 passed (apply.spec.ts, journey.spec.ts).
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

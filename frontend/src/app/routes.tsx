@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import { FeaturePage } from "./FeaturePage";
+import { ApplyPage } from "../features/apply";
 import { StatusPage } from "../features/status/StatusPage";
 
 export function AppRoutes() {
@@ -10,7 +11,7 @@ export function AppRoutes() {
         path="/help-here"
         element={<FeaturePage feature="help-here" next="/apply" />}
       />
-      <Route path="/apply" element={<FeaturePage feature="apply" next="/letter" />} />
+      <Route path="/apply" element={<ApplyPage />} />
       <Route path="/letter" element={<FeaturePage feature="letter" next="/deadline" />} />
       <Route path="/deadline" element={<FeaturePage feature="deadline" next="/programs" />} />
       <Route path="/programs" element={<FeaturePage feature="programs" />} />
