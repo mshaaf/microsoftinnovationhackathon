@@ -3,7 +3,7 @@ id: P2-01
 title: "OCR adapter"
 phase: 2
 lane: B
-status: "in_progress"
+status: "review"
 owner: ""
 depends_on: [P0-04]
 research: [R04]
@@ -94,6 +94,8 @@ Running 5 tests using 1 worker
 ```
 
 2026-09-24 review fix: The reviewer found that the staged endpoint called OCR, then returned a retryable error. Changed the stage to validate the upload and stop before any adapter call; the error now says the full review cannot be completed right now. The regression test failed when the OCR adapter was called and now passes. Final `make check`: 124 backend passed, 3 skipped; 29 frontend passed; contracts and fixtures passed; 5 smoke tests passed.
+
+2026-09-24 independent review: No outstanding code findings. The route validates and bounds uploads, then stops before OCR until the safe full response pipeline exists.
 
 Final `make check` output after review fix (exit 0; last 10 lines):
 ```text
