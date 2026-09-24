@@ -1,4 +1,9 @@
-from app.adapters.ocr.base import OCRUnavailable
+from app.adapters.ocr.base import OCRResult, OCRUnavailable
+from app.features.letter.redact_step import RedactionResult, redact
+
+
+def redact_ocr_result(ocr: OCRResult, language: str = "en") -> RedactionResult:
+    return redact(ocr.text, language)
 
 
 async def decode_ocr() -> None:
