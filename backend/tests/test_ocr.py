@@ -31,20 +31,22 @@ async def test_mock_matches_name_and_hash():
     assert by_name.pages == 1 and by_name.confidence == 0.97
 
 
-def test_incomplete_pipeline_does_not_send_upload_to_ocr(monkeypatch, caplog):
+def test_mock_pipeline_passes_upload_to_ocr(monkeypatch, caplog):
     from app.adapters.ocr import mock
 
-    def fail_if_called(*args, **kwargs):
-        raise AssertionError("OCR must wait until the decode pipeline is complete")
+    original_read = mock.Adapter.read
+    seen = {}
 
-    monkeypatch.setattr(mock.Adapter, "read", fail_if_called)
+    async def capture_read(self, data, filename):
+        seen["data"] = data
+        seen["filename"] = filename
+        return await original_read(self, data, filename)
+
+    monkeypatch.setattr(mock.Adapter, "read", capture_read)
     response = upload()
-    assert response.status_code == 503
-    assert_matches_schema(response, "error")
-    assert response.json()["error"]["code"] == "dependency_unavailable"
-    assert response.json()["error"]["message"] == (
-        "Letter review cannot be completed right now. Try again later."
-    )
+    assert response.status_code == 200
+    assert_matches_schema(response, "letter-decode")
+    assert seen == {"data": PNG, "filename": "L01.png"}
     assert "Jordan Samplewell" not in response.text + caplog.text
 
 
@@ -53,16 +55,17 @@ def test_incomplete_pipeline_does_not_send_upload_to_ocr(monkeypatch, caplog):
     [(b"\xff\xd8\xffexample", "image/jpeg"), (b"%PDF-1.7\nexample", "application/pdf")],
 )
 def test_accepted_file_types(data, kind):
-    response = upload(data, "L01.png", kind)
-    assert response.status_code == 503
-    assert response.json()["error"]["code"] == "dependency_unavailable"
+    name = "L01.jpg" if kind == "image/jpeg" else "L01.pdf"
+    response = upload(data, name, kind)
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "unreadable_letter"
 
 
 def test_accepts_exactly_10_megabytes():
     data = PNG + b" " * (10 * 1024 * 1024 - len(PNG))
     response = upload(data)
-    assert response.status_code == 503
-    assert response.json()["error"]["code"] == "dependency_unavailable"
+    assert response.status_code == 200
+    assert_matches_schema(response, "letter-decode")
 
 
 @pytest.mark.parametrize(

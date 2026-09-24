@@ -1,3 +1,4 @@
+import json
 import os
 from typing import Any
 
@@ -39,6 +40,22 @@ class Adapter(ModelAdapter):
             project_endpoint=endpoint, model=model, credential=credential
         )
         agent = Agent(client=client, name="Navigator", instructions=payload["rules"])
+        if payload.get("task") == "letter_classifier":
+            try:
+                result = await agent.run(
+                    json.dumps(
+                        {
+                            "lang": payload["lang"],
+                            "allowed_reasons": payload["allowed_reasons"],
+                            "untrusted_letter_text": payload["letter_text"],
+                        },
+                        ensure_ascii=False,
+                    ),
+                    options={"response_format": payload["response_format"]},
+                )
+            except Exception:  # noqa: BLE001 - SDK errors must not expose letter content.
+                raise NotConfigured("Letter classification is unavailable") from None
+            return result.value
         sources = "\n".join(
             f'<source n="{i}" title="{s["title"]}" url="{s["url"]}">{s["content"]}</source>'
             for i, s in enumerate(payload["sources"], 1)
