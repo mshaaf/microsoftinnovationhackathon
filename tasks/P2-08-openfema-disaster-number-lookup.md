@@ -3,11 +3,11 @@ id: P2-08
 title: "OpenFEMA disaster-number lookup"
 phase: 2
 lane: A
-status: "todo"
+status: "in_progress"
 owner: ""
 depends_on: [P2-05]
 research: [R10]
-branch: ""
+branch: "task/P2-08-openfema-disaster-number-lookup"
 ---
 
 ## Execute in phases
