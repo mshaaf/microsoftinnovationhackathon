@@ -3,11 +3,11 @@ id: P2-03
 title: "Reason taxonomy and classifier"
 phase: 2
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P2-02, P2-04]
 research: [R01, R12]
-branch: ""
+branch: "task/P2-03-reason-classifier"
 ---
 
 ## Execute in phases
