@@ -3,11 +3,11 @@ id: P1-04
 title: "Stage 1 UI: is help available here?"
 phase: 1
 lane: C
-status: todo
+status: "review"
 owner: ""
 depends_on: [P0-07]
 research: []
-branch: ""
+branch: "task/P1-04-stage1-ui"
 ---
 
 ## Execute in phases
@@ -27,13 +27,13 @@ First screen judges see.
 - Anything not listed above. Put needed changes under Follow-ups.
 
 ## Acceptance criteria
-- [ ] Numeric ZIP input with validation and a clear error message
-- [ ] County picker when needs_confirmation is true
-- [ ] Disaster card: title, declaration date, Individual Assistance open/closed, official link
-- [ ] Serious Needs callout: amount, 'apply by' date, 'may be extended', 'this isn't the total help available'
-- [ ] Registration deadline shown; a "registration closed" state if `registration_open` is false
-- [ ] No-declaration state: what that means, 211, FEMA Helpline
-- [ ] Loading and error states
+- [x] Numeric ZIP input with validation and a clear error message
+- [x] County picker when needs_confirmation is true
+- [x] Disaster card: title, declaration date, Individual Assistance open/closed, official link
+- [x] Serious Needs callout: amount, 'apply by' date, 'may be extended', 'this isn't the total help available'
+- [x] Registration deadline shown; a "registration closed" state if `registration_open` is false
+- [x] No-declaration state: what that means, 211, FEMA Helpline
+- [x] Loading and error states
 
 ## Tests to add
 - Component tests for each state
@@ -48,7 +48,11 @@ First screen judges see.
 - (none)
 
 ## Log
-<!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+2026-09-23
+Plan: (1) HelpHerePage with view states form/loading/error/pick/result; (2) ZIP validated as /^\d{5}$/; POST /api/location then GET /api/declarations via shared client; (3) store zipCode/county/disasterNumber in journey context only; (4) en+es strings, CSS module, 44px targets; (5) Vitest tests stub fetch with VITE_APP_MODE=live for S12/S13/closed/error/loading; e2e stage1.spec.ts in mock mode.
+Human-approved scope exceptions: (a) frontend/src/app/routes.tsx edited ONLY to mount HelpHerePage at "/" and "/help-here". (b) frontend/e2e/journey.spec.ts: 2 lines added (enter ZIP + click Check) because Continue now appears only after a result; unavoidable to keep make check green.
+Learned: the mock client returns one fixed example, so multi-county and empty states can only be tested by stubbing fetch in live mode.
+make check last lines: `2 passed (4.6s)` (journey + stage1 smoke); all lint/typecheck/tests/contracts green.
 
 ## Follow-ups
-<!-- Changes needed outside this task's files. -->
+- Mock mode always returns the single example county; S12/S13 states are only reachable in live mode or unit tests.

@@ -1,15 +1,13 @@
 import { Navigate, Route, Routes } from "react-router";
 import { FeaturePage } from "./FeaturePage";
+import { HelpHerePage } from "../features/help-here/HelpHerePage";
 import { StatusPage } from "../features/status/StatusPage";
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<FeaturePage feature="help-here" next="/apply" />} />
-      <Route
-        path="/help-here"
-        element={<FeaturePage feature="help-here" next="/apply" />}
-      />
+      <Route path="/" element={<HelpHerePage />} />
+      <Route path="/help-here" element={<HelpHerePage />} />
       <Route path="/apply" element={<FeaturePage feature="apply" next="/letter" />} />
       <Route path="/letter" element={<FeaturePage feature="letter" next="/deadline" />} />
       <Route path="/deadline" element={<FeaturePage feature="deadline" next="/programs" />} />
