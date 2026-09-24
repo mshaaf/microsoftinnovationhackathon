@@ -3,11 +3,11 @@ id: P1-03
 title: "Rules regimes and Serious Needs window"
 phase: 1
 lane: A
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P1-02]
 research: [R13]
-branch: ""
+branch: "task/P1-03-rules-regimes-sna"
 ---
 
 ## Execute in phases
