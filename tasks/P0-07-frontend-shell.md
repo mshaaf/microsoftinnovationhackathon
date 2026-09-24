@@ -68,10 +68,11 @@ The frontend can build every screen before the backend exists.
 Learned: Vite's eager glob imports made feature-owned translation files work without a shared strings file or dependency.
 
 2026-09-23: Review follow-up: widened journey answers for string, boolean, numeric, and null values; synchronized the document language with the UI toggle; added the App entry files to this task's allowlist.
+2026-09-23: Re-review follow-up: merge nested answer patches so separate stages preserve fields captured earlier.
 
 `make check` (exit 0):
 ```text
-   Duration  1.24s (transform 160ms, setup 0ms, collect 666ms, tests 276ms, environment 1.26s, prepare 175ms)
+   Duration  1.33s (transform 164ms, setup 0ms, collect 666ms, tests 276ms, environment 1.39s, prepare 211ms)
 
 uv run --project backend python scripts/validate_contracts.py
 Validator mismatch check passed.

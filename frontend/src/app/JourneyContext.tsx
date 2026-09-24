@@ -30,7 +30,13 @@ export function JourneyProvider({ children }: PropsWithChildren) {
     () => ({
       journey,
       updateJourney: (changes: Partial<JourneyState>) =>
-        setJourney((current) => ({ ...current, ...changes })),
+        setJourney((current) => ({
+          ...current,
+          ...changes,
+          answers: changes.answers
+            ? { ...current.answers, ...changes.answers }
+            : current.answers,
+        })),
     }),
     [journey],
   );

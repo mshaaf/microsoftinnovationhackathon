@@ -12,13 +12,15 @@ function JourneyProbe() {
       <output>{`${journey.answers.lost_id}:${journey.answers.household_size}`}</output>
       <button
         type="button"
-        onClick={() =>
-          updateJourney({
-            answers: { lost_id: true, household_size: 3 },
-          })
-        }
+        onClick={() => updateJourney({ answers: { lost_id: true } })}
       >
-        Save answers
+        Set lost ID
+      </button>
+      <button
+        type="button"
+        onClick={() => updateJourney({ answers: { household_size: 3 } })}
+      >
+        Set household size
       </button>
     </>
   );
@@ -33,7 +35,8 @@ describe("journey state", () => {
       </JourneyProvider>,
     );
 
-    await user.click(screen.getByRole("button", { name: "Save answers" }));
+    await user.click(screen.getByRole("button", { name: "Set lost ID" }));
+    await user.click(screen.getByRole("button", { name: "Set household size" }));
     expect(screen.getByText("true:3")).toBeInTheDocument();
   });
 });
