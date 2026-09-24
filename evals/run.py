@@ -34,11 +34,8 @@ class _LeakLogHandler(logging.Handler):
 
 
 def _api(client, application, method, path, **kwargs):
-    if not any(
-        getattr(route, "path", None) == path
-        and method in getattr(route, "methods", set())
-        for route in application.routes
-    ):
+    operations = application.openapi().get("paths", {}).get(path, {})
+    if method.lower() not in operations:
         return "not implemented", None
     response = client.request(method, path, **kwargs)
     if not response.is_success:

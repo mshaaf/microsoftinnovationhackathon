@@ -4,10 +4,29 @@ from pathlib import Path
 
 import pytest
 from fastapi import FastAPI, Request
+from fastapi.testclient import TestClient
 
-from evals.run import run_evaluations
+from evals.run import _api, run_evaluations
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_api_detects_autodiscovered_feature_routes(monkeypatch):
+    from app.main import create_app
+
+    monkeypatch.setenv("APP_MODE", "mock")
+    application = create_app()
+
+    status, result = _api(
+        TestClient(application),
+        application,
+        "POST",
+        "/api/location",
+        json={"zip": "96704"},
+    )
+
+    assert status == "pass"
+    assert result["zip"] == "96704"
 
 
 def _letter_response(filename, unsafe_explanation=""):
