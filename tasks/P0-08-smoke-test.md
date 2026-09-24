@@ -3,11 +3,11 @@ id: P0-08
 title: "Playwright smoke and accessibility check"
 phase: 0
 lane: C
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-07]
 research: [R16]
-branch: ""
+branch: "task/P0-08-smoke-test"
 ---
 
 ## Execute in phases
