@@ -26,6 +26,8 @@ test("a survivor can walk through every placeholder stage", async ({ page }, tes
   await page.goto("/");
   await checkScreen(page, testInfo, "Start with your ZIP code", "help-here");
 
+  await page.getByLabel("ZIP code").fill("96704");
+  await page.getByRole("button", { name: "Check my area" }).click();
   await page.getByRole("link", { name: "Continue" }).click();
   await expect(page).toHaveURL(/\/apply$/);
   await checkScreen(page, testInfo, "Get ready to apply", "apply");

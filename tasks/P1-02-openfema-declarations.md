@@ -3,7 +3,7 @@ id: P1-02
 title: "OpenFEMA declarations lookup"
 phase: 1
 lane: A
-status: todo
+status: blocked
 owner: ""
 depends_on: [P0-04]
 research: [R10]
@@ -51,6 +51,7 @@ Answers the survivor's first question with official data.
 
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+- 2026-09-23: Blocked before implementation. The response contract requires `county.name`, but the documented request provides only `state` and `county_fips`. When OpenFEMA returns no rows, there is no `designatedArea` to supply the name. P1-01's county lookup is still todo and outside this task's file scope. Question: should P1-02 wait for and use P1-01's lookup, or should the GET contract carry `county_name` (requiring a `[CONTRACT]` change)?
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

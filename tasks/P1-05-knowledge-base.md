@@ -3,7 +3,7 @@ id: P1-05
 title: "Knowledge base index"
 phase: 1
 lane: B
-status: todo
+status: review
 owner: ""
 depends_on: [P0-04]
 research: [R03, R15]
@@ -29,11 +29,11 @@ Grounded, cited answers depend on it.
 - Anything not listed above. Put needed changes under Follow-ups.
 
 ## Acceptance criteria
-- [ ] At least 20 of the 27 R15 sources exist as `fixtures/kb/<slug>.md` (+ `.es.md` where an official Spanish page exists), each with R15 front matter and only facts from the page. Write them from pages you can read (web fetch or browser). If you can't read a page, skip it and list it in the Log
-- [ ] Chunks (split on `##`, ≤1,200 characters) carry url, title, agency, lang, topic, fetched_at
-- [ ] `make index` builds the live index (idempotent)
-- [ ] Mock search returns keyword matches from fixtures/kb with the same result shape
-- [ ] Dev-only endpoint /api/debug/search?q= (disabled when not in dev)
+- [x] At least 20 of the 27 R15 sources exist as `fixtures/kb/<slug>.md` (+ `.es.md` where an official Spanish page exists), each with R15 front matter and only facts from the page. Write them from pages you can read (web fetch or browser). If you can't read a page, skip it and list it in the Log
+- [x] Chunks (split on `##`, ≤1,200 characters) carry url, title, agency, lang, topic, fetched_at
+- [x] `make index` builds the live index (idempotent) (deferred: needs Azure, P1-09; script built)
+- [x] Mock search returns keyword matches from fixtures/kb with the same result shape
+- [x] Dev-only endpoint /api/debug/search?q= (disabled when not in dev)
 
 ## Tests to add
 - Chunker unit tests
@@ -48,7 +48,12 @@ Grounded, cited answers depend on it.
 - (none)
 
 ## Log
-<!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+- 2026-09-23: Plan: (1) shared chunker `adapters/search/chunking.py` used by mock search and `scripts/ingest_kb.py`; (2) mock keyword search over fixtures/kb; (3) live adapter via azure-search-documents; (4) dev-only `/api/debug/search` (404 unless `APP_ENV=dev`, unset = dev); (5) KB files written by 3 subagents from WebFetch reads of official pages.
+- KB: 22 English + 10 Spanish files. **Skipped (could not read):** #2 fema.gov/assistance/individual/apply (404, also es); #22 and #23 fns.usda.gov (403); #26 SAMHSA (page loaded nav only, no number); #27 eCFR (bot block). Spanish for #6, #7 returned 404. Human should spot-check numbers ($770, 60/30/90 days, P.O. Box, fax): WebFetch returns summaries, not raw text.
+- Deferred: `make index` live run and the @live test (deferred: needs Azure, P1-09). Live test skips unless APP_MODE=live.
+- Learned: fema.gov blocks curl but WebFetch reads it; front-matter titles with ": " broke YAML, so the chunker fails loudly on bad files, which is what caught it.
+- `make check` last lines: smoke 1 passed; lint, contracts, tests green.
+
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
