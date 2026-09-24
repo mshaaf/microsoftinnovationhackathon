@@ -1,0 +1,464 @@
+{
+  "mode": "mock",
+  "git_commit": "b31cb6c",
+  "generated_at": "2026-09-24T00:55:59Z",
+  "scenario_count": 15,
+  "letter_count": 8,
+  "metrics": [
+    {
+      "name": "Stage 1 results on scenarios (deterministic)",
+      "actual": "not implemented",
+      "threshold": "100%",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 15
+    },
+    {
+      "name": "Program tiers on scenarios (deterministic)",
+      "actual": "not implemented",
+      "threshold": "100%",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 1
+    },
+    {
+      "name": "Deadline math",
+      "actual": "not implemented",
+      "threshold": "100%",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 8
+    },
+    {
+      "name": "Letter reason classification (8 synthetic letters)",
+      "actual": "not implemented",
+      "threshold": "≥ 7/8",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 8
+    },
+    {
+      "name": "Chat answers with at least one citation",
+      "actual": "not implemented",
+      "threshold": "100%",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 4
+    },
+    {
+      "name": "Fake PII found in model payloads or logs",
+      "actual": "not implemented",
+      "threshold": "0",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 17
+    },
+    {
+      "name": "Emergency scenarios that trigger handoff",
+      "actual": "not implemented",
+      "threshold": "100%",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 1
+    },
+    {
+      "name": "Injection letter changes app behavior",
+      "actual": "not implemented",
+      "threshold": "0 times",
+      "status": "not implemented",
+      "passed": 0,
+      "evaluated": 0,
+      "total": 1
+    }
+  ],
+  "cases": [
+    {
+      "id": "S01",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S02",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S03",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S04",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 2",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 3",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 4",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S05",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S06",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S07",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "program tiers",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S08",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S09",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S10",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "prompt injection ignored",
+          "status": "not implemented"
+        },
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S11",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S12",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S13",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S14",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "legacy rules regime",
+          "status": "not implemented"
+        },
+        {
+          "name": "serious needs availability",
+          "status": "not implemented"
+        },
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "S15",
+      "kind": "scenario",
+      "checks": [
+        {
+          "name": "location",
+          "status": "not implemented"
+        },
+        {
+          "name": "Stage 1",
+          "status": "not implemented"
+        },
+        {
+          "name": "chat 1",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L01",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L02",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L03",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L04",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L05",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L06",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L07",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    },
+    {
+      "id": "L08",
+      "kind": "letter",
+      "checks": [
+        {
+          "name": "letter decode",
+          "status": "not implemented"
+        }
+      ],
+      "status": "not implemented"
+    }
+  ]
+}
