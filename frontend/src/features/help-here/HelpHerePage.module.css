@@ -1,0 +1,24 @@
+.page { max-width: 47rem; padding: 0 0 1rem; }
+.page h1 { max-width: 17ch; margin: 0; font-size: clamp(2rem, 8vw, 3.4rem); font-weight: 750; letter-spacing: -0.04em; line-height: 1.05; }
+.description { color: var(--color-muted); font-size: 1.15rem; line-height: 1.6; margin: 1rem 0 1.5rem; }
+.form { display: grid; gap: 0.35rem; margin-bottom: 1.5rem; }
+.form label { font-weight: 700; }
+.hint { color: var(--color-muted); }
+.row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.row input { flex: 1 1 8rem; min-height: 2.75rem; padding: 0 0.75rem; font-size: 1.2rem; border: 2px solid var(--color-line); border-radius: 0.3rem; }
+.page button { min-height: 2.75rem; padding: 0 1.15rem; border: 0; border-radius: 0.3rem; background: var(--color-sea); color: #fff; font-weight: 700; cursor: pointer; }
+.page button:disabled { opacity: 0.6; cursor: not-allowed; }
+.error { color: var(--color-action); font-weight: 600; }
+.status { color: var(--color-muted); }
+.pick { border: 2px solid var(--color-line); border-radius: 0.3rem; padding: 1rem; display: grid; gap: 0.5rem; }
+.option { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; }
+.option input { width: 1.4rem; height: 1.4rem; }
+.card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 0.4rem; padding: 1rem; margin-bottom: 1rem; line-height: 1.5; }
+.card h2 { margin: 0 0 0.5rem; font-size: 1.3rem; }
+.card a { display: inline-block; min-height: 2.75rem; padding-top: 0.6rem; color: var(--color-sea-dark); font-weight: 600; }
+.strong { font-weight: 700; }
+.callout { margin-top: 0.75rem; padding: 0.9rem; background: var(--color-banner); border: 1px solid var(--color-banner-border); border-radius: 0.3rem; }
+.callout h3 { margin: 0 0 0.4rem; }
+.callout p { margin: 0.3rem 0; }
+.continue { display: inline-flex; min-height: 3rem; align-items: center; padding: 0.7rem 1.15rem; border-radius: 0.3rem; background: var(--color-sea); color: #fff; font-weight: 700; text-decoration: none; }
+.continue:hover { background: var(--color-sea-dark); }
