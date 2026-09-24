@@ -1,8 +1,8 @@
 # Evaluation scorecard
 
 Mode: `mock`  
-Git commit: `cb67d19`  
-Generated: `2026-09-24T12:36:50Z`  
+Git commit: `5c0d727`  
+Generated: `2026-09-24T12:38:46Z`  
 Cases: 15 scenarios, 8 letters
 
 ## Metrics
