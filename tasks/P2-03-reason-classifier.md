@@ -26,6 +26,9 @@ Turns a confusing letter into a specific next step.
 - backend/app/features/letter/router.py
 - backend/app/features/letter/ocr_step.py
 - backend/app/features/letter/test_decode.py
+- backend/app/adapters/model/live.py
+- backend/app/adapters/model/mock.py
+- backend/app/adapters/model/test_structured.py
 
 ## Do not touch
 - Anything not listed above. Put needed changes under Follow-ups.
@@ -39,6 +42,7 @@ Turns a confusing letter into a specific next step.
 
 ## Tests to add
 - Validation unit tests (bad date, unknown disaster)
+- Structured-output adapter tests, including deterministic mock classification.
 - Eval: reason accuracy ≥ 7/8 letters in mock; report live accuracy separately
 - L07 leads to handoff; L08 behavior unchanged
 
