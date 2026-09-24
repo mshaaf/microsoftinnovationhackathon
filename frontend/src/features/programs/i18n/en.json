@@ -1,4 +1,24 @@
 {
   "title": "Other help you may qualify for",
-  "description": "See other programs that may help with your recovery. Each program makes its own decisions."
+  "description": "See other programs that may help with your recovery. Each program makes its own decisions.",
+  "missingJourney": "Start with your ZIP code so we can find the right programs for your area.",
+  "backToStart": "Check your area",
+  "lostWork": "Did you lose work or self-employment income because of the disaster?",
+  "onSnap": "Are you currently receiving SNAP?",
+  "householdSize": "How many people are in your household?",
+  "yes": "Yes",
+  "no": "No",
+  "submit": "See programs",
+  "loading": "Looking for programs...",
+  "error": "We could not load programs. Check your connection and try again.",
+  "retry": "Try again",
+  "empty": "No programs matched these answers. Check with your local and state agencies for other help.",
+  "tier.checkNow": "Check now",
+  "tier.open": "Open",
+  "tier.likely": "May apply",
+  "tier.optional": "Optional",
+  "noDeadline": "No exact date confirmed. The window may be short, so check now.",
+  "howToApply": "How to apply",
+  "source": "Official source",
+  "lastVerified": "Last verified"
 }

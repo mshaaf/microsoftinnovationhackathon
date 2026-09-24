@@ -1,4 +1,24 @@
 {
   "title": "Otras ayudas que podrías recibir",
-  "description": "Consulta otros programas que podrían apoyar tu recuperación. Cada programa toma sus propias decisiones."
+  "description": "Consulta otros programas que podrían apoyar tu recuperación. Cada programa toma sus propias decisiones.",
+  "missingJourney": "Empieza con tu código postal para encontrar los programas de tu zona.",
+  "backToStart": "Consultar mi zona",
+  "lostWork": "¿Perdiste trabajo o ingresos por cuenta propia debido al desastre?",
+  "onSnap": "¿Recibes SNAP actualmente?",
+  "householdSize": "¿Cuántas personas viven en tu hogar?",
+  "yes": "Sí",
+  "no": "No",
+  "submit": "Ver programas",
+  "loading": "Buscando programas...",
+  "error": "No pudimos cargar los programas. Revisa tu conexión e inténtalo de nuevo.",
+  "retry": "Intentar de nuevo",
+  "empty": "Ningún programa coincide con estas respuestas. Consulta con las agencias locales y estatales para encontrar otra ayuda.",
+  "tier.checkNow": "Revisar ahora",
+  "tier.open": "Abierto",
+  "tier.likely": "Podría aplicar",
+  "tier.optional": "Opcional",
+  "noDeadline": "No hay una fecha exacta confirmada. El plazo puede ser corto, así que consulta ahora.",
+  "howToApply": "Cómo solicitar",
+  "source": "Fuente oficial",
+  "lastVerified": "Verificado"
 }

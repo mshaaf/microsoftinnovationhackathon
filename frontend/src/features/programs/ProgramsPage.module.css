@@ -1,0 +1,26 @@
+.page { max-width: 48rem; margin: 0 auto; padding: 1rem; }
+.description { margin: 1rem 0 1.5rem; color: var(--color-muted); font-size: 1.1rem; line-height: 1.55; }
+.form, .cards { display: grid; gap: 1rem; }
+.form { margin: 1.5rem 0; }
+.question, .card, .error { padding: 1rem; border: 1px solid var(--color-line); border-radius: .4rem; background: var(--color-paper); }
+.question { display: flex; flex-wrap: wrap; gap: .75rem 1rem; }
+.question legend { padding: 0 .25rem; font-weight: 700; }
+.choice { display: inline-flex; min-height: 2.75rem; align-items: center; gap: .5rem; }
+.choice input { width: 1.2rem; height: 1.2rem; accent-color: var(--color-sea); }
+.household { display: grid; max-width: 16rem; gap: .4rem; font-weight: 700; }
+.household input { min-height: 2.75rem; padding: 0 .6rem; border: 2px solid var(--color-line); border-radius: .3rem; font: inherit; }
+.page button { min-height: 2.75rem; justify-self: start; padding: 0 1.15rem; border: 0; border-radius: .3rem; background: var(--color-sea); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.page button:hover { background: var(--color-sea-dark); }
+.page button:disabled { cursor: wait; opacity: .7; }
+.card { line-height: 1.5; }
+.card h2 { margin: .25rem 0 .75rem; font-size: 1.25rem; }
+.card p { margin: .65rem 0; }
+.tier { display: inline-flex; min-height: 2rem; align-items: center; gap: .45rem; margin: 0; padding: .2rem .6rem; border: 1px solid var(--color-sea); border-radius: 999px; color: var(--color-ink); font-weight: 700; }
+.tier span:first-child { color: var(--color-sea-dark); font-size: 1.1rem; }
+.card a, .page > a { display: inline-flex; min-height: 2.75rem; align-items: center; color: var(--color-sea-dark); font-weight: 700; }
+.verified { color: var(--color-muted); font-size: .9rem; }
+.error { border-color: var(--color-action); }
+
+@media (min-width: 42rem) {
+  .page { padding: 1.5rem; }
+}
