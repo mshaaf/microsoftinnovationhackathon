@@ -3,7 +3,7 @@ id: P2-05
 title: "Programs rules and endpoint"
 phase: 2
 lane: A
-status: review
+status: done
 owner: ""
 depends_on: [P1-03]
 research: [R14]
