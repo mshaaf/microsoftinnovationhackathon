@@ -3,6 +3,7 @@ import { FeaturePage } from "./FeaturePage";
 import { ApplyPage } from "../features/apply";
 import { HelpHerePage } from "../features/help-here/HelpHerePage";
 import { LetterPage } from "../features/letter/LetterPage";
+import { ProgramsPage } from "../features/programs/ProgramsPage";
 import { StatusPage } from "../features/status/StatusPage";
 
 export function AppRoutes() {
@@ -13,7 +14,7 @@ export function AppRoutes() {
       <Route path="/apply" element={<ApplyPage />} />
       <Route path="/letter" element={<LetterPage />} />
       <Route path="/deadline" element={<FeaturePage feature="deadline" next="/programs" />} />
-      <Route path="/programs" element={<FeaturePage feature="programs" />} />
+      <Route path="/programs" element={<ProgramsPage />} />
       <Route path="/status" element={<StatusPage />} />
       <Route path="/about" element={<FeaturePage feature="about" />} />
       <Route path="*" element={<Navigate to="/" replace />} />
