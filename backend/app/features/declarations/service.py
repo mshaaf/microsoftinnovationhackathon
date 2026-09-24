@@ -5,8 +5,7 @@ from functools import lru_cache
 
 from app.adapters.geo.base import BUNDLE_PATH
 from app.core.clock import today
-
-RULES_CHANGE_DATE = date(2024, 3, 22)
+from app.features.rules.service import rules_for_declaration
 
 
 @lru_cache(maxsize=1)
@@ -93,13 +92,9 @@ def build_declarations(rows: list[dict], county_fips: str) -> list[dict]:
             "incident_type": row.get("incidentType") or "",
             "declaration_date": declared.isoformat(),
             "individual_assistance": individual_assistance,
-            "rules_regime": (
-                "pre-2024-03-22" if declared < RULES_CHANGE_DATE else "2024-03-22"
-            ),
             "registration_deadline": deadline.isoformat(),
             "registration_open": as_of <= deadline,
-            # P1-03 replaces this schema-compatible default with rule data.
-            "serious_needs": {"available": False},
+            **rules_for_declaration(declared),
             "fema_url": f"https://www.fema.gov/disaster/{number}",
         }
 

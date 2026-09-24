@@ -1,0 +1,51 @@
+{
+  "last_verified": "2026-09-23",
+  "regimes": [
+    {
+      "id": "pre-2024-03-22",
+      "declared_before": "2024-03-22",
+      "appeal_window_days": 60,
+      "sba_application_required_for_some_ona": true,
+      "signed_appeal_letter_required": true,
+      "serious_needs": {"available": false}
+    },
+    {
+      "id": "2024-03-22",
+      "declared_on_or_after": "2024-03-22",
+      "appeal_window_days": 60,
+      "sba_application_required_for_some_ona": false,
+      "signed_appeal_letter_required": false,
+      "serious_needs": {
+        "available": true,
+        "window_days": 30,
+        "extension_max_days": 60,
+        "amounts": [
+          {"amount_usd": 750, "effective": "2024-03-22"},
+          {"amount_usd": 770, "effective": "2024-10-01"}
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "fact": "Individual Assistance reform effective date and requirements",
+      "url": "https://www.federalregister.gov/documents/2024/01/22/2024-00677/individual-assistance-program-equity"
+    },
+    {
+      "fact": "Appeal period and signing requirements",
+      "url": "https://www.ecfr.gov/current/title-44/chapter-I/subchapter-D/part-206/subpart-D"
+    },
+    {
+      "fact": "Serious Needs Assistance amount for declarations through 2024-09-30",
+      "url": "https://www.federalregister.gov/documents/2024/10/24/2024-24701/notice-of-award-amount-adjustment-for-serious-needs-assistance"
+    },
+    {
+      "fact": "Serious Needs Assistance amount for declarations on or after 2024-10-01",
+      "url": "https://www.federalregister.gov/documents/2024/10/24/2024-24701/notice-of-award-amount-adjustment-for-serious-needs-assistance"
+    },
+    {
+      "fact": "Serious Needs Assistance application window and extension",
+      "url": "https://www.fema.gov/fact-sheet/serious-needs-assistance-0"
+    }
+  ]
+}
