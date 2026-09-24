@@ -1,0 +1,9 @@
+.page { max-width: 47rem; padding-bottom: 2rem; }
+.page h1 { max-width: 17ch; margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); line-height: 1.04; letter-spacing: -.045em; }
+.upload, .panel { margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--color-line); border-radius: .4rem; background: var(--color-surface); }
+.upload label { display: block; margin: .75rem 0; font-weight: 700; }
+.upload input { display: block; width: 100%; min-height: 44px; margin: .4rem 0; }
+.panel li { margin: .7rem 0; }
+.panel a { display: inline-block; min-height: 44px; }
+.page button { min-height: 44px; }
+.preview { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }

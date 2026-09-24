@@ -1,0 +1,8 @@
+.panel { margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--color-line); border-radius: .4rem; background: var(--color-surface); }
+.panel label { display: block; margin: 1rem 0; font-weight: 700; }
+.panel input, .draft { display: block; width: 100%; box-sizing: border-box; padding: .7rem; margin-top: .35rem; font: inherit; }
+.draft { line-height: 1.5; resize: vertical; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.actions button { min-height: 44px; padding: .6rem 1rem; border: 0; border-radius: .3rem; background: var(--color-sea); color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.panel a { display: inline-block; min-height: 44px; margin-top: .5rem; }
+@media print { .panel > :not(label):not(h3), .panel label:not(:has(textarea)), .panel h2 { display: none; } .panel { border: 0; } .draft { border: 0; height: auto; } }
