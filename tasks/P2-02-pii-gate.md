@@ -3,11 +3,11 @@ id: P2-02
 title: "PII redaction gate and leak tests"
 phase: 2
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P2-01]
 research: [R05]
-branch: ""
+branch: "task/P2-02-pii-gate"
 ---
 
 ## Execute in phases
