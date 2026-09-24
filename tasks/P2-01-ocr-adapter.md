@@ -3,7 +3,7 @@ id: P2-01
 title: "OCR adapter"
 phase: 2
 lane: B
-status: "review"
+status: "done"
 owner: ""
 depends_on: [P0-04]
 research: [R04]
