@@ -3,7 +3,7 @@ id: P2-08
 title: "OpenFEMA disaster-number lookup"
 phase: 2
 lane: A
-status: "in_progress"
+status: "review"
 owner: ""
 depends_on: [P2-05]
 research: [R10]
@@ -31,9 +31,9 @@ The letter pipeline must verify that a disaster number exists without hard-codin
 - Anything not listed above. Put needed changes under Follow-ups.
 
 ## Acceptance criteria
-- [ ] Adapter lookup returns a matching declaration or `None` in mock mode using the OpenFEMA snapshot.
-- [ ] Live lookup filters globally by disaster number, selects only required fields, caches for one hour, and maps service failures to `OpenFEMAUnavailable`.
-- [ ] Checklist obtains declaration dates only through the adapter; its existing behavior and contract remain unchanged.
+- [x] Adapter lookup returns a matching declaration or `None` in mock mode using the OpenFEMA snapshot.
+- [x] Live lookup filters globally by disaster number, selects only required fields, caches for one hour, and maps service failures to `OpenFEMAUnavailable`.
+- [x] Checklist obtains declaration dates only through the adapter; its existing behavior and contract remain unchanged.
 
 ## Tests to add
 - Adapter tests cover fixture hit/miss, live query parameters, cache expiry, and upstream failure.
@@ -56,6 +56,25 @@ The letter pipeline must verify that a disaster number exists without hard-codin
 2. Add tests for mock hit/miss and live filtering, caching, and failure handling.
 3. Add the minimal adapter method and refactor checklist date lookup to use it.
 4. Run focused tests and `make check`, then record verification and hand off.
+
+2026-09-24 implementation:
+- Added fixture-backed mock lookup and a live filtered lookup with only `disasterNumber`/`declarationDate`, one-hour positive/negative caching, and upstream error mapping.
+- Routed checklist regime dates through `get_adapter("openfema")`; unknown disaster numbers still return the existing 400 error.
+- Focused adapter and checklist tests: 31 passed. Full `make check`: passed (147 backend, 29 frontend, 14 contract examples, 15 scenarios / 8 letters / 12 OpenFEMA rows, 5 smoke tests).
+- Last 10 lines of `make check` output:
+  ```text
+
+  Running 5 tests using 1 worker
+
+    ✓  1 e2e/apply.spec.ts:3:1 › renter, not sure, lost ID shows checklist and a chat link (1.2s)
+    ✓  2 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (2.8s)
+    ✓  3 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (361ms)
+    ✓  4 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (425ms)
+    ✓  5 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (354ms)
+
+    5 passed (6.9s)
+  ```
+- Learned: The checklist’s direct OpenFEMA call duplicated both mock/live selection and cache behavior; moving the number lookup into the adapter removed that split.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
