@@ -3,11 +3,11 @@ id: P1-08
 title: "Stage 2 UI and chat panel"
 phase: 1
 lane: C
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P0-07]
 research: []
-branch: ""
+branch: "task/P1-08-stage2-ui"
 ---
 
 ## Execute in phases
