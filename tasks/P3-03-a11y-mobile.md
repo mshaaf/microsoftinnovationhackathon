@@ -38,13 +38,20 @@ Accessibility is named in the brief and scored in Responsible AI.
 
 ## How to verify (human, under 5 minutes)
 1. Run `make smoke`. Expect 9 tests to pass, including axe scans with no critical/serious violations and the 360px keyboard journey through the decoded letter and appeal draft.
-2. Run `cd frontend && pnpm exec playwright test e2e/keyboard.spec.ts`. Expect one pass; it reaches program cards using real keyboard events, exercises the letter upload and local draft controls, checks visible focus and 44px targets, and detects horizontal overflow.
+2. Run `cd frontend && pnpm exec playwright test e2e/keyboard.spec.ts`. Expect one pass; it checks the header brand's 44px target and white focus outline, reaches program cards using real keyboard events, exercises the letter upload and local draft controls, checks visible focus and 44px targets, and detects horizontal overflow.
 
 ## Facts to respect
 - (none)
 
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+
+2026-09-25 review-fix plan:
+- Extend the existing keyboard smoke test to visit the header brand and navigation.
+- Assert the brand has a 44px target and focused header controls have a contrasting outline.
+- Run the test to confirm both failures before changing CSS.
+- Apply the smallest header-only CSS fix, rerun the focused test and `make check`.
+- Record the verification result and push the existing PR branch for integration review.
 
 2026-09-25 plan:
 - Make smoke fail on critical/serious axe findings and add a regression check for the gate itself.
@@ -89,6 +96,21 @@ Accessibility is named in the brief and scored in Responsible AI.
     9 passed (14.9s)
   ```
 - Fresh `make eval` completed; all metrics pass except emergency handoff (0/1), which remains covered by P3-01's separate, unmerged branch. Generated reports were restored after evaluation.
+- Review fix: the expanded keyboard test failed on the brand link's 20px target before CSS was changed. The brand now has a 44px target; the dark header uses a white focus outline instead of the low-contrast global rust outline. Header brand, language toggle, and navigation links are exercised by keyboard. Focused test passed.
+- Fresh `make check` after the review fix passed: 161 backend tests, 3 live skips, 42 frontend tests, contract/fixture validation, and 9 Playwright tests. Last 10 lines:
+  ```text
+    ✓  2 e2e/axe-gate.spec.ts:4:1 › axe audit rejects a serious violation (394ms)
+    ✓  3 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (2.9s)
+    ✓  4 e2e/keyboard.spec.ts:49:1 › survivor can reach the next stages with keyboard only (5.5s)
+    ✓  5 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.1s)
+    ✓  6 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (979ms)
+    ✓  7 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (475ms)
+    ✓  8 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (479ms)
+    ✓  9 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (409ms)
+
+    9 passed (15.9s)
+  ```
+- Learned: testing only the main form controls missed the first focusable link in the page header.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->

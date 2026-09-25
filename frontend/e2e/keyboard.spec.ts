@@ -52,6 +52,16 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
   await expectOnePageHeading(page);
   await attachScreenAudit(page, testInfo, "keyboard-start");
 
+  for (const control of [
+    page.getByRole("link", { name: "Survivor Journey Navigator" }),
+    page.getByRole("button", { name: "Español" }),
+    page.getByRole("navigation", { name: "More information" }).getByRole("link").first(),
+  ]) {
+    await tabTo(page, control);
+    await expectKeyboardFocus(control);
+    await expect(control).toHaveCSS("outline-color", "rgb(255, 255, 255)");
+  }
+
   const zip = page.getByLabel("ZIP code");
   await tabTo(page, zip);
   await page.keyboard.type("96704");
