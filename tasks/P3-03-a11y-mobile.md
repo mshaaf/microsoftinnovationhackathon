@@ -3,7 +3,7 @@ id: P3-03
 title: "Accessibility and mobile pass"
 phase: 3
 lane: C
-status: review
+status: done
 owner: ""
 depends_on: [P2-06, P2-07]
 research: [R16]
