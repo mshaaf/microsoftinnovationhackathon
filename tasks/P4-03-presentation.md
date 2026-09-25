@@ -3,7 +3,7 @@ id: P4-03
 title: "Presentation deck for the video"
 phase: 4
 lane: shared
-status: "in_progress"
+status: in_progress
 owner: ""
 depends_on: []
 research: [R18]
@@ -35,13 +35,60 @@ The submission is a video with a demo **and** a presentation. Without this, the 
 8. Key learnings (harvest the `Learned:` lines from every task Log: `grep -h "Learned:" tasks/*.md`)
 
 ## Acceptance criteria
-- [ ] Every R18 topic has its own slide
-- [ ] Speaker notes fit about 90 seconds total
-- [ ] Architecture diagram matches what was actually deployed
+- [x] Every R18 topic has its own slide
+- [x] Speaker notes total 195 words, about 90 seconds at 130 words per minute
+- [x] Draft diagram matches the current mock-mode runtime and labels Azure targets as unprovisioned
+- [ ] Refresh results and deployment claims after Gate 3, then export a 6–8 slide deck
 
 ## How to verify (human, under 5 minutes)
-1. Read demo/presentation.md aloud with a timer. It fits in 90–120 seconds.
+1. For the draft, read `demo/presentation.md` aloud with a timer. Expect about 90 seconds for the notes at 130 words per minute, and 90–120 seconds total with slide transitions.
+2. Check `evals/reports/latest.md`. The integrated mock scorecard should show emergency handoff 1/1. A final exported deck is still pending Gate 3.
 
 ## Log
 
+2026-09-25 plan:
+- Draft eight slides and speaker notes in `demo/presentation.md`; do not export a deck or record video.
+- Source problem, goals, architecture, and Responsible AI claims from PRODUCT, ARCHITECTURE, RESPONSIBLE_AI, DEMO, and R18.
+- Show Azure services as planned targets; label the current mock deployment and pre-Gate-3 eval snapshot clearly.
+- Synthesize the `Learned:` entries across P0–P3 into concise, task-sourced takeaways.
+- Verify all R18 topics, slide count, note length near 90 seconds, and `make check`; leave finalization for after Gate 3.
+
+2026-09-25:
+- Drafted eight slides in `demo/presentation.md` covering the problem, goals, planned Azure components, current mock architecture and privacy boundary, approach, visible Responsible AI, provisional eval results, and synthesized P0–P3 task learnings.
+- Kept deployment claims explicit: the solid architecture path is the runnable mock app; Azure targets are marked unprovisioned. The scorecard uses the 2026-09-24 report and flags emergency handoff 0/1 before P3-01 integration.
+- Review correction: changed the 911-first emergency card from a current-behavior claim to a P3-01 feature pending integration.
+- Verified eight slides, all R18 topics, and 195 speaker-note words (about 90 seconds at 130 words per minute). No deck export or recording was made; this is the requested first draft.
+- `make check` passed: 161 backend tests passed, 3 live tests skipped; 42 frontend tests passed; 14 contract examples and fixtures validated; 7 Playwright smoke tests passed. Last 10 lines from the final run:
+  ```text
+  [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  Running 7 tests using 1 worker
+    ✓  1 e2e/apply.spec.ts:3:1 › renter, not sure, lost ID shows checklist and a chat link (1.3s)
+    ✓  2 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (2.8s)
+    ✓  3 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.1s)
+    ✓  4 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (929ms)
+    ✓  5 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (347ms)
+    ✓  6 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (427ms)
+    ✓  7 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (345ms)
+
+  7 passed (9.2s)
+  ```
+- Learned: a provisional scorecard and a clearly labeled mock architecture let the team draft the story early without presenting unprovisioned services or unfinished gate results as final.
+- Integration review: this PR is a mergeable draft, not a completed P4-03 task. Leave status `in_progress` until a final deck is exported and checked against the integrated eval and actual deployment state.
+- Refreshed the outline after P3-01–P3-03 merged. The cited `evals/reports/latest.md` now records emergency handoff 1/1 on the integrated mock build at `f74aeb7`; the deck still labels Azure as unprovisioned. Verified eight slide sections and 195 speaker-note words. The export remains unchecked.
+- `make check` passed on the rebased draft: 187 backend tests passed, 3 live skipped; 44 frontend tests passed; 14 contract examples and fixtures validated; 10 Playwright tests passed. Last 10 lines:
+  ```text
+    ✓   3 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (3.1s)
+    ✓   4 e2e/journey.spec.ts:57:1 › S07 journey and chat work in Spanish (1.1s)
+    ✓   5 e2e/keyboard.spec.ts:49:1 › survivor can reach the next stages with keyboard only (5.6s)
+    ✓   6 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.4s)
+    ✓   7 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (994ms)
+    ✓   8 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (397ms)
+    ✓   9 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (491ms)
+    ✓  10 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (355ms)
+
+    10 passed (17.2s)
+  ```
+- Learned: an outline can stay useful across gates if each result points to an exact scorecard commit and unfinished deployment claims remain explicit.
+
 ## Follow-ups
+- After Gate 3, rerun `make eval`, update the architecture to match the actual deployment, and finalize/export the deck.
