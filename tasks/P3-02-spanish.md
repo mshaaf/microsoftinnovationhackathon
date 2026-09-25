@@ -3,7 +3,7 @@ id: P3-02
 title: "Spanish end to end"
 phase: 3
 lane: B
-status: "review"
+status: done
 owner: ""
 depends_on: [P2-06]
 research: [R07]
