@@ -3,11 +3,11 @@ id: P4-03
 title: "Presentation deck for the video"
 phase: 4
 lane: shared
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: []
 research: [R18]
-branch: ""
+branch: "task/P4-03-presentation"
 ---
 
 ## Execute in phases
