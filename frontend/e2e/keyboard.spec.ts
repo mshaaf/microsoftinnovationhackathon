@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { fileURLToPath } from "node:url";
 import { attachScreenAudit } from "./helpers";
 
 async function tabTo(page: Page, target: Locator) {
@@ -15,14 +16,25 @@ async function expectKeyboardFocus(target: Locator, hitArea = target) {
     return {
       outlineStyle: computed.outlineStyle,
       outlineWidth: Number.parseFloat(computed.outlineWidth),
+      outlineColor: computed.outlineColor,
     };
   });
-  const { width, height } = await hitArea.evaluate((element) => {
+  const { width, height, withinViewport } = await hitArea.evaluate((element) => {
     const rect = element.getBoundingClientRect();
-    return { width: rect.width, height: rect.height };
+    return {
+      width: rect.width,
+      height: rect.height,
+      withinViewport:
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= innerHeight &&
+        rect.right <= innerWidth,
+    };
   });
   expect(style.outlineStyle).not.toBe("none");
   expect(style.outlineWidth).toBeGreaterThanOrEqual(2);
+  expect(style.outlineColor).not.toBe("rgba(0, 0, 0, 0)");
+  expect(withinViewport).toBeTruthy();
   expect(width).toBeGreaterThanOrEqual(44);
   expect(height).toBeGreaterThanOrEqual(44);
 }
@@ -49,7 +61,7 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
 
   const zip = page.getByLabel("ZIP code");
   await tabTo(page, zip);
-  await page.keyboard.insertText("96704");
+  await page.keyboard.type("96704");
   await activate(page, page.getByRole("button", { name: "Check my area" }));
   await expect(page.getByRole("heading", { name: /Disaster 4936:/ })).toBeVisible();
   await expectOnePageHeading(page);
@@ -69,7 +81,7 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
   const question = page.getByLabel("Your question");
   await tabTo(page, question);
   await expectKeyboardFocus(question);
-  await page.keyboard.insertText("Where can I apply for help?");
+  await page.keyboard.type("Where can I apply for help?");
   const chatResponse = page.waitForResponse((response) =>
     response.url().endsWith("/api/chat") && response.request().method() === "POST",
   );
@@ -84,8 +96,31 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
   await expectOnePageHeading(page);
   await attachScreenAudit(page, testInfo, "keyboard-letter");
 
-  await tabTo(page, page.getByLabel("Choose a letter"));
-  await expectKeyboardFocus(page.getByLabel("Choose a letter"));
+  const fileInput = page.getByLabel("Choose a letter");
+  await tabTo(page, fileInput);
+  await expectKeyboardFocus(fileInput);
+  const fileChooserPromise = page.waitForEvent("filechooser");
+  await page.keyboard.press("Enter");
+  const fileChooser = await fileChooserPromise;
+  const decode = page.waitForResponse((response) => response.url().endsWith("/api/letter/decode"));
+  await fileChooser.setFiles(fileURLToPath(new URL("../../fixtures/letters/L03.png", import.meta.url)));
+  expect((await decode).status()).toBe(200);
+  await expect(page.getByLabel("Redacted preview")).toBeVisible();
+  const appealDraft = page.getByLabel("Appeal draft");
+  await expect(appealDraft).toBeVisible();
+  await attachScreenAudit(page, testInfo, "keyboard-letter-decoded");
+
+  const name = page.getByLabel("Your name (optional)");
+  await tabTo(page, name);
+  await expectKeyboardFocus(name);
+  await page.keyboard.type("Keyboard Survivor");
+  const registration = page.getByLabel("FEMA registration number (optional)");
+  await tabTo(page, registration);
+  await expectKeyboardFocus(registration);
+  await page.keyboard.type("000000001");
+  await expect(appealDraft).toHaveValue(/Keyboard Survivor/);
+  await expect(appealDraft).toHaveValue(/000000001/);
+  await activate(page, page.getByRole("button", { name: "Copy draft" }));
 
   await activate(page, page.getByRole("link", { name: "Continue", exact: true }));
   await expect(page.getByRole("heading", { name: "Know your deadline" })).toBeVisible();
@@ -114,7 +149,7 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
   const household = page.getByLabel("How many people are in your household?");
   await tabTo(page, household);
   await expectKeyboardFocus(household);
-  await page.keyboard.insertText("3");
+  await page.keyboard.type("3");
   await activate(page, page.getByRole("button", { name: "See programs" }));
   await expect(page.getByRole("article").first()).toBeVisible();
   await expectOnePageHeading(page);

@@ -37,8 +37,8 @@ Accessibility is named in the brief and scored in Responsible AI.
 - Keyboard navigation Playwright test
 
 ## How to verify (human, under 5 minutes)
-1. Run `make smoke`. Expect 9 tests to pass, including axe scans with no critical/serious violations and the 360px keyboard journey.
-2. Run `cd frontend && pnpm exec playwright test e2e/keyboard.spec.ts`. Expect one pass; it reaches program cards with keyboard input, checks visible focus and 44px targets, and detects horizontal overflow.
+1. Run `make smoke`. Expect 9 tests to pass, including axe scans with no critical/serious violations and the 360px keyboard journey through the decoded letter and appeal draft.
+2. Run `cd frontend && pnpm exec playwright test e2e/keyboard.spec.ts`. Expect one pass; it reaches program cards using real keyboard events, exercises the letter upload and local draft controls, checks visible focus and 44px targets, and detects horizontal overflow.
 
 ## Facts to respect
 - (none)
@@ -71,9 +71,24 @@ Accessibility is named in the brief and scored in Responsible AI.
     ✓  8 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (459ms)
     ✓  9 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (384ms)
 
-    9 passed (13.2s)
+  9 passed (13.2s)
   ```
 - Learned: mouse-driven smoke paths did not reveal the undersized Continue link; the keyboard journey's 44px assertions caught it.
+- Review follow-up: changed all text entry to keyboard events; opened the letter chooser with Enter, decoded the synthetic L03 fixture, edited the local appeal draft, and activated Copy draft by keyboard. The axe regression now asserts `button-name` on a valid document. Focus checks also require a visible outline and an in-viewport target.
+- Fresh `make check` after review fixes passed: 161 backend tests passed, 3 live tests skipped; 42 frontend tests passed; 14 contract examples and fixtures validated; all 9 Playwright smoke tests passed. Last 10 lines:
+  ```text
+    ✓  2 e2e/axe-gate.spec.ts:4:1 › axe audit rejects a serious violation (406ms)
+    ✓  3 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (2.8s)
+    ✓  4 e2e/keyboard.spec.ts:57:1 › survivor can reach the next stages with keyboard only (4.7s)
+    ✓  5 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.1s)
+    ✓  6 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (913ms)
+    ✓  7 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (370ms)
+    ✓  8 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (422ms)
+    ✓  9 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (314ms)
+
+    9 passed (14.4s)
+  ```
+- Fresh `make eval` completed; all metrics pass except emergency handoff (0/1), which remains covered by P3-01's separate, unmerged branch. Generated reports were restored after evaluation.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
