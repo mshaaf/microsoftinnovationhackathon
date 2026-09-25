@@ -74,19 +74,19 @@ Accessibility is named in the brief and scored in Responsible AI.
   9 passed (13.2s)
   ```
 - Learned: mouse-driven smoke paths did not reveal the undersized Continue link; the keyboard journey's 44px assertions caught it.
-- Review follow-up: changed all text entry to keyboard events; opened the letter chooser with Enter, decoded the synthetic L03 fixture, edited the local appeal draft, and activated Copy draft by keyboard. Its success assertion first failed because the isolated Chromium context lacked clipboard permissions; granting clipboard read/write in this test context made the “Draft copied” status appear. CI then showed the viewport check was applied to a radio's 44px label rather than its focused input; the check now measures the focused control while retaining the label's target-size check. The axe regression asserts `button-name` on a valid document. Focus checks require a visible outline and an in-viewport target.
+- Review follow-up: changed all text entry to keyboard events; opened the letter chooser with Enter, decoded the synthetic L03 fixture, edited the local appeal draft, and activated Copy draft by keyboard. Its success assertion first failed because the isolated Chromium context lacked clipboard permissions; granting clipboard read/write in this test context made the “Draft copied” status appear. CI then showed the viewport check was applied to a radio's 44px label rather than its focused input; the check now measures the focused control while retaining the label's target-size check. Failure output includes the focused element's viewport bounds. The axe regression asserts `button-name` on a valid document. Focus checks require a visible outline and an in-viewport target.
 - Fresh `make check` after review fixes passed: 161 backend tests passed, 3 live tests skipped; 42 frontend tests passed; 14 contract examples and fixtures validated; all 9 Playwright smoke tests passed. Last 10 lines:
   ```text
-    ✓  2 e2e/axe-gate.spec.ts:4:1 › axe audit rejects a serious violation (458ms)
+    ✓  2 e2e/axe-gate.spec.ts:4:1 › axe audit rejects a serious violation (411ms)
     ✓  3 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (2.9s)
-    ✓  4 e2e/keyboard.spec.ts:58:1 › survivor can reach the next stages with keyboard only (4.6s)
-    ✓  5 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.1s)
-    ✓  6 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (912ms)
-    ✓  7 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (424ms)
-    ✓  8 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (433ms)
-    ✓  9 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (354ms)
+    ✓  4 e2e/keyboard.spec.ts:65:1 › survivor can reach the next stages with keyboard only (4.9s)
+    ✓  5 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.2s)
+    ✓  6 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (939ms)
+    ✓  7 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (393ms)
+    ✓  8 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (436ms)
+    ✓  9 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (347ms)
 
-    9 passed (14.7s)
+    9 passed (14.8s)
   ```
 - Fresh `make eval` completed; all metrics pass except emergency handoff (0/1), which remains covered by P3-01's separate, unmerged branch. Generated reports were restored after evaluation.
 
