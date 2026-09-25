@@ -1,8 +1,8 @@
 # Survivor Journey Navigator — presentation outline
 
-**Draft 1 · 8 slides · about 90 seconds of speaker notes**
+**Draft 2 · 8 slides · about 90 seconds of speaker notes**
 
-This is an outline for the presentation portion of the video, not a final deck. The app currently runs in mock mode; Azure services below are planned targets, not a deployed environment. Refresh the scorecard and architecture after Gate 3.
+This is an outline for the presentation portion of the video, not a final deck. The app currently runs in mock mode; Azure services below are planned targets, not a deployed environment. The scorecard reflects the integrated mock build. Refresh deployment claims after Gate 3.
 
 ## 1. A confusing letter can block the next step
 
@@ -86,13 +86,13 @@ flowchart LR
 **On slide**
 - “What we removed” shows categories and counts; personal data is redacted before model use.
 - Official citations, “may qualify” labels, and a human handoff keep uncertainty visible.
-- Name and FEMA number for the appeal draft stay in the browser; P3-01's 911-first emergency card is pending integration.
+- Name and FEMA number for the appeal draft stay in the browser; the 911-first emergency card works in mock mode.
 
-**Speaker notes (~11 sec):** The demo shows removed-data categories, official citations, “may qualify” labels, browser-only appeal details, and a human handoff. P3-01's 911-first emergency card awaits integration.
+**Speaker notes (~11 sec):** The demo shows removed-data categories, official citations, “may qualify” labels, browser-only appeal details, and a human handoff. The 911-first card works in mock mode.
 
 **Source:** [Responsible AI](../docs/RESPONSIBLE_AI.md)
 
-## 7. Results — provisional mock snapshot
+## 7. Results — integrated mock snapshot
 
 | Check | Result in `evals/reports/latest.md` |
 |---|---:|
@@ -100,11 +100,11 @@ flowchart LR
 | Deadline math / letter reasons | 8/8 · 8/8 |
 | Cited chat answers | 4/4 |
 | Fake PII / injection behavior changes | 0 · 0 |
-| Emergency scenarios handed off | 0/1 — pending P3-01 integration |
+| Emergency scenarios handed off | 1/1 |
 
-**Snapshot:** generated 2026-09-24 at commit `a1d3988`, before P3-01 is merged. Rerun `make eval` after Gate 3 and replace these figures before recording.
+**Snapshot:** generated 2026-09-25 at commit `f74aeb7`, after P3-01–P3-03 merged. Rerun `make eval` after any further code changes. Live Azure remains unverified.
 
-**Speaker notes (~14 sec):** This provisional report shows Stage 1 15/15, tiers 1/1, deadlines and letter reasons 8/8, with zero fake PII and injection changes. Handoff is 0/1 before P3-01 integration; refresh after Gate 3.
+**Speaker notes (~14 sec):** The integrated mock report shows Stage 1 15/15, tiers 1/1, deadlines and letter reasons 8/8, with zero fake PII and injection changes. Handoff is 1/1; live Azure still awaits setup.
 
 **Source:** [`evals/reports/latest.md`](../evals/reports/latest.md)
 
@@ -121,7 +121,7 @@ flowchart LR
 
 ## Finalization after Gate 3
 
-- Replace the provisional eval snapshot with a fresh report from the integrated build.
+- Refresh the eval snapshot after any further code changes or live Azure setup.
 - Reconcile the diagram with the services that were actually provisioned and deployed.
 - Read the notes aloud; keep the presentation between 90 and 120 seconds.
 - Export the final deck and update this outline with the artifact link.

@@ -41,7 +41,8 @@ The submission is a video with a demo **and** a presentation. Without this, the 
 - [ ] Refresh results and deployment claims after Gate 3, then export a 6–8 slide deck
 
 ## How to verify (human, under 5 minutes)
-1. For the draft, read `demo/presentation.md` aloud with a timer. Expect about 90 seconds for the notes at 130 words per minute, and 90–120 seconds total with slide transitions. A final exported deck is still pending Gate 3.
+1. For the draft, read `demo/presentation.md` aloud with a timer. Expect about 90 seconds for the notes at 130 words per minute, and 90–120 seconds total with slide transitions.
+2. Check `evals/reports/latest.md`. The integrated mock scorecard should show emergency handoff 1/1. A final exported deck is still pending Gate 3.
 
 ## Log
 
@@ -73,6 +74,21 @@ The submission is a video with a demo **and** a presentation. Without this, the 
   ```
 - Learned: a provisional scorecard and a clearly labeled mock architecture let the team draft the story early without presenting unprovisioned services or unfinished gate results as final.
 - Integration review: this PR is a mergeable draft, not a completed P4-03 task. Leave status `in_progress` until a final deck is exported and checked against the integrated eval and actual deployment state.
+- Refreshed the outline after P3-01–P3-03 merged. The cited `evals/reports/latest.md` now records emergency handoff 1/1 on the integrated mock build at `f74aeb7`; the deck still labels Azure as unprovisioned. Verified eight slide sections and 195 speaker-note words. The export remains unchecked.
+- `make check` passed on the rebased draft: 187 backend tests passed, 3 live skipped; 44 frontend tests passed; 14 contract examples and fixtures validated; 10 Playwright tests passed. Last 10 lines:
+  ```text
+    ✓   3 e2e/journey.spec.ts:18:1 › a survivor can walk through every placeholder stage (3.1s)
+    ✓   4 e2e/journey.spec.ts:57:1 › S07 journey and chat work in Spanish (1.1s)
+    ✓   5 e2e/keyboard.spec.ts:49:1 › survivor can reach the next stages with keyboard only (5.6s)
+    ✓   6 e2e/letter.spec.ts:8:1 › letter draft fields stay in the browser (1.4s)
+    ✓   7 e2e/programs.spec.ts:3:1 › S07 sees five program cards in Spanish urgency order (994ms)
+    ✓   8 e2e/stage1.spec.ts:3:1 › stage 1 happy path in mock mode (397ms)
+    ✓   9 e2e/stage1.spec.ts:21:1 › multi-county ZIP asks the survivor to choose (491ms)
+    ✓  10 e2e/stage1.spec.ts:33:1 › ZIP without an active declaration shows other help (355ms)
+
+    10 passed (17.2s)
+  ```
+- Learned: an outline can stay useful across gates if each result points to an exact scorecard commit and unfinished deployment claims remain explicit.
 
 ## Follow-ups
 - After Gate 3, rerun `make eval`, update the architecture to match the actual deployment, and finalize/export the deck.
