@@ -69,10 +69,21 @@ async def answer(req: ChatRequest) -> ChatResponse:
         return ChatResponse(
             request_id=request_id, reply=NO_PII[req.lang], citations=[], handoff=None
         )
+    reply = result["text"]
+    translator = get_adapter("translator") if req.lang == "es" else None
+    if translator:
+        reply = translator.translate(reply)
     urls = dict.fromkeys(s["url"] for s in sources)
-    titles = {s["url"]: s["title"] for s in sources}
+    titles = {
+        s["url"]: (
+            translator.translate(s["title"])
+            if translator and s.get("lang") == "en"
+            else s["title"]
+        )
+        for s in sources
+    }
     return ChatResponse(
         request_id=request_id,
-        reply=f"{result['text']} {DECISION_NOTE[req.lang]}",
+        reply=f"{reply} {DECISION_NOTE[req.lang]}",
         citations=[Citation(title=titles[u], url=u) for u in urls],
     )

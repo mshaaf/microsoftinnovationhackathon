@@ -61,6 +61,6 @@ class Adapter(ModelAdapter):
             for i, s in enumerate(payload["sources"], 1)
         )
         result = await agent.run(
-            f"Reply in {payload['lang']}.\n{sources}\n<question>{payload['question']}</question>"
+            f"Reply in English.\n{sources}\n<question>{payload['question']}</question>"
         )
         return {"text": result.text}
