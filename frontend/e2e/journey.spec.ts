@@ -53,3 +53,48 @@ test("a survivor can walk through every placeholder stage", async ({ page }, tes
   expectNoRequestContains(requests, "Jordan Samplewell");
   expect(browserErrors).toEqual([]);
 });
+
+test("S07 journey and chat work in Spanish", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Español" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Comienza con tu código postal" }),
+  ).toBeVisible();
+  await page.getByLabel("Código postal").fill("96704");
+  await page.getByRole("button", { name: "Revisar mi zona" }).click();
+  await expect(page.getByText(/La Asistencia Individual está abierta/)).toBeVisible();
+  await page.getByRole("link", { name: "Continuar" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Prepárate para solicitar ayuda" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Era inquilino" }).click();
+  await page.getByRole("button", { name: "No", exact: true }).click();
+  await page.getByRole("button", { name: "No", exact: true }).click();
+  await page.getByRole("button", { name: "No", exact: true }).click();
+  await expect(page.getByText("Tu lista")).toBeVisible();
+
+  await page.getByLabel("Tu pregunta").fill("¿Qué pasa si FEMA cobra cargos?");
+  await page.getByRole("button", { name: "Enviar" }).click();
+  await expect(page.getByText(/Incluya el número de solicitud de FEMA/)).toBeVisible();
+  await expect(page.getByText(/FEMA y las otras agencias toman la decisión final/)).toBeVisible();
+  await page.getByRole("link", { name: "Continuar" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Entiende tu carta de FEMA" }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Continuar" }).click();
+  await expect(page.getByRole("heading", { name: "Conoce tu fecha límite" })).toBeVisible();
+  await page.getByRole("link", { name: "Continuar" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Otras ayudas que podrías recibir" }),
+  ).toBeVisible();
+  await page.getByRole("group", { name: /perdiste trabajo/i }).getByLabel("Sí").check();
+  await page.getByRole("group", { name: /recibes SNAP/i }).getByLabel("No").check();
+  await page.getByLabel(/personas viven en tu hogar/i).fill("1");
+  await page.getByRole("button", { name: "Ver programas" }).click();
+  await expect(page.getByRole("article")).toHaveCount(5);
+  await expect(page.getByText("Solicite en DisasterAssistance.gov", { exact: false })).toBeVisible();
+});
