@@ -3,7 +3,7 @@ id: P4-03
 title: "Presentation deck for the video"
 phase: 4
 lane: shared
-status: review
+status: in_progress
 owner: ""
 depends_on: []
 research: [R18]
@@ -37,10 +37,11 @@ The submission is a video with a demo **and** a presentation. Without this, the 
 ## Acceptance criteria
 - [x] Every R18 topic has its own slide
 - [x] Speaker notes total 195 words, about 90 seconds at 130 words per minute
-- [x] Diagram matches the current mock-mode runtime and labels Azure targets as unprovisioned; refresh against Gate 3 deployment before finalizing
+- [x] Draft diagram matches the current mock-mode runtime and labels Azure targets as unprovisioned
+- [ ] Refresh results and deployment claims after Gate 3, then export a 6–8 slide deck
 
 ## How to verify (human, under 5 minutes)
-1. Read `demo/presentation.md` aloud with a timer. Expect about 90 seconds for the notes at 130 words per minute, and 90–120 seconds total with slide transitions.
+1. For the draft, read `demo/presentation.md` aloud with a timer. Expect about 90 seconds for the notes at 130 words per minute, and 90–120 seconds total with slide transitions. A final exported deck is still pending Gate 3.
 
 ## Log
 
@@ -71,6 +72,7 @@ The submission is a video with a demo **and** a presentation. Without this, the 
   7 passed (9.2s)
   ```
 - Learned: a provisional scorecard and a clearly labeled mock architecture let the team draft the story early without presenting unprovisioned services or unfinished gate results as final.
+- Integration review: this PR is a mergeable draft, not a completed P4-03 task. Leave status `in_progress` until a final deck is exported and checked against the integrated eval and actual deployment state.
 
 ## Follow-ups
 - After Gate 3, rerun `make eval`, update the architecture to match the actual deployment, and finalize/export the deck.
