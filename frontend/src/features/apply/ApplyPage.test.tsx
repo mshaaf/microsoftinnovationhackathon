@@ -86,18 +86,27 @@ describe("chat panel", () => {
     expect(screen.getByRole("link", { name: /Verify identity/ })).toHaveAttribute("href", expect.stringContaining("fema.gov"));
   });
 
-  it("renders the handoff card when the reply has one", async () => {
-    vi.spyOn(client, "apiRequest").mockResolvedValueOnce({
+  it("loads a handoff card when chat returns a handoff reason", async () => {
+    const request = vi.spyOn(client, "apiRequest");
+    request.mockResolvedValueOnce({
       request_id: "r",
       reply: "Please call.",
       citations: [],
-      handoff: { title: "Get help now", steps: ["Call 911."], phones: [{ label: "Emergency", number: "911" }] },
+      handoff: "emergency",
+    } as never).mockResolvedValueOnce({
+      request_id: "r2",
+      card: {
+        title: "Get help now",
+        steps: ["Call 911."],
+        phones: [{ label: "Emergency", number: "911" }],
+      },
     } as never);
     const user = setup();
     await user.type(screen.getByLabelText("Your question"), "help");
     await user.click(screen.getByRole("button", { name: "Send" }));
     expect(await screen.findByRole("heading", { name: "Get help now" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Emergency/ })).toHaveAttribute("href", "tel:911");
+    expect(request.mock.calls.map(([path]) => path)).toEqual(["/api/chat", "/api/escalate"]);
   });
 
   it("works in Spanish", async () => {
