@@ -80,6 +80,6 @@ export function LetterPage() {
         <DeadlinePanel deadline={result.deadline} templateId={result.appeal_template_id} />
       </>}
     </>}
-    <Link to="/deadline">{t("app.continue")}</Link>
+    <Link className={styles.continue} to="/deadline">{t("app.continue")}</Link>
   </section>;
 }
