@@ -3,11 +3,11 @@ id: P3-02
 title: "Spanish end to end"
 phase: 3
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P2-06]
 research: [R07]
-branch: ""
+branch: "task/P3-02-spanish"
 ---
 
 ## Execute in phases
