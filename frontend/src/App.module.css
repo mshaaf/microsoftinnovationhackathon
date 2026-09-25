@@ -9,6 +9,10 @@
   color: var(--color-paper);
 }
 
+.header :focus-visible {
+  outline-color: var(--color-paper);
+}
+
 .headerInner {
   display: grid;
   width: min(100%, 66rem);
@@ -20,6 +24,9 @@
 }
 
 .brand {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   max-width: 17rem;
   color: inherit;
   font-size: 1rem;

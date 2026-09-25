@@ -22,11 +22,7 @@ export async function attachScreenAudit(
     contentType: "image/png",
   });
 
-  if (serious.length > 0) {
-    console.warn(
-      `[axe] ${name}: ${serious.length} critical/serious violation(s); warn-only until Phase 3`,
-    );
-  }
+  expect(serious, `[axe] ${name}: critical/serious accessibility violations`).toEqual([]);
 }
 
 export function captureRequests(page: Page) {
