@@ -19,17 +19,18 @@ async function expectKeyboardFocus(target: Locator, hitArea = target) {
       outlineColor: computed.outlineColor,
     };
   });
-  const { width, height, withinViewport } = await hitArea.evaluate((element) => {
+  const { width, height } = await hitArea.evaluate((element) => {
     const rect = element.getBoundingClientRect();
-    return {
-      width: rect.width,
-      height: rect.height,
-      withinViewport:
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= innerHeight &&
-        rect.right <= innerWidth,
-    };
+    return { width: rect.width, height: rect.height };
+  });
+  const withinViewport = await target.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= innerHeight &&
+      rect.right <= innerWidth
+    );
   });
   expect(style.outlineStyle).not.toBe("none");
   expect(style.outlineWidth).toBeGreaterThanOrEqual(2);
