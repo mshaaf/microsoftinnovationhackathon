@@ -55,6 +55,7 @@ async function expectOnePageHeading(page: Page) {
 }
 
 test("survivor can reach the next stages with keyboard only", async ({ page }, testInfo) => {
+  await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto("/");
   await expectOnePageHeading(page);
   await attachScreenAudit(page, testInfo, "keyboard-start");
@@ -121,6 +122,7 @@ test("survivor can reach the next stages with keyboard only", async ({ page }, t
   await expect(appealDraft).toHaveValue(/Keyboard Survivor/);
   await expect(appealDraft).toHaveValue(/000000001/);
   await activate(page, page.getByRole("button", { name: "Copy draft" }));
+  await expect(page.getByRole("status")).toHaveText("Draft copied");
 
   await activate(page, page.getByRole("link", { name: "Continue", exact: true }));
   await expect(page.getByRole("heading", { name: "Know your deadline" })).toBeVisible();
