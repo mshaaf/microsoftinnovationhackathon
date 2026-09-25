@@ -1,9 +1,11 @@
 import json
 
 import httpx
+from azure import identity
 
 from app.adapters import get_adapter
 from app.adapters.translator.live import Adapter as LiveTranslator
+from app.core.i18n import translator_text
 
 ENGLISH_REPLY = "Common disaster-related rumors: FEMA never charges fees."
 SPANISH_REPLY = "Rumores comunes: FEMA nunca cobra tarifas."
@@ -47,3 +49,39 @@ def test_live_translator_sends_glossary_and_region(monkeypatch):
         'translation="apelación">appeal',
     ):
         assert term in text
+
+
+def test_live_translator_uses_resource_endpoint_with_entra_token(monkeypatch):
+    monkeypatch.delenv("AZURE_AI_SERVICES_KEY", raising=False)
+    monkeypatch.delenv("CONTAINER_APP_NAME", raising=False)
+    monkeypatch.setenv("AZURE_AI_SERVICES_REGION", "eastus2")
+    monkeypatch.setenv(
+        "AZURE_AI_SERVICES_ENDPOINT", "https://example.cognitiveservices.azure.com/"
+    )
+
+    class Credential:
+        def get_token(self, scope):
+            assert scope == "https://cognitiveservices.azure.com/.default"
+            return type("Token", (), {"token": "test-token"})()
+
+        def close(self):
+            pass
+
+    monkeypatch.setattr(identity, "AzureCliCredential", Credential)
+    requests = []
+
+    def respond(request):
+        requests.append(request)
+        return httpx.Response(200, json=[{"translations": [{"text": "Hola"}]}])
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        assert LiveTranslator(client).translate("Hello") == "Hola"
+
+    request = requests[0]
+    assert request.url.host == "example.cognitiveservices.azure.com"
+    assert request.url.path == "/translator/text/v3.0/translate"
+    assert request.headers["Authorization"] == "Bearer test-token"
+
+
+def test_glossary_does_not_match_inside_plural_words():
+    assert translator_text("appeals") == "appeals"

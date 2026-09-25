@@ -20,7 +20,10 @@ class Adapter(TranslatorAdapter):
         self._client = client
 
     def health_status(self) -> ServiceStatus:
-        if not os.getenv("AZURE_AI_SERVICES_REGION"):
+        if not os.getenv("AZURE_AI_SERVICES_REGION") or not (
+            os.getenv("AZURE_AI_SERVICES_KEY")
+            or os.getenv("AZURE_AI_SERVICES_ENDPOINT")
+        ):
             raise NotConfigured("translator live adapter is not configured")
         return "ok"
 
@@ -31,6 +34,12 @@ class Adapter(TranslatorAdapter):
 
         key = os.getenv("AZURE_AI_SERVICES_KEY")
         region = os.environ["AZURE_AI_SERVICES_REGION"]
+        endpoint = (
+            ENDPOINT
+            if key
+            else os.environ["AZURE_AI_SERVICES_ENDPOINT"].rstrip("/")
+            + "/translator/text/v3.0/translate"
+        )
         credential = None
         headers = {"Content-Type": "application/json"}
         try:
@@ -55,7 +64,7 @@ class Adapter(TranslatorAdapter):
             )
             with context as client:
                 response = client.post(
-                    ENDPOINT,
+                    endpoint,
                     params={"api-version": "3.0", "from": "en", "to": "es"},
                     headers=headers,
                     json=[{"Text": translator_text(text)}],

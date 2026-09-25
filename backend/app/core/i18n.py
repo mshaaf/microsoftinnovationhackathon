@@ -9,7 +9,9 @@ GLOSSARY = {
     "appeal": "apelación",
 }
 _GLOSSARY_PATTERN = re.compile(
-    "|".join(re.escape(term) for term in sorted(GLOSSARY, key=len, reverse=True)),
+    r"\b(?:"
+    + "|".join(re.escape(term) for term in sorted(GLOSSARY, key=len, reverse=True))
+    + r")\b",
     re.IGNORECASE,
 )
 _GLOSSARY_CASEFOLD = {
