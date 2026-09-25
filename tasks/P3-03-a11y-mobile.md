@@ -3,11 +3,11 @@ id: P3-03
 title: "Accessibility and mobile pass"
 phase: 3
 lane: C
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P2-06, P2-07]
 research: [R16]
-branch: ""
+branch: "task/P3-03-a11y-mobile"
 ---
 
 ## Execute in phases
