@@ -21,9 +21,17 @@ Language access is part of the track brief.
 
 ## Files you may touch
 - backend/app/adapters/translator/**
+- backend/app/adapters/model/live.py
 - backend/app/core/i18n.py
+- backend/app/features/chat/service.py
+- backend/tests/test_chat.py
+- backend/tests/test_translator.py
 - frontend/src/features/*/i18n/es.json and frontend/src/app/i18n/es.json
+- frontend/src/shared/i18n/messages.test.ts
+- frontend/e2e/journey.spec.ts
 - data/*.json (es fields only)
+
+Scope correction (2026-09-24): chat service/model integration is needed to translate generated replies while preserving Spanish PII detection; the listed tests are required by this task's acceptance criteria. UI pages already use the shared message loader, so only locale data and its completeness/smoke tests are in scope.
 
 ## Do not touch
 - Anything not listed above. Put needed changes under Follow-ups.
@@ -45,6 +53,11 @@ Language access is part of the track brief.
 
 ## Log
 <!-- Agent appends: date, what was done, last 10 lines of `make check`, open questions. -->
+Plan (2026-09-24):
+- Implement the Translator live adapter and glossary using R07; keep mock translations fixture-backed.
+- Route Spanish model-generated chat text through translation without changing data-file translations or PII language.
+- Check locale completeness, fill any missing reviewed Spanish strings, and add a Spanish journey/chat smoke path.
+- Run `make check` and `make eval`, then record a plain-language review and Azure-only deferrals.
 
 ## Follow-ups
 <!-- Changes needed outside this task's files. -->
