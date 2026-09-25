@@ -48,30 +48,31 @@ def guard(payload: Any, mode: str | None = None) -> None:
         raise PIILeakError("Model payload contains personal information")
 
 
+async def shield_chat_input(question: str, mode: str) -> None:
+    result = await get_adapter("safety", mode).shield_prompt(question, [])
+    if result["user_prompt_attack"]:
+        logger.warning(
+            "prompt_injection_detected",
+            extra={"category": "prompt_injection_detected"},
+        )
+        raise PromptInjectionDetected("Prompt injection detected")
+
+
 async def run(payload: Any, mode: str | None = None) -> Any:
     selected_mode = mode or get_app_mode()
     guard(payload, selected_mode)
     task = payload.get("task") if isinstance(payload, dict) else None
     if task == "chat":
-        user_prompt = payload.get("question", "")
-        documents = []
+        await shield_chat_input(payload.get("question", ""), selected_mode)
     elif task == "letter_classifier":
-        user_prompt = ""
-        documents = [payload.get("letter_text", "")]
-    else:
-        user_prompt = None
-        documents = []
-
-    if user_prompt is not None or documents:
-        safety = get_adapter("safety", selected_mode)
-        result = await safety.shield_prompt(user_prompt or "", documents)
+        result = await get_adapter("safety", selected_mode).shield_prompt(
+            "", [payload.get("letter_text", "")]
+        )
         if result["user_prompt_attack"]:
             logger.warning(
                 "prompt_injection_detected",
                 extra={"category": "prompt_injection_detected"},
             )
-            if task == "chat":
-                raise PromptInjectionDetected("Prompt injection detected")
         if any(result["document_attacks"]):
             logger.warning(
                 "prompt_injection_detected",

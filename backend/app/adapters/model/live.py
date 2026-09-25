@@ -1,6 +1,8 @@
 import json
 import os
-from typing import Any
+from typing import Any, Literal
+
+from pydantic import BaseModel, ConfigDict
 
 from app.adapters.base import NotConfigured, ServiceStatus
 from app.adapters.model.base import ModelAdapter
@@ -11,6 +13,16 @@ def _require(name: str) -> str:
     if not value:
         raise NotConfigured(f"{name} is not set; model live adapter is not configured")
     return value
+
+
+class ChatModelOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    text: str
+    handoff: (
+        Literal["emergency", "shelter", "sensitive", "low_confidence", "user_request"]
+        | None
+    ) = None
 
 
 class Adapter(ModelAdapter):
@@ -39,7 +51,16 @@ class Adapter(ModelAdapter):
         client = FoundryChatClient(
             project_endpoint=endpoint, model=model, credential=credential
         )
-        agent = Agent(client=client, name="Navigator", instructions=payload["rules"])
+        rules = payload["rules"]
+        if payload.get("task") == "chat":
+            rules += (
+                " Return structured text and handoff fields. Set handoff to emergency "
+                "for immediate danger, shelter for no safe place to stay, sensitive "
+                "for self-harm or abuse, low_confidence when unsure, user_request "
+                "when asked for a person, or null otherwise. Safety handoffs do not "
+                "need a cited answer."
+            )
+        agent = Agent(client=client, name="Navigator", instructions=rules)
         if payload.get("task") == "letter_classifier":
             try:
                 result = await agent.run(
@@ -61,6 +82,7 @@ class Adapter(ModelAdapter):
             for i, s in enumerate(payload["sources"], 1)
         )
         result = await agent.run(
-            f"Reply in English.\n{sources}\n<question>{payload['question']}</question>"
+            f"Reply in English.\n{sources}\n<question>{payload['question']}</question>",
+            options={"response_format": ChatModelOutput},
         )
-        return {"text": result.text}
+        return ChatModelOutput.model_validate(result.value).model_dump()

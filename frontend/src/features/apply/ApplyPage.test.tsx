@@ -109,6 +109,28 @@ describe("chat panel", () => {
     expect(request.mock.calls.map(([path]) => path)).toEqual(["/api/chat", "/api/escalate"]);
   });
 
+  it("shows new hotline guidance without a stale card if card loading fails", async () => {
+    const request = vi.spyOn(client, "apiRequest");
+    request.mockResolvedValueOnce({
+      reply: "Call 911.", citations: [], handoff: "emergency",
+    } as never).mockResolvedValueOnce({
+      card: { title: "Get help now", steps: ["Call 911."], phones: [{ label: "Emergency", number: "911" }] },
+    } as never).mockResolvedValueOnce({
+      reply: "Call the Disaster Distress Helpline at 1-800-985-5990. For thoughts of suicide, call 988. For domestic violence, call 1-800-799-7233.",
+      citations: [], handoff: "sensitive",
+    } as never).mockRejectedValueOnce(new Error("network"));
+    const user = setup();
+    await user.type(screen.getByLabelText("Your question"), "water is rising");
+    await user.click(screen.getByRole("button", { name: "Send" }));
+    expect(await screen.findByRole("heading", { name: "Get help now" })).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText("Your question"), "I might hurt myself");
+    await user.click(screen.getByRole("button", { name: "Send" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("We could not answer");
+    expect(screen.queryByRole("heading", { name: "Get help now" })).not.toBeInTheDocument();
+    expect(screen.getByText(/1-800-985-5990.*988.*1-800-799-7233/)).toBeInTheDocument();
+  });
+
   it("works in Spanish", async () => {
     const user = setup();
     await user.click(screen.getByRole("button", { name: /espa/i }));

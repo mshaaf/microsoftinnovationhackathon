@@ -83,6 +83,16 @@ def test_safety_keywords_return_contract_handoff(message, reason):
     assert response.json()["handoff"] == reason
 
 
+def test_sensitive_handoff_reply_remains_usable_if_card_fetch_fails():
+    body = ask("I might hurt myself tonight.").json()
+
+    assert body["handoff"] == "sensitive"
+    assert all(
+        number in body["reply"]
+        for number in ("1-800-985-5990", "988", "1-800-799-7233")
+    )
+
+
 def test_model_handoff_flag_is_validated_and_returned(monkeypatch):
     original_get_adapter = model_gateway.get_adapter
 

@@ -16,7 +16,9 @@ def handoff_response(reason: str, lang: str) -> ChatResponse:
     card = build_card(cast(HandoffReason, reason), lang)
     return ChatResponse(
         request_id=str(uuid4()),
-        reply=card.steps[0],
+        reply=" ".join(
+            [*card.steps, *(f"{p.label}: {p.number}." for p in card.phones)]
+        ),
         citations=[],
         handoff=reason,
     )

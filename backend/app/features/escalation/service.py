@@ -16,6 +16,8 @@ def _rules() -> dict:
 
 def keyword_handoff(message: str) -> HandoffReason | None:
     normalized = message.casefold()
+    if normalized.strip(" \t\r\n.!?") == "fire":
+        return "emergency"
     # ponytail: phrase matching can miss paraphrases; expand only when scenario evals show gaps.
     for reason in KEYWORD_REASONS:
         if any(term in normalized for term in _rules()["triggers"][reason]):
