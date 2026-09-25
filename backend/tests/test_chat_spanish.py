@@ -112,9 +112,12 @@ async def test_live_model_returns_english_for_spanish_translation(monkeypatch):
         def __init__(self, **kwargs):
             pass
 
-        async def run(self, prompt):
+        async def run(self, prompt, *, options):
             prompts.append(prompt)
-            return SimpleNamespace(text="English generated reply")
+            assert "handoff" in options["response_format"].model_fields
+            return SimpleNamespace(
+                value={"text": "English generated reply", "handoff": None}
+            )
 
     agent_framework = ModuleType("agent_framework")
     agent_framework.Agent = Agent
@@ -142,5 +145,5 @@ async def test_live_model_returns_english_for_spanish_translation(monkeypatch):
         }
     )
 
-    assert result == {"text": "English generated reply"}
+    assert result == {"text": "English generated reply", "handoff": None}
     assert prompts[0].startswith("Reply in English.")

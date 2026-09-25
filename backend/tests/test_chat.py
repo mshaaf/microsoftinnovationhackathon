@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import pytest
@@ -45,6 +46,30 @@ def test_no_sources_means_dont_know_and_handoff(q):
     body = response.json()
     assert body["citations"] == [] and body["handoff"] == "low_confidence"
     assert "don't know" in body["reply"]
+
+
+def test_no_sources_still_runs_prompt_shields(caplog):
+    with caplog.at_level(logging.WARNING):
+        body = ask("[[INJECT]]").json()
+
+    assert body["handoff"] is None
+    assert "Please ask about FEMA" in body["reply"]
+    assert "prompt_injection_detected" in caplog.text
+    assert "[[INJECT]]" not in caplog.text
+
+
+def test_pii_is_blocked_before_search(monkeypatch):
+    from app.features.chat import service
+
+    class Search:
+        def search(self, *args):
+            raise AssertionError("PII reached search")
+
+    monkeypatch.setattr(service, "get_adapter", lambda name: Search())
+    body = ask("zzz qqq 808-555-0142").json()
+
+    assert body["citations"] == []
+    assert "personal details" in body["reply"]
 
 
 def test_pii_in_question_is_blocked_before_the_model():

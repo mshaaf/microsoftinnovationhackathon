@@ -44,8 +44,16 @@ def _retrieve(question: str, lang: str) -> list[dict]:
 
 async def answer(req: ChatRequest) -> ChatResponse:
     request_id = str(uuid4())
+    mode = get_app_mode()
+    try:
+        model_gateway.guard({"lang": req.lang, "question": req.message}, mode)
+    except model_gateway.PIILeakError:
+        return ChatResponse(
+            request_id=request_id, reply=NO_PII[req.lang], citations=[], handoff=None
+        )
     sources = _retrieve(req.message, req.lang)
     if not sources:
+        await model_gateway.shield_chat_input(req.message, mode)
         return ChatResponse(
             request_id=request_id,
             reply=NO_ANSWER[req.lang],
@@ -64,7 +72,7 @@ async def answer(req: ChatRequest) -> ChatResponse:
         ],
     }
     try:
-        result = await model_gateway.run(payload, get_app_mode())
+        result = await model_gateway.run(payload, mode)
     except model_gateway.PIILeakError:
         return ChatResponse(
             request_id=request_id, reply=NO_PII[req.lang], citations=[], handoff=None
