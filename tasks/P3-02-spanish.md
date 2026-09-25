@@ -24,14 +24,14 @@ Language access is part of the track brief.
 - backend/app/adapters/model/live.py
 - backend/app/core/i18n.py
 - backend/app/features/chat/service.py
-- backend/tests/test_chat.py
+- backend/tests/test_chat_spanish.py
 - backend/tests/test_translator.py
 - frontend/src/features/*/i18n/es.json and frontend/src/app/i18n/es.json
 - frontend/src/shared/i18n/messages.test.ts
 - frontend/e2e/journey.spec.ts
 - data/*.json (es fields only)
 
-Scope correction (2026-09-24): chat service/model integration is needed to translate generated replies while preserving Spanish PII detection; the listed tests are required by this task's acceptance criteria. UI pages already use the shared message loader, so only locale data and its completeness/smoke tests are in scope.
+Scope correction (2026-09-24): chat service/model integration is needed to translate generated replies while preserving Spanish PII detection; the listed tests are required by this task's acceptance criteria. The Spanish chat regression has its own test file so it does not collide with P3-01's safety tests. UI pages already use the shared message loader, so only locale data and its completeness/smoke tests are in scope.
 
 ## Do not touch
 - Anything not listed above. Put needed changes under Follow-ups.

@@ -24,7 +24,8 @@ Humans stay in the loop, and the app can't be hijacked by a letter.
 - backend/app/adapters/safety/**
 - backend/app/core/model_gateway.py
 - backend/app/features/chat/models.py
-- backend/app/features/chat/service.py
+- backend/app/features/chat/router.py
+- backend/app/features/chat/safety.py
 - backend/app/features/letter/test_decode.py
 - backend/tests/test_chat.py
 - backend/tests/test_escalation.py
@@ -34,7 +35,7 @@ Humans stay in the loop, and the app can't be hijacked by a letter.
 - frontend/src/features/apply/ApplyPage.test.tsx
 - data/escalation_rules.json
 
-Scope correction (2026-09-24): the existing gateway is the shared route for chat and redacted OCR; the chat contract returns a handoff reason while the UI needs the card from `/api/escalate`. These integration and test files are required to exercise both paths without changing frozen contracts.
+Scope correction (2026-09-24): the existing gateway is the shared route for chat and redacted OCR; the chat contract returns a handoff reason while the UI needs the card from `/api/escalate`. A thin router hook plus a dedicated chat safety helper handles early handoff without overlapping P3-02's chat service changes. These integration and test files exercise both paths without changing frozen contracts.
 
 ## Do not touch
 - Anything not listed above. Put needed changes under Follow-ups.
