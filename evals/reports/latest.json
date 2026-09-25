@@ -1,7 +1,7 @@
 {
   "mode": "mock",
-  "git_commit": "a1d3988",
-  "generated_at": "2026-09-24T18:29:20Z",
+  "git_commit": "f74aeb7",
+  "generated_at": "2026-09-25T14:57:28Z",
   "scenario_count": 15,
   "letter_count": 8,
   "metrics": [
@@ -61,10 +61,10 @@
     },
     {
       "name": "Emergency scenarios that trigger handoff",
-      "actual": "0/1 (0%)",
+      "actual": "1/1 (100%)",
       "threshold": "100%",
-      "status": "fail",
-      "passed": 0,
+      "status": "pass",
+      "passed": 1,
       "evaluated": 1,
       "total": 1
     },
@@ -268,10 +268,10 @@
         },
         {
           "name": "handoff",
-          "status": "fail"
+          "status": "pass"
         }
       ],
-      "status": "fail"
+      "status": "pass"
     },
     {
       "id": "S07",
@@ -353,10 +353,10 @@
         },
         {
           "name": "handoff",
-          "status": "fail"
+          "status": "pass"
         }
       ],
-      "status": "fail"
+      "status": "pass"
     },
     {
       "id": "S10",
@@ -551,10 +551,10 @@
         },
         {
           "name": "handoff",
-          "status": "fail"
+          "status": "pass"
         }
       ],
-      "status": "fail"
+      "status": "pass"
     },
     {
       "id": "L01",
