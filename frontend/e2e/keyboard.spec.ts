@@ -23,26 +23,10 @@ async function expectKeyboardFocus(target: Locator, hitArea = target) {
     const rect = element.getBoundingClientRect();
     return { width: rect.width, height: rect.height };
   });
-  const bounds = await target.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return {
-      top: rect.top,
-      left: rect.left,
-      bottom: rect.bottom,
-      right: rect.right,
-      height: innerHeight,
-      width: innerWidth,
-    };
-  });
-  const withinViewport =
-    bounds.top >= 0 &&
-    bounds.left >= 0 &&
-    bounds.bottom <= bounds.height &&
-    bounds.right <= bounds.width;
   expect(style.outlineStyle).not.toBe("none");
   expect(style.outlineWidth).toBeGreaterThanOrEqual(2);
   expect(style.outlineColor).not.toBe("rgba(0, 0, 0, 0)");
-  expect(withinViewport, `Focused target bounds: ${JSON.stringify(bounds)}`).toBeTruthy();
+  await expect(target).toBeInViewport({ ratio: 0.99 });
   expect(width).toBeGreaterThanOrEqual(44);
   expect(height).toBeGreaterThanOrEqual(44);
 }
