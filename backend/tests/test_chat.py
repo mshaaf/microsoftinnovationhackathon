@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import pytest
@@ -47,6 +48,30 @@ def test_no_sources_means_dont_know_and_handoff(q):
     assert "don't know" in body["reply"]
 
 
+def test_no_sources_still_runs_prompt_shields(caplog):
+    with caplog.at_level(logging.WARNING):
+        body = ask("[[INJECT]]").json()
+
+    assert body["handoff"] is None
+    assert "Please ask about FEMA" in body["reply"]
+    assert "prompt_injection_detected" in caplog.text
+    assert "[[INJECT]]" not in caplog.text
+
+
+def test_pii_is_blocked_before_search(monkeypatch):
+    from app.features.chat import service
+
+    class Search:
+        def search(self, *args):
+            raise AssertionError("PII reached search")
+
+    monkeypatch.setattr(service, "get_adapter", lambda name: Search())
+    body = ask("zzz qqq 808-555-0142").json()
+
+    assert body["citations"] == []
+    assert "personal details" in body["reply"]
+
+
 def test_pii_in_question_is_blocked_before_the_model():
     body = ask("How do I appeal? My number is 808-555-0142").json()
     assert body["citations"] == [] and "personal details" in body["reply"]
@@ -66,3 +91,67 @@ def test_chat_model_calls_go_through_gateway(monkeypatch):
         "[REDACTED]" in s["content"] or "1-800" not in s["content"]
         for s in calls[0]["sources"]
     )
+
+
+@pytest.mark.parametrize(
+    ("message", "reason"),
+    [
+        ("The water is rising and my son is hurt.", "emergency"),
+        ("I was displaced and have nowhere safe to stay tonight.", "shelter"),
+        ("I might hurt myself tonight.", "sensitive"),
+    ],
+)
+def test_safety_keywords_return_contract_handoff(message, reason):
+    response = ask(message)
+
+    assert_matches_schema(response, "chat")
+    assert response.json()["handoff"] == reason
+
+
+def test_sensitive_handoff_reply_remains_usable_if_card_fetch_fails():
+    body = ask("I might hurt myself tonight.").json()
+
+    assert body["handoff"] == "sensitive"
+    assert all(
+        number in body["reply"]
+        for number in ("1-800-985-5990", "988", "1-800-799-7233")
+    )
+
+
+def test_model_handoff_flag_is_validated_and_returned(monkeypatch):
+    original_get_adapter = model_gateway.get_adapter
+
+    class FlaggedModel:
+        async def run(self, payload):
+            return {"text": "Please get help now.", "handoff": "sensitive"}
+
+    monkeypatch.setattr(
+        model_gateway,
+        "get_adapter",
+        lambda service, mode=None: (
+            FlaggedModel()
+            if service == "model"
+            else original_get_adapter(service, mode)
+        ),
+    )
+
+    response = ask("How do I appeal a FEMA decision?")
+
+    assert response.status_code == 200
+    assert_matches_schema(response, "chat")
+    assert response.json()["handoff"] == "sensitive"
+
+
+def test_prompt_injection_redirect_is_polite_and_does_not_expose_text(monkeypatch):
+    async def flagged(payload, mode=None):
+        raise model_gateway.PromptInjectionDetected("Prompt injection detected")
+
+    monkeypatch.setattr(model_gateway, "run", flagged)
+
+    response = ask("How do I appeal a FEMA decision?")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["handoff"] is None and body["citations"] == []
+    assert "Please ask about FEMA" in body["reply"]
+    assert "Prompt injection detected" not in response.text

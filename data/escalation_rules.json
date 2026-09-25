@@ -1,0 +1,164 @@
+{
+  "last_verified": "2026-09-23",
+  "sources": [
+    "https://www.fema.gov/assistance/individual/disaster-fraud",
+    "https://www.samhsa.gov/find-help/helplines/disaster-distress-helpline",
+    "https://988lifeline.org/",
+    "https://www.thehotline.org/"
+  ],
+  "triggers": {
+    "emergency": [
+      "water is rising",
+      "rising water",
+      "someone is hurt",
+      "my son is hurt",
+      "my daughter is hurt",
+      "i am hurt",
+      "i'm hurt",
+      "injured",
+      "injury",
+      "on fire",
+      "house fire",
+      "fire nearby",
+      "wildfire approaching",
+      "immediate danger",
+      "medical emergency",
+      "need medical help",
+      "el agua está subiendo",
+      "subiendo el agua",
+      "mi hijo está herido",
+      "mi hija está herida",
+      "alguien está herido",
+      "estoy herido",
+      "estoy herida",
+      "incendio",
+      "peligro inmediato",
+      "emergencia médica",
+      "necesito ayuda médica"
+    ],
+    "shelter": [
+      "nowhere safe to stay",
+      "nowhere safe to sleep",
+      "no safe place to sleep",
+      "unsafe housing",
+      "no shelter tonight",
+      "can't stay there safely",
+      "cannot stay there safely",
+      "no tengo un lugar seguro para dormir",
+      "no hay un lugar seguro para dormir",
+      "sin refugio esta noche",
+      "no puedo quedarme allí con seguridad"
+    ],
+    "sensitive": [
+      "hurt myself",
+      "harm myself",
+      "kill myself",
+      "suicide",
+      "suicidal",
+      "self-harm",
+      "self harm",
+      "hurt someone",
+      "harm someone",
+      "domestic violence",
+      "abuse",
+      "assault",
+      "hacerme daño",
+      "lastimarme",
+      "quitarme la vida",
+      "suicidio",
+      "violencia doméstica",
+      "abuso",
+      "agredir a alguien"
+    ]
+  },
+  "cards": {
+    "emergency": {
+      "en": {
+        "title": "Get help now",
+        "steps": ["If someone is in immediate danger, call 911 now."],
+        "phones": [
+          {"label": "Emergency", "number": "911"},
+          {"label": "FEMA Helpline", "number": "1-800-621-3362"}
+        ]
+      },
+      "es": {
+        "title": "Pide ayuda ahora",
+        "steps": ["Si alguien está en peligro inmediato, llama al 911 ahora."],
+        "phones": [
+          {"label": "Emergencias", "number": "911"},
+          {"label": "Línea de ayuda de FEMA", "number": "1-800-621-3362"}
+        ]
+      }
+    },
+    "shelter": {
+      "en": {
+        "title": "Find a safe place",
+        "steps": ["Call 211 for local shelter and basic needs. FEMA can also help."],
+        "phones": [
+          {"label": "Local help", "number": "211"},
+          {"label": "FEMA Helpline", "number": "1-800-621-3362"}
+        ]
+      },
+      "es": {
+        "title": "Busca un lugar seguro",
+        "steps": ["Llama al 211 para buscar refugio y ayuda local. FEMA también puede ayudar."],
+        "phones": [
+          {"label": "Ayuda local", "number": "211"},
+          {"label": "Línea de ayuda de FEMA", "number": "1-800-621-3362"}
+        ]
+      }
+    },
+    "sensitive": {
+      "en": {
+        "title": "Talk with someone now",
+        "steps": [
+          "The Disaster Distress Helpline is free and open 24/7. Call or text 1-800-985-5990.",
+          "For thoughts of suicide, call or text 988.",
+          "For domestic violence, call 1-800-799-7233 or text START to 88788."
+        ],
+        "phones": [
+          {"label": "Disaster Distress Helpline", "number": "1-800-985-5990"},
+          {"label": "988 Suicide & Crisis Lifeline", "number": "988"},
+          {"label": "National Domestic Violence Hotline", "number": "1-800-799-7233"}
+        ]
+      },
+      "es": {
+        "title": "Habla con alguien ahora",
+        "steps": [
+          "La línea de ayuda por angustia después de un desastre es gratis y atiende las 24 horas. Llama o envía un mensaje al 1-800-985-5990.",
+          "Si piensas en suicidarte, llama o envía un mensaje al 988.",
+          "Por violencia doméstica, llama al 1-800-799-7233 o envía START al 88788."
+        ],
+        "phones": [
+          {"label": "Línea de ayuda por angustia después de un desastre", "number": "1-800-985-5990"},
+          {"label": "Línea 988 de ayuda en crisis y suicidio", "number": "988"},
+          {"label": "Línea Nacional contra la Violencia Doméstica", "number": "1-800-799-7233"}
+        ]
+      }
+    },
+    "low_confidence": {
+      "en": {
+        "title": "Talk with FEMA",
+        "steps": ["Ask FEMA or a Disaster Recovery Center to review your situation."],
+        "phones": [{"label": "FEMA Helpline", "number": "1-800-621-3362"}]
+      },
+      "es": {
+        "title": "Habla con FEMA",
+        "steps": ["Pide a FEMA o a un Centro de Recuperación por Desastre que revise tu situación."],
+        "phones": [{"label": "Línea de ayuda de FEMA", "number": "1-800-621-3362"}]
+      }
+    },
+    "user_request": {
+      "en": {
+        "title": "Talk with FEMA",
+        "steps": ["Call FEMA for help with your application."],
+        "phones": [{"label": "FEMA Helpline", "number": "1-800-621-3362"}]
+      },
+      "es": {
+        "title": "Habla con FEMA",
+        "steps": ["Llama a FEMA para recibir ayuda con tu solicitud."],
+        "phones": [{"label": "Línea de ayuda de FEMA", "number": "1-800-621-3362"}]
+      }
+    }
+  }
+}

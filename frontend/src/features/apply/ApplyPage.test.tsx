@@ -86,18 +86,49 @@ describe("chat panel", () => {
     expect(screen.getByRole("link", { name: /Verify identity/ })).toHaveAttribute("href", expect.stringContaining("fema.gov"));
   });
 
-  it("renders the handoff card when the reply has one", async () => {
-    vi.spyOn(client, "apiRequest").mockResolvedValueOnce({
+  it("loads a handoff card when chat returns a handoff reason", async () => {
+    const request = vi.spyOn(client, "apiRequest");
+    request.mockResolvedValueOnce({
       request_id: "r",
       reply: "Please call.",
       citations: [],
-      handoff: { title: "Get help now", steps: ["Call 911."], phones: [{ label: "Emergency", number: "911" }] },
+      handoff: "emergency",
+    } as never).mockResolvedValueOnce({
+      request_id: "r2",
+      card: {
+        title: "Get help now",
+        steps: ["Call 911."],
+        phones: [{ label: "Emergency", number: "911" }],
+      },
     } as never);
     const user = setup();
     await user.type(screen.getByLabelText("Your question"), "help");
     await user.click(screen.getByRole("button", { name: "Send" }));
     expect(await screen.findByRole("heading", { name: "Get help now" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Emergency/ })).toHaveAttribute("href", "tel:911");
+    expect(request.mock.calls.map(([path]) => path)).toEqual(["/api/chat", "/api/escalate"]);
+  });
+
+  it("shows new hotline guidance without a stale card if card loading fails", async () => {
+    const request = vi.spyOn(client, "apiRequest");
+    request.mockResolvedValueOnce({
+      reply: "Call 911.", citations: [], handoff: "emergency",
+    } as never).mockResolvedValueOnce({
+      card: { title: "Get help now", steps: ["Call 911."], phones: [{ label: "Emergency", number: "911" }] },
+    } as never).mockResolvedValueOnce({
+      reply: "Call the Disaster Distress Helpline at 1-800-985-5990. For thoughts of suicide, call 988. For domestic violence, call 1-800-799-7233.",
+      citations: [], handoff: "sensitive",
+    } as never).mockRejectedValueOnce(new Error("network"));
+    const user = setup();
+    await user.type(screen.getByLabelText("Your question"), "water is rising");
+    await user.click(screen.getByRole("button", { name: "Send" }));
+    expect(await screen.findByRole("heading", { name: "Get help now" })).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText("Your question"), "I might hurt myself");
+    await user.click(screen.getByRole("button", { name: "Send" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("We could not answer");
+    expect(screen.queryByRole("heading", { name: "Get help now" })).not.toBeInTheDocument();
+    expect(screen.getByText(/1-800-985-5990.*988.*1-800-799-7233/)).toBeInTheDocument();
   });
 
   it("works in Spanish", async () => {

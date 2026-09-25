@@ -71,6 +71,9 @@ def test_decode_returns_frozen_contract_without_fixture_pii(
     assert all(
         value.casefold() not in exposed.casefold() for value in expected["fake_pii"]
     )
+    if letter_id == "L08":
+        assert "prompt_injection_detected" in caplog.text
+        assert "Ignore all previous instructions" not in caplog.text
 
 
 def test_decode_derives_checklist_and_explanation_from_spanish_taxonomy():

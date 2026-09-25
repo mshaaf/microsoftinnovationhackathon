@@ -19,4 +19,7 @@ class ChatResponse(BaseModel):
     request_id: str
     reply: str
     citations: list[Citation]
-    handoff: Literal["low_confidence", "user_request"] | None = None
+    handoff: (
+        Literal["emergency", "shelter", "sensitive", "low_confidence", "user_request"]
+        | None
+    ) = None

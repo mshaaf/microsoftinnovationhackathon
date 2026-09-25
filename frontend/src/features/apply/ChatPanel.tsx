@@ -6,7 +6,17 @@ import { HandoffCard } from "../handoff/HandoffCard";
 import type { Handoff } from "../handoff/HandoffCard";
 import styles from "./ApplyPage.module.css";
 
-type Reply = { reply: string; citations: { title: string; url: string }[] };
+type Reply = {
+  reply: string;
+  citations: { title: string; url: string }[];
+  handoff?:
+    | "emergency"
+    | "shelter"
+    | "sensitive"
+    | "low_confidence"
+    | "user_request"
+    | null;
+};
 const post = (body: unknown) => ({
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -30,7 +40,7 @@ export function ChatPanel() {
     setBusy(true);
     setError("");
     try {
-      const res = await apiRequest(
+      const res = (await apiRequest(
         "/api/chat",
         post({
           session_id: sessionId,
@@ -38,9 +48,16 @@ export function ChatPanel() {
           lang: language,
           context: { disaster_number: Number(journey.disasterNumber) || 9999 },
         }),
-      );
+      )) as Reply;
       setReply(res);
-      setCard(res.handoff ?? null);
+      setCard(null);
+      if (res.handoff) {
+        const escalation = (await apiRequest(
+          "/api/escalate",
+          post({ session_id: sessionId, reason: res.handoff, lang: language }),
+        )) as { card: Handoff };
+        setCard(escalation.card);
+      }
       setMessage("");
     } catch {
       setError(t("apply.chatError"));

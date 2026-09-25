@@ -125,3 +125,49 @@ async def test_live_classifier_requests_structured_output_and_returns_parsed_val
         row["id"] for row in taxonomy_data()["reasons"]
     ]
     assert calls[0][1]["response_format"] is Reading
+
+
+async def test_live_chat_carries_structured_handoff_to_gateway(monkeypatch):
+    calls = []
+
+    class Agent:
+        def __init__(self, **kwargs):
+            self.instructions = kwargs["instructions"]
+
+        async def run(self, text, *, options):
+            calls.append((text, options, self.instructions))
+            return SimpleNamespace(
+                value={"text": "Please get help now.", "handoff": "sensitive"}
+            )
+
+    framework = ModuleType("agent_framework")
+    framework.Agent = Agent
+    foundry = ModuleType("agent_framework.foundry")
+    foundry.FoundryChatClient = lambda **kwargs: object()
+    identity = ModuleType("azure.identity")
+    identity.AzureCliCredential = lambda: object()
+    identity.ManagedIdentityCredential = lambda: object()
+    azure = ModuleType("azure")
+    azure.identity = identity
+    monkeypatch.setitem(sys.modules, "agent_framework", framework)
+    monkeypatch.setitem(sys.modules, "agent_framework.foundry", foundry)
+    monkeypatch.setitem(sys.modules, "azure", azure)
+    monkeypatch.setitem(sys.modules, "azure.identity", identity)
+    monkeypatch.setenv("FOUNDRY_PROJECT_ENDPOINT", "https://example.test/project")
+    monkeypatch.setenv("FOUNDRY_MODEL", "mock-deployment")
+
+    result = await LiveAdapter().run(
+        {
+            "task": "chat",
+            "rules": "Answer from official sources.",
+            "lang": "en",
+            "question": "I'm afraid for my safety tonight",
+            "sources": [
+                {"title": "FEMA", "url": "https://www.fema.gov/", "content": "Help"}
+            ],
+        }
+    )
+
+    assert result == {"text": "Please get help now.", "handoff": "sensitive"}
+    assert "handoff" in calls[0][1]["response_format"].model_fields
+    assert "safety" in calls[0][2].lower()
