@@ -3,11 +3,11 @@ id: P3-01
 title: "Escalation and safety"
 phase: 3
 lane: B
-status: todo
+status: "in_progress"
 owner: ""
 depends_on: [P1-06, P2-03]
 research: [R06, R19]
-branch: ""
+branch: "task/P3-01-escalation-safety"
 ---
 
 ## Execute in phases
