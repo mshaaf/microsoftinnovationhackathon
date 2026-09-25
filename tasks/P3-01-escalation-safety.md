@@ -3,7 +3,7 @@ id: P3-01
 title: "Escalation and safety"
 phase: 3
 lane: B
-status: "review"
+status: done
 owner: ""
 depends_on: [P1-06, P2-03]
 research: [R06, R19]
